@@ -81,7 +81,7 @@ def register_GUI():
     sug1_button.place(x = 40, y = 200)
     
 
-    sug2_image = PIL.Image.open('CSC 322 Project/Suggested System 2.png')
+    sug2_image = PIL.Image.open('Suggested System 2.png')
     resize_sug2 = sug2_image.resize((300,200), PIL.Image.ANTIALIAS)
 
     sug2_image_resized = PIL.ImageTk.PhotoImage(resize_sug2)
@@ -144,3 +144,4 @@ def Account_Settings(): #This function will lead user to the appropriate page
 
     print("Work in Progress")
 
+register_GUI()
