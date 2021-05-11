@@ -5,9 +5,10 @@ import os
 con = mysql.connector.connect(
         host = "127.0.0.1",
         user = "root",
-        password = "password",
+        password = "dbvb72^^DATAf2fa1#$", #change for your own pw
         database = "computer_store",
-        port = 3306
+        port = 3306,
+        auth_plugin="mysql_native_password"
 )
 #print ("Connnected To Database")
 cursor = con.cursor()
@@ -110,5 +111,5 @@ def delete_Login_Failed(): #deletes fail screen and sends back to user Login Pag
     loginFail.destroy()
     
 
-Login_Page()
+# Login_Page()
 con.close()

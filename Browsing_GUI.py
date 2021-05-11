@@ -1,15 +1,16 @@
 from tkinter import *
 from tkinter import ttk
 import os
-import PIL.Image
-import PIL.ImageTk
+import PIL
+from PIL import ImageTk
+from PIL import Image
 from Login_Interface import *
 
 
 def Browsing_GUI():
 
     Home = Tk()
-    Home.geometry('1000x1000')
+    Home.geometry('1280x720')
 
     #ScrollBar
     '''main_frame = Frame(Home)
@@ -28,8 +29,10 @@ def Browsing_GUI():
 
     my_Canvas.create_window((0,0), window = second_frame, anchor = "nw")'''
 
+    
+    
     #Home Button
-    logo_image = PhotoImage(file = 'CSC 322 Project/Logo.png')
+    logo_image = PhotoImage(file = 'images/Logo.png')
     logo_label = Label(image = logo_image)
     
     logo_button = Button(Home, image = logo_image, command = homepage, borderwidth = 0)
@@ -59,7 +62,7 @@ def Browsing_GUI():
 
     #3 suggested Systems by Store Manager
 
-    sug1_image = PIL.Image.open('CSC 322 Project/Suggested System 1.png')
+    sug1_image = PIL.Image.open('images/suggested-system-1.png')
     resize_sug1 = sug1_image.resize((300,200), PIL.Image.ANTIALIAS)
 
     sug1_image_resized = PIL.ImageTk.PhotoImage(resize_sug1)
@@ -69,7 +72,7 @@ def Browsing_GUI():
     sug1_button.place(x = 40, y = 200)
     
 
-    sug2_image = PIL.Image.open('CSC 322 Project/Suggested System 2.png')
+    sug2_image = PIL.Image.open('images/suggested-system-2.png')
     resize_sug2 = sug2_image.resize((300,200), PIL.Image.ANTIALIAS)
 
     sug2_image_resized = PIL.ImageTk.PhotoImage(resize_sug2)
@@ -79,7 +82,7 @@ def Browsing_GUI():
     sug2_button.place(x = 40, y = 450)
    
     
-    sug3_image = PIL.Image.open('CSC 322 Project/Suggested System 3.png')
+    sug3_image = PIL.Image.open('images/suggested-system-3.png')
     resize_sug3 = sug3_image.resize((300,200), PIL.Image.ANTIALIAS)
 
     sug3_image_resized = PIL.ImageTk.PhotoImage(resize_sug3)
@@ -92,6 +95,27 @@ def Browsing_GUI():
     #3 most Popular Computers per number of Sales
 
 
+    # Scrollbar 
+
+    # scrollbar = Scrollbar(Home)
+    # scrollbar.pack(side=RIGHT, fill=Y)
+    # myList = Listbox(Home, yscrollcommand=scrollbar.set)
+    # for line in range(100):
+    #     myList.insert(END, "this is line number" + str(line))
+    # myList.insert(END, logo_image)
+    # myList.insert(END, browsing_menu)
+    # myList.insert(END, buildPC_button)
+    # myList.insert(END, login_button)
+    # myList.insert(END, sug1_button)
+    # myList.insert(END, sug2_button)
+    # myList.insert(END, sug3_button)
+
+
+
+
+
+    # myList.pack(side=LEFT, fill=BOTH)
+    # scrollbar.config(command=myList.yview)
 
     Home.mainloop()
 

@@ -1,0 +1,420 @@
+from tkinter import *
+from tkinter import ttk
+from Connect_DB import *
+from Browse_Item import *
+from Discussion_Detail import *
+# from Visitor_Home import create_visitor_home
+
+def browsing_catalog_choice():
+    root = Tk()
+    root.title('Browsing Catalog')
+    root.geometry('1280x720')
+
+    def return_home():
+        print("WIP")
+        # root.destroy()
+        # create_visitor_home()
+    
+    def go_to_discussion(category, id):
+        root.destroy()
+        browse_discussion_detail(id, category)
+
+    def browse_cpu_detail(cpu_name):
+        print("WE BROWSIN!!")
+        print(cpu_name)
+        for child in mainFrame.winfo_children():
+            child.destroy()
+        sql_query = "SELECT * FROM computer_store.cpu WHERE name = '" + cpu_name + "'"
+        cursor.execute(sql_query)
+        data = cursor.fetchall()
+        print(data)
+        print(data[0][0])
+        detail_frame = Frame(mainFrame, width=728, height=500)
+        detail_frame.pack(pady=20, padx=20)
+
+        cpu_label = Label(detail_frame, text=cpu_name, borderwidth=1, font=('Helvetica', 60)).pack()
+
+        company = "Company ID: " + str(data[0][1])
+        company_label = Label(detail_frame, text=company, borderwidth=0, font=('Helvetica', 30)).pack()
+
+        num_of_cores = "Number of Cores: " + str(data[0][3])
+        cores_label = Label(detail_frame, text=num_of_cores, borderwidth=0, font=('Helvetica', 30)).pack()
+        
+        clock_speed = "Clock Speed: " + data[0][4]
+        clock_speed_label = Label(detail_frame, text=clock_speed, borderwidth=0, font=('Helvetica', 30)).pack()
+        
+        boosted_clock_speed = "Boosted Clock Speed: " + data[0][5]
+        boosted_clock_speed_label = Label(detail_frame, text=boosted_clock_speed, borderwidth=0, font=('Helvetica', 30)).pack()
+        
+        integrated_graphics = "Integrated Graphics: " + data[0][6]
+        integrated_graphics_label = Label(detail_frame, text=integrated_graphics, borderwidth=0, font=('Helvetica', 30)).pack()
+        
+        socket = "Socket: " + data[0][7]
+        socket_label = Label(detail_frame, text=socket, borderwidth=0, font=('Helvetica', 30)).pack()
+        
+        cooling = "Cooling?: " + data[0][8]
+        cooling_label = Label(detail_frame, text=cooling, borderwidth=0, font=('Helvetica', 30)).pack()
+        
+        price = "Price: $" + str(data[0][9])
+        price_label = Label(detail_frame, text=price, borderwidth=0, font=('Helvetica', 30)).pack()
+
+        category = "cpu"
+        return_to_list_button = Button(detail_frame, text="Return", command=browse_cpu).pack()
+        go_to_discussion_button = Button(detail_frame, text="Discuss", command=lambda category=category, id=data[0][0]: go_to_discussion(category, id)).pack()
+    
+    def browse_ram_detail(ram_name):
+        print("WE BROWSIN!!")
+        print(ram_name)
+        for child in mainFrame.winfo_children():
+            child.destroy()
+        sql_query = "SELECT * FROM computer_store.ram WHERE name = '" + ram_name + "'"
+        cursor.execute(sql_query)
+        data = cursor.fetchall()
+        print(data)
+        print(data[0][0])
+        detail_frame = Frame(mainFrame, width=728, height=500)
+        detail_frame.pack(pady=20, padx=20)
+
+        ram_label = Label(detail_frame, text=ram_name, borderwidth=1, font=('Helvetica', 60)).pack()
+
+        company = "Company ID: " + str(data[0][1])
+        company_label = Label(detail_frame, text=company, borderwidth=0, font=('Helvetica', 30)).pack()
+
+        type_ram = "Type: " + data[0][3]
+        type_label = Label(detail_frame, text=type_ram, borderwidth=0, font=('Helvetica', 30)).pack()
+
+        ram_speed = "Speed: " + str(data[0][4])
+        speed_label = Label(detail_frame, text=ram_speed, borderwidth=0, font=('Helvetica', 30)).pack()
+
+        ram_modules = "Modules: " + data[0][5]
+        modules_label = Label(detail_frame, text=ram_modules, borderwidth=0, font=('Helvetica', 30)).pack()
+
+        rgb_string = "RGB?: " + data[0][6]
+        rgb_label = Label(detail_frame, text=rgb_string, borderwidth=0, font=('Helvetica', 30)).pack()
+
+        price = "Price: $" + str(data[0][7])
+        price_label = Label(detail_frame, text=price, borderwidth=0, font=('Helvetica', 30)).pack()
+
+        category = "ram"
+        return_to_list_button = Button(detail_frame, text="Return", command=browse_ram).pack()
+        go_to_discussion_button = Button(detail_frame, text="Discuss", command=lambda category=category, id=data[0][0]: go_to_discussion(category, id)).pack()
+
+    def browse_motherboard_detail(motherboard_name):
+        print("WE BROWSIN!!")
+        print(motherboard_name)
+        for child in mainFrame.winfo_children():
+            child.destroy()
+        sql_query = "SELECT * FROM computer_store.motherboard WHERE name = '" + motherboard_name + "'"
+        cursor.execute(sql_query)
+        data = cursor.fetchall()
+        print(data)
+        print(data[0][0])
+        detail_frame = Frame(mainFrame, width=728, height=500)
+        detail_frame.pack(pady=20, padx=20)
+
+        motherboard_label = Label(detail_frame, text=motherboard_name, borderwidth=1, font=('Helvetica', 60)).pack()
+
+        company = "Company ID: " + str(data[0][1])
+        company_label = Label(detail_frame, text=company, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        form_factor = "Form Factor: " + data[0][3]
+        form_factor_label = Label(detail_frame, text=form_factor, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        socket = "Socket: " + data[0][4]
+        socket_label = Label(detail_frame, text=socket, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        memory_type = "Memory Type: " + data[0][5]
+        memory_type_label = Label(detail_frame, text=memory_type, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        memory_slots = "Memory Slots: " + str(data[0][6])
+        memory_slots_label = Label(detail_frame, text=memory_slots, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        pci = "PCI 16?: " + data[0][7]
+        pci_label = Label(detail_frame, text=pci, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        ethernet = "Ethernet?: " + data[0][8]
+        ethernet_label = Label(detail_frame, text=ethernet, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        sata = "Sata: " + str(data[0][9])
+        sata_label = Label(detail_frame, text=sata, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        usb_2 = "Usb 2: " + str(data[0][10])
+        usb_2_label = Label(detail_frame, text=usb_2, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        usb_3 = "Usb 3: " + str(data[0][11])
+        usb_3_label = Label(detail_frame, text=usb_3, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        wireless = "Wireless?: " + data[0][12]
+        wireless_label = Label(detail_frame, text=wireless, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        rgb_string = "RGB?: " + data[0][13]
+        rgb_label = Label(detail_frame, text=rgb_string, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        price = "Price: $" + str(data[0][14])
+        price_label = Label(detail_frame, text=price, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        category = "motherboard"
+        return_to_list_button = Button(detail_frame, text="Return", command=browse_motherboard).pack()
+        go_to_discussion_button = Button(detail_frame, text="Discuss", command=lambda category=category, id=data[0][0]: go_to_discussion(category, id)).pack()
+
+    def browse_gpu_detail(gpu_name):
+        print("WE BROWSIN!!")
+        print(gpu_name)
+        for child in mainFrame.winfo_children():
+            child.destroy()
+        sql_query = "SELECT * FROM computer_store.gpu WHERE name = '" + gpu_name + "'"
+        cursor.execute(sql_query)
+        data = cursor.fetchall()
+        print(data)
+        print(data[0][0])
+        detail_frame = Frame(mainFrame, width=728, height=500)
+        detail_frame.pack(pady=20, padx=20)
+
+        gpu_label = Label(detail_frame, text=gpu_name, borderwidth=1, font=('Helvetica', 60)).pack()
+
+        company = "Company ID: " + str(data[0][1])
+        company_label = Label(detail_frame, text=company, borderwidth=0, font=('Helvetica', 30)).pack()
+
+        memory = "Memory: " + str(data[0][3])
+        memory_level = Label(detail_frame, text=memory, borderwidth=0, font=('Helvetica', 30)).pack()
+
+        clock_speed = "Clock Speed: " + data[0][4]
+        clock_speed_label = Label(detail_frame, text=clock_speed, borderwidth=0, font=('Helvetica', 30)).pack()
+
+        boosted_clock_speed = "Boosted Clock Speed: " + data[0][5]
+        boosted_clock_speed_label = Label(detail_frame, text=boosted_clock_speed, borderwidth=0, font=('Helvetica', 30)).pack()
+
+        interface = "Interface: " + data[0][6]
+        interface_label = Label(detail_frame, text=interface, borderwidth=0, font=('Helvetica', 30)).pack()
+
+        length = "Length: " + str(data[0][7])
+        length_label = Label(detail_frame, text=length, borderwidth=0, font=('Helvetica', 30)).pack()
+
+        hdmi_ports = "HDMI Ports: " + str(data[0][8])
+        hdmi_ports_label = Label(detail_frame, text=hdmi_ports, borderwidth=0, font=('Helvetica', 30)).pack()
+
+        display_ports = "Display Ports: " + str(data[0][9])
+        display_ports_label = Label(detail_frame, text=display_ports, borderwidth=0, font=('Helvetica', 30)).pack()
+
+        price = "Price: $" + str(data[0][10])
+        price_label = Label(detail_frame, text=price, borderwidth=0, font=('Helvetica', 30)).pack()
+
+        category = "gpu"
+        return_to_list_button = Button(detail_frame, text="Return", command=browse_GPU).pack()
+        go_to_discussion_button = Button(detail_frame, text="Discuss", command=lambda category=category, id=data[0][0]: go_to_discussion(category, id)).pack()
+
+    def browse_case_detail(case_name):
+        print("WE BROWSIN!!")
+        print(case_name)
+        for child in mainFrame.winfo_children():
+            child.destroy()
+        sql_query = "SELECT * FROM computer_store.case WHERE name = '" + case_name + "'"
+        cursor.execute(sql_query)
+        data = cursor.fetchall()
+        print(data)
+        print(data[0][0])
+        detail_frame = Frame(mainFrame, width=728, height=500)
+        detail_frame.pack(pady=20, padx=20)
+
+        case_label = Label(detail_frame, text=case_name, borderwidth=1, font=('Helvetica', 60)).pack()
+
+        company = "Company ID: " + str(data[0][1])
+        company_label = Label(detail_frame, text=company, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        case_type = "Case Type: " + data[0][3]
+        case_type_label = Label(detail_frame, text=case_type, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        side_panel = "Side Panel?: " + data[0][4]
+        side_panel_label = Label(detail_frame, text=side_panel, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        external_bay = "Exernal Bays: " + str(data[0][5])
+        external_bay_label = Label(detail_frame, text=external_bay, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        internal_bay = "Internal Bays: " + str(data[0][6])
+        internal_bay_label = Label(detail_frame, text=internal_bay, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        max_gpu_size = "Max GPU Size: " + str(data[0][7])
+        max_gpu_size_label = Label(detail_frame, text=max_gpu_size, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        max_fan_size = "Max Fan Size: " + str(data[0][8])
+        max_fan_size_label = Label(detail_frame, text=max_fan_size, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        num_front_fan = "Number of Front Fans: " + str(data[0][9])
+        num_front_fan_label = Label(detail_frame, text=num_front_fan, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        num_top_fan = "Number of Top Fans: " + str(data[0][10])
+        num_top_fan_label = Label(detail_frame, text=num_top_fan, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        num_exhaust_fan = "Number of Exhaust Fans: " + str(data[0][11])
+        num_exhaust_fan_label = Label(detail_frame, text=num_exhaust_fan, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        num_included_fan = "Number of Included Fans: " + str(data[0][12])
+        num_included_fan_label = Label(detail_frame, text=num_included_fan, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        max_radiator = "Number of Radiators: " + str(data[0][13])
+        max_radiator_label = Label(detail_frame, text=max_radiator, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        rgb_string = "RGB?: " + data[0][14]
+        rgb_label = Label(detail_frame, text=rgb_string, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        price = "Price: $" + str(data[0][15])
+        price_label = Label(detail_frame, text=price, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        category = "case"
+        return_to_list_button = Button(detail_frame, text="Return", command=browse_case).pack()
+        go_to_discussion_button = Button(detail_frame, text="Discuss", command=lambda category=category, id=data[0][0]: go_to_discussion(category, id)).pack()
+
+    def browse_GPU():
+        for child in mainFrame.winfo_children():
+            child.destroy()
+        cursor.execute("SELECT name FROM GPU")
+        data = cursor.fetchall()
+        print(data)
+        gpu_frame = Frame(mainFrame, width= 720, height=500)
+        gpu_frame.pack(pady=20, padx=20)
+        for item in data:
+            print(item)
+            print(type(item))
+            print(item[0])
+            name = item[0]
+            gpu_button = Button(gpu_frame, text=name, command=lambda name=name: browse_gpu_detail(name)).pack()
+        del data
+
+    def browse_motherboard():
+        for child in mainFrame.winfo_children():
+            child.destroy()
+        cursor.execute("SELECT name FROM motherboard")
+        data = cursor.fetchall()
+        print(data)
+        motherboard_frame = Frame(mainFrame, width= 720, height=500)
+        motherboard_frame.pack(pady=20, padx=20)
+        for item in data:
+            print(item)
+            print(type(item))
+            print(item[0])
+            name = item[0]
+            motherboard_button = Button(motherboard_frame, text=name, command=lambda name=name: browse_motherboard_detail(name)).pack()
+        del data
+
+    def browse_ram():
+        for child in mainFrame.winfo_children():
+            child.destroy()
+        cursor.execute("SELECT name FROM ram")
+        data = cursor.fetchall()
+        print(data)
+        ram_frame = Frame(mainFrame, width= 720, height=500)
+        ram_frame.pack(pady=20, padx=20)
+        for item in data:
+            print(item)
+            print(type(item))
+            print(item[0])
+            name = item[0]
+            ram_button = Button(ram_frame, text=name, command=lambda name=name: browse_ram_detail(name)).pack()
+            # label = Label(ram_frame, text=item[0]).pack()
+        del data
+    
+    def browse_cpu():
+        for child in mainFrame.winfo_children():
+            child.destroy()
+        cursor.execute("SELECT name FROM cpu")
+        data = cursor.fetchall()
+        print(data)
+        cpu_frame = Frame(mainFrame, width= 720, height=500)
+        cpu_frame.pack(pady=20, padx=20)
+        for item in data:
+            print(item)
+            print(type(item))
+            print(item[0])
+            # label = Label(cpu_frame, text=item[0]).pack()
+            name = item[0]
+            cpu_button = Button(cpu_frame, text=name, command=lambda name=name: browse_cpu_detail(name)).pack()
+            # cpu_button = Button(cpu_frame, text=name, command=browse_cpu_detail(name))
+            # cpu_frame.pack()
+
+        del data
+
+    def browse_case():
+        for child in mainFrame.winfo_children():
+            child.destroy()
+        cursor.execute("SELECT name FROM computer_store.case")
+        data = cursor.fetchall()
+        print(data)
+        case_frame = Frame(mainFrame, width= 720, height=500)
+        case_frame.pack(pady=20, padx=20)
+        for item in data:
+            print(item)
+            print(type(item))
+            print(item[0])
+            name = item[0]
+            case = Button(case_frame, text=name, command=lambda name=name: browse_case_detail(name)).pack()
+        del data
+
+    def browse_cpu_cooler():
+        print("WIP")
+
+    def browse_storage():
+        print("WIP")
+
+    def browse_power_supply():
+        print("WIP")
+
+    def browse_reset():
+        for child in mainFrame.winfo_children():
+            child.destroy()
+
+    def comboClick(event):
+        choice = myCombo.get()
+        # label = Label(root, text=myCombo.get()).pack()
+        if choice == "CPU":
+            browse_cpu()
+        elif choice == "Motherboard":
+            browse_motherboard()
+        elif choice == "CPU Cooler":
+            browse_cpu_cooler()
+        elif choice == "RAM":
+            browse_ram()
+        elif choice == "GPU":
+            browse_GPU()
+        elif choice == "Case":
+            browse_case()
+        elif choice == "Storage":
+            browse_storage()
+        elif choice == "Power Supply":
+            browse_power_supply()
+        else:
+            browse_reset()
+
+
+    browsingOptions = [
+        "BROWSE", 
+        "CPU", 
+        "Motherboard", 
+        "CPU Cooler", 
+        "RAM", 
+        "GPU", 
+        "Case", 
+        "Storage", 
+        "Power Supply",
+    ]
+
+    # clickedOption = StringVar()
+    # clickedOption.set(browsingOptions[0])
+
+    # drop_menu = OptionMenu(root, clickedOption, *browsingOptions, command=selected)
+    # drop_menu.pack(pady=20)
+
+ 
+    logo_image = PhotoImage(file = 'images/Logo.png')
+    logo_label = Label(image = logo_image)
+    
+    logo_button = Button(root, image = logo_image, command=return_home, borderwidth = 0)
+    logo_button.place(x = 640, y = 0)
+    logo_button.pack(pady=20, padx=20)
+
+    myCombo = ttk.Combobox(root, value=browsingOptions)
+    myCombo.current(0)
+    myCombo.bind("<<ComboboxSelected>>", comboClick)
+    myCombo.pack()
+    mainFrame = Frame(root, width= 1280, height=720)
+    mainFrame.pack()
+    root.mainloop()
