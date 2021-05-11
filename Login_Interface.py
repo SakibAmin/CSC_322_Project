@@ -1,18 +1,8 @@
 import mysql.connector
+from Connect_DB import *
+# from Visitor_Home import * 
 from tkinter import *
 import os
-
-con = mysql.connector.connect(
-        host = "127.0.0.1",
-        user = "root",
-        password = "dbvb72^^DATAf2fa1#$", #change for your own pw
-        database = "computer_store",
-        port = 3306,
-        auth_plugin="mysql_native_password"
-)
-#print ("Connnected To Database")
-cursor = con.cursor()
-
 
 def Login_Page(): #Login Screen
 
@@ -55,30 +45,102 @@ def Login_Page(): #Login Screen
     Login.mainloop()
 
 def Login_Verfication(): #Logs users into the database
+    
+    #Store Inputted Values
     email1 = login_email.get()
     password1 = login_password.get()
+
+    #Delete Previous Inputted Values
     emailEntry.delete(0, END)
     passwordEntry.delete(0, END)
-    cursor.execute("SELECT * FROM Registered_Customers WHERE email = %s AND password = %s", (email1, password1))
-    #print(username1), print(password1)
-    result = cursor.fetchall()
-    count = cursor.rowcount
-    if count == 1:
-        #print("Login Successful")
-        Login_Successful() 
-    else:
-        #print("Email or Password is Incorrect")
-        Login_Failed()
-        
 
-    #Delete Previous Entries
-   
+    cursor.execute("SELECT * FROM registered_customers WHERE email = %s AND password = %s", (email1, password1))
+    #print(username1), print(password1)
+    records = cursor.fetchall()
+    count = cursor.rowcount
+    #print(count)
+    global id
+    if count == 0:
+        cursor.execute("SELECT * FROM computer_parts_companies WHERE email = %s AND password = %s", (email1, password1))
+        records = cursor.fetchall()
+        count = cursor.rowcount
+        if count == 0:
+            cursor.execute("SELECT * FROM delivery_companies WHERE email = %s AND password = %s", (email1, password1))
+            records = cursor.fetchall()
+            count = cursor.rowcount
+            if count == 0:
+                cursor.execute("SELECT * FROM store_clerk WHERE email = %s AND password = %s", (email1, password1))
+                records = cursor.fetchall()
+                count = cursor.rowcount
+                if count == 0:
+                    cursor.execute("SELECT * FROM store_manager WHERE email = %s AND password = %s", (email1, password1))
+                    records = cursor.fetchall()
+                    count = cursor.rowcount
+                    if count == 1:
+                        print("You are good")
+                        for record in records:
+                            id = record[0]
+                            #print(id)
+                        #Add the store manager GUI
+                        '''
+                        Things a store manager GUI needs:
+                            A way to view complaints from registered customers on clerks, parts, and delivery companies
+                                This system should be able to view these messages and then provide a way to give punishments
+                            A way to view appeals from clerks, parts, and delivery companies
+                            A way to view complaints on disscussion fourms and allow the manager to make the proper corrections or punishments
+                        '''
+                    else:
+                        Login_Failed()  
+                elif count == 1:
+                    print("You are good")
+                    for record in records:
+                        id = record[0]
+                        #print(id)
+                    #Add the store clerk GUI 
+                    '''
+                    Things a store clerk GUI needs:
+                        A way to see the bidding system and select which company will be doing the delivery service. Will also provide justification
+                        A appeal system where u can provide justification to the complaint recieved
+                    '''
+            elif count == 1:
+                print("You are good")
+                for record in records:
+                    id = record[0]
+                    #print(id)
+                #Add the delivery company GUI
+                '''
+                Things a delivery company GUI needs:
+                    Bidding System where they can place bids on orders
+                    A appeal system where u can provide justification to the complaint recieved
+                '''
+        elif count == 1:
+            print("You are good")
+            for record in records:
+                id = record[0]
+                #CPC_GUI(id)
+                #print(id)
+            #Add the computer part company GUI
+            '''
+            Things Computer Part Company GUI needs:
+                List of Products they are selling and how much of it has sold
+                Add Parts System
+                Wallet to see how much money they have earned
+                A appeal system where u can provide justification to the complaint recieved
+            '''
+    elif count == 1:
+        #print("Login Successful")
+        for record in records:
+            id = record[0]
+            #print(id)
+        Login_Successful()
+        
+        
+       
 
 def Login_Successful(): #Tells user the login was successful
     
     #global Variable
     global loginSuccess
-
     loginSuccess = Tk()
 
     #Login Success Screen
@@ -109,7 +171,6 @@ def Login_Failed(): #Tells user wrong password or username was entered
 
 def delete_Login_Failed(): #deletes fail screen and sends back to user Login Page
     loginFail.destroy()
-    
 
+# id = 0
 # Login_Page()
-con.close()

@@ -6,7 +6,7 @@ from PIL import ImageTk
 from PIL import Image
 
 from Browsing_Catalog import *
-from Login_Interface import *
+from Login_Interface import Login_Page
 import tkinter as tk
 
 def Exit_Store():
