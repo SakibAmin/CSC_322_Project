@@ -16,6 +16,9 @@ def homepage(): #This function will either refresh the Browsing_GUI page or send
 
     print("Work in Progress")
 
+def Log_Out():
+    print("logout")
+
 def Browse_Catalog():
     root.destroy()
     browsing_catalog_choice()
@@ -70,9 +73,9 @@ def populate(frame, canvas):
     
     tk.Button(frame, text = "Browse Catalog", command = Browse_Catalog, width=40, font=('Helvetica', 12)).grid(row=2, column=0)
 
-    #Build Your Own
+    #Log Out
     
-    tk.Button(frame, text = "Build Your Own", command = Build_Your_Own, width=40, font=('Helvetica', 12)).grid(row=2, column=1)
+    tk.Button(frame, text = "Log_Out", command = Log_Out, width=40, font=('Helvetica', 12)).grid(row=2, column=1)
 
     #Login Button
 

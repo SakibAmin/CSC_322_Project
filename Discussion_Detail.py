@@ -5,6 +5,9 @@ from Browse_Item import *
 import tkinter as tk
 
 def browse_discussion_detail(item_id, item_type):
+    def complain_user():
+        print("complain")
+
     def onFrameConfigure(canvas):
         canvas.configure(scrollregion=canvas.bbox("all"))
 
@@ -133,6 +136,7 @@ def browse_discussion_detail(item_id, item_type):
             print(comment[3])
 
             comment_author_label = Label(frame, text=author_name, borderwidth=1, font=('Helvetica', 20)).grid(row=row_num, column=1)
+            report_button = Button(frame, text="Complain", command=complain_user, borderwidth=0, font=('Helvetica', 12)).grid(row=row_num, column=2, padx=10)
             row_num += 1
             comment_label = Label(frame, text=comment, borderwidth=1, font=('Helvetica', 15), wraplength=500).grid(row=row_num, column=1)
             row_num += 1
@@ -179,14 +183,14 @@ def browse_discussion_detail(item_id, item_type):
 
     root = Tk()
     root.title('Discussion Detail')
-    canvas = tk.Canvas(root, height=720, width=1280)
+    canvas = tk.Canvas(root, height=720, width=800)
     frame = tk.Frame(canvas)
     vsb = tk.Scrollbar(root, orient="vertical", command=canvas.yview)
     canvas.configure(yscrollcommand=vsb.set)
 
     vsb.pack(side="right", fill="y")
-    canvas.pack(side="left", fill="both", expand=True)
-    canvas.create_window((4,4), window=frame, anchor="nw")
+    canvas.pack(side="left", fill="both", expand=True, anchor="center")
+    canvas.create_window((4,4), window=frame, anchor="center")
 
     frame.bind("<Configure>", lambda event, canvas=canvas: onFrameConfigure(canvas))
 

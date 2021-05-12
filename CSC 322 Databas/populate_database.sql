@@ -615,7 +615,7 @@ CREATE TABLE `registered_customers` (
 
 LOCK TABLES `registered_customers` WRITE;
 /*!40000 ALTER TABLE `registered_customers` DISABLE KEYS */;
-INSERT INTO `registered_customers` VALUES (1,'Bob Jones','bobjones@gmail.com','password','114-11 134st');
+INSERT INTO `registered_customers` VALUES (1,'Bob Jones','bobjones@gmail.com','password','114-11 134st'),(2,'John Doe','johndoe@gmail.com','password','114-11 134st');
 /*!40000 ALTER TABLE `registered_customers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -859,4 +859,36 @@ CREATE TABLE `taboo` (
 
 LOCK TABLES `taboo` WRITE;
 INSERT INTO `taboo` VALUES (1, 'badword'),(2, 'poopy'),(3, 'nerd'),(4, 'supernerd'),(5, 'stupid'),(6, 'meanie');
+UNLOCK TABLES;
+
+DROP TABLE IF EXISTS `complain`;
+CREATE TABLE `complain` (
+  `complain_id` int NOT NULL AUTO_INCREMENT,
+  `complainee_name` varchar(255) DEFAULT NULL,
+  `complainant_id` int DEFAULT NULL,
+  `reason` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`complain_id`),
+  KEY `complainant_id` (`complainant_id`), 
+  CONSTRAINT complainant_ibfk_1 FOREIGN KEY (complainant_id) REFERENCES registered_customers(registered_id)
+);
+
+LOCK TABLES `complain` WRITE;
+INSERT INTO `complain` VALUES (1, 'John Doe', 1, 'i dont like what they commented'),(2, 'John Doe', 1, 'i dont like them');
+UNLOCK TABLES;
+
+DROP TABLE IF EXISTS `appeal`;
+CREATE TABLE `appeal` (
+  `appeal_id` int NOT NULL AUTO_INCREMENT,
+  `complain_id` int NOT NULL,
+  `registered_id` int DEFAULT NULL,
+  `reason` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`appeal_id`),
+  KEY `registered_id` (`registered_id`),   
+  KEY `complain_id` (`complain_id`), 
+  CONSTRAINT registered_id_ibfk_1 FOREIGN KEY (registered_id) REFERENCES registered_customers(registered_id),
+  CONSTRAINT complain_id_ibfk_1 FOREIGN KEY (complain_id) REFERENCES complain(complain_id)
+);
+
+LOCK TABLES `appeal` WRITE;
+INSERT INTO `appeal` VALUES (1, 1, 2, 'i did not mean to say it like that, i apologize'),(2, 2, 2, 'i dont deserve this!');
 UNLOCK TABLES;
