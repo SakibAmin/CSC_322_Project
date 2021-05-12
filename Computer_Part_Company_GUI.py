@@ -1106,7 +1106,7 @@ def addCase():
         else:
             Label(Button_Frame, text = "Failed to add Part to the System,").grid(row=2, column=0, padx=0, pady=0)
 
-    Add_Button = Button(Button_Frame, text = "Add to System", width = 10, command = motherAdd)
+    Add_Button = Button(Button_Frame, text = "Add to System", width = 10, command = Add)
     Add_Button.config(font = ("Hevetica", 10,))
     Add_Button.grid(row=0, column=0, padx=0, pady=0)
 

@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import mysql.connector
 import os
-from Buy_Functions import *
+from Buy_GUI import *
 
 con = mysql.connector.connect(
         host = "127.0.0.1",
