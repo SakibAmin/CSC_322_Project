@@ -829,6 +829,10 @@ UNION
 SELECT name FROM computer_store.storage;
 -- UNLOCK TABLES;
 
+
+--   FOREIGN KEY (discussion_id) REFERENCES discussion(discussion_id),
+--   FOREIGN KEY (registered_id) REFERENCES registered_customers(registered_id),
+
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
   `comment_id` int NOT NULL AUTO_INCREMENT,
@@ -839,9 +843,20 @@ CREATE TABLE `comment` (
   KEY `discussion_id` (`discussion_id`), 
   KEY `registered_id` (`registered_id`),
   CONSTRAINT `discussion_ibfk_1` FOREIGN KEY (`discussion_id`) REFERENCES `discussion` (`discussion_id`),
-  CONSTRAINT `registered_customers_ibfk_1` FOREIGN KEY (`registered_id`) REFERENCES `registered` (`registered_id`)
+  CONSTRAINT `registered_customers_ibfk_1` FOREIGN KEY (`registered_id`) REFERENCES `registered_customers` (`registered_id`)
 );
 
 LOCK TABLES `comment` WRITE;
 INSERT INTO `comment` VALUES (1, 1, 1, 'hello i like this product, very nice!!1'), (2, 1, 1, 'it is me again!! i love this item');
+UNLOCK TABLES;
+
+DROP TABLE IF EXISTS `taboo`;
+CREATE TABLE `taboo` (
+  `taboo_id` int NOT NULL AUTO_INCREMENT,
+  `word` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`taboo_id`)
+);
+
+LOCK TABLES `taboo` WRITE;
+INSERT INTO `taboo` VALUES (1, 'badword'),(2, 'poopy'),(3, 'nerd'),(4, 'supernerd'),(5, 'stupid'),(6, 'meanie');
 UNLOCK TABLES;

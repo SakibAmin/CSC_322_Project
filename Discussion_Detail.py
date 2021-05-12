@@ -8,16 +8,59 @@ def browse_discussion_detail(item_id, item_type):
     def onFrameConfigure(canvas):
         canvas.configure(scrollregion=canvas.bbox("all"))
 
-    def get_text(comment_box):
-        text = comment_box.get()
+    def restart(item_id, item_type):
+        root.destroy()
+        browse_discussion_detail(item_id, item_type)
+
+    def comment_to_database(text):
+        sql_query = "INSERT INTO computer_store.comment (discussion_id, registered_id, description) VALUES ("+ str(DETAIL_ID) + "," +  str(CUSTOMER_ID) + ","    +"'" + text + "')"
+        cursor.execute(sql_query)
+        con.commit()
+        restart(item_id, item_type)
+
+    def give_warning():
+        print("give warning")
+
+    def check_taboo(text, words):
+        taboo_found = False
+        for word in words:
+            print(word)
+            if (text.find(word) != -1):
+                tabo_found = True
+                max = 100
+                star = "***"
+                text = text.replace(word, star, 100)
         print(text)
-        comment_box.delete("1.0", END)
-        # text = txtbox.get("1.0", 'end-1c')
-        # print(str(text))
-        # txtbox.delete("1.0", 'end-1c')
-        # print("?")
+        return taboo_found
+
+    def add_comment(text):
+        print("is this working?")
+        sql_query = "SELECT * FROM computer_store.taboo"
+        cursor.execute(sql_query)
+        taboo = cursor.fetchall()
+        taboo_list = []
+        for data in taboo:
+            taboo_list.append(data[1])
+        print(taboo_list)
+        check = check_taboo(text, taboo_list)
+
+        if check:
+            give_warning()
+        else:
+            comment_to_database(text)
+
+
+    # def get_text(comment_box):
+    #     text = comment_box.get()
+    #     print(text)
+    #     # add_comment(text)
+    #     print(text + "HELLO")
+    #     # comment_box.delete("1.0", END)
+    #     print(text + "HELLO")
+
 
     def get_comments(discussion_id):
+        DETAIL_ID = discussion_id
         print("grabbing discussion id" + str(discussion_id))
         sql_query = "SELECT * FROM computer_store.comment WHERE discussion_id=" + str(discussion_id)
         cursor.execute(sql_query)
@@ -25,6 +68,7 @@ def browse_discussion_detail(item_id, item_type):
         return comment_data
 
     def get_comment_author(registered_id):
+        CUSTOMER_ID = registered_id
         sql_query = "SELECT name FROM computer_store.registered_customers WHERE registered_id=" + str(registered_id)
         cursor.execute(sql_query)
         name = cursor.fetchall()
@@ -35,6 +79,7 @@ def browse_discussion_detail(item_id, item_type):
         text = entry.get()
         entry.delete(0, 'end')
         print(text)
+        add_comment(text)
 
     def get_item_data(frame, item_id, item_type):
         print("huh?")
@@ -70,7 +115,7 @@ def browse_discussion_detail(item_id, item_type):
         # retrieve comment owner & comment
         # this would be in a for loop
         comment_author_label = Label(frame, text="ENTER YOU COMMENT BELOW!!", borderwidth=1, font=('Helvetica', 20)).grid(row=2, column=1)
-        random_text = "Act civil in discussion and be nice to one another! Enjoy dicussing!"
+        random_text = "Act civil in discussion and be nice to one another! Enjoy discussing!"
         comment_label = Label(frame, text=random_text, borderwidth=1, font=('Helvetica', 15), wraplength=500).grid(row=3, column=1)
 
         break_label = Label(frame, text=" " * 3000, borderwidth=1, font=('Helvetica', 15), wraplength=500).grid(row=4, column=1)
@@ -94,7 +139,7 @@ def browse_discussion_detail(item_id, item_type):
             break_label = Label(frame, text=" " * 3000, borderwidth=1, font=('Helvetica', 15), wraplength=500).grid(row=row_num, column=1)
             row_num += 1
 
-        return row_num
+        return row_num, discussion_id
         # comment_author_label = Label(frame, text="Made by John", borderwidth=1, font=('Helvetica', 20)).grid(row=5, column=1)
         # random_text = "jadvblvnalvnalkvnavakjlvn;kvba;jvakvhba;dhvba;kdabvkahbdvaabakbkjvbadbbvbdvbdvbjwenhofiehfoiwhnofihewofihwefhwfnevnovnowvnkldsbkjvbs.dhivabldv sjbcvadhacvludvcalushvcaushcvajhsc ahjs cajhsv cahsv cahsvailcvauscvax"
         # comment_label = Label(frame, text=random_text * 5, borderwidth=1, font=('Helvetica', 15), wraplength=500).grid(row=6, column=1)
@@ -121,6 +166,17 @@ def browse_discussion_detail(item_id, item_type):
 
         # break_label = Label(frame, text=" " * 3000, borderwidth=1, font=('Helvetica', 15), wraplength=500).grid(row=13, column=1)
 
+    # sql_query = "SELECT name FROM computer_store." + item_type + " WHERE " +  item_type + "_id = " + str(item_id)
+    # cursor.execute(sql_query)
+    # item_data = cursor.fetchall()
+    # name = item_data[0][0]
+
+    # sql_query = "SELECT * FROM computer_store.discussion WHERE part_name='" + name + "'"
+    # cursor.execute(sql_query)
+    # discussion_data = cursor.fetchall()
+    DETAIL_ID = None
+    CUSTOMER_ID = 1
+
     root = Tk()
     root.title('Discussion Detail')
     canvas = tk.Canvas(root, height=720, width=1280)
@@ -134,7 +190,8 @@ def browse_discussion_detail(item_id, item_type):
 
     frame.bind("<Configure>", lambda event, canvas=canvas: onFrameConfigure(canvas))
 
-    row_num = get_item_data(frame, item_id, item_type)
+    row_num, DETAIL_ID = get_item_data(frame, item_id, item_type)
+    print("THIS IS A PAGE FOR" + str(DETAIL_ID))
     print(item_id, " ", item_type)
 
     # text_box = Text(frame, height=10, width=60)
