@@ -43,6 +43,10 @@ def CPC_GUI(id):
     addProduct_Button.config(font = ("Hevetica", 15,))
     addProduct_Button.pack()
 
+    Wallet_Button = Button(cpc, text = "Wallet", width = 20, height = 3, command = viewWallet)
+    Wallet_Button.config(font = ("Hevetica", 15,))
+    Wallet_Button.pack()
+
     cpc.mainloop()
 
 def viewProducts():
@@ -475,6 +479,7 @@ def viewPower():
     con.commit()
 
 def addProducts():
+
     products = Tk()
     products.geometry('600x600')
 
@@ -521,22 +526,22 @@ def addProducts():
 
 def addCPU():
     
-    add = Tk()
-    add.geometry('600x400')
+    cpuadd = Tk()
+    cpuadd.geometry('600x400')
 
-    Info_Label = Label(add, text = 'CPU Info')
+    Info_Label = Label(cpuadd, text = 'CPU Info')
     Info_Label.config(font = ("Hevetica", 15, "underline"))
     Info_Label.pack()
 
-    Label(add, text="").pack()
-    Label(add, text="").pack()
-    Label(add, text="").pack()
+    Label(cpuadd, text="").pack()
+    Label(cpuadd, text="").pack()
+    Label(cpuadd, text="").pack()
 
-    CPU_Button = Button(add, text = "View CPU's already in System", width = 25, height = 2, command = viewCPU)
+    CPU_Button = Button(cpuadd, text = "View CPU's already in System", width = 25, height = 2, command = viewCPU)
     CPU_Button.config(font = ("Hevetica", 15,))
     CPU_Button.pack()
 
-    Info_Frame = LabelFrame(add)
+    Info_Frame = LabelFrame(cpuadd)
     Info_Frame.pack(expand="yes", padx=0, pady = 0)
     global id
     name = StringVar()
@@ -574,7 +579,7 @@ def addCPU():
     socketEntry.grid(row=5, column=1, padx=0, pady=0)
 
     Label(Info_Frame, text = "Does the CPU come with a cooler?: ").grid(row=5, column=0, padx=0, pady=0)
-    coolerEntry = Entry(Info_Frame, textvariable = socket)
+    coolerEntry = Entry(Info_Frame, textvariable = cooler)
     coolerEntry.grid(row=5, column=1, padx=0, pady=0)
 
     Label(Info_Frame, text = "What is the  price of the CPU?: ").grid(row=6, column=0, padx=0, pady=0)
@@ -585,10 +590,10 @@ def addCPU():
     stockEntry = Entry(Info_Frame, textvariable = stock)
     stockEntry.grid(row=7, column=1, padx=0, pady=0)
 
-    Button_Frame = LabelFrame(add)
+    Button_Frame = LabelFrame(cpuadd)
     Button_Frame.pack(expand="yes", padx=0, pady = 0)
 
-    def cpuAdd():
+    def Add():
 
         global id
         name = nameEntry.get()
@@ -612,12 +617,12 @@ def addCPU():
         else:
             Label(Button_Frame, text = "Failed to add Part to the System,").grid(row=2, column=0, padx=0, pady=0)
 
-    Add_Button = Button(Button_Frame, text = "Add to System", width = 10, command = cpuAdd)
+    Add_Button = Button(Button_Frame, text = "Add to System", width = 10, command = Add)
     Add_Button.config(font = ("Hevetica", 10,))
     Add_Button.grid(row=0, column=0, padx=0, pady=0)
 
     def close():
-        add.destroy()
+        cpuadd.destroy()
 
     Close_Button = Button(Button_Frame, text = "Close", width = 10, command = close)
     Close_Button.config(font = ("Hevetica", 10,))
@@ -625,22 +630,22 @@ def addCPU():
 
 def addRAM():
 
-    add = Tk()
-    add.geometry('600x400')
+    ramadd = Tk()
+    ramadd.geometry('600x400')
 
-    Info_Label = Label(add, text = 'RAM Info')
+    Info_Label = Label(ramadd, text = 'RAM Info')
     Info_Label.config(font = ("Hevetica", 15, "underline"))
     Info_Label.pack()
 
-    Label(add, text="").pack()
-    Label(add, text="").pack()
-    Label(add, text="").pack()
+    Label(ramadd, text="").pack()
+    Label(ramadd, text="").pack()
+    Label(ramadd, text="").pack()
 
-    CPU_Button = Button(add, text = "View RAM's already in System", width = 25, height = 2, command = viewRAM)
+    CPU_Button = Button(ramadd, text = "View RAM's already in System", width = 25, height = 2, command = viewRAM)
     CPU_Button.config(font = ("Hevetica", 15,))
     CPU_Button.pack()
 
-    Info_Frame = LabelFrame(add)
+    Info_Frame = LabelFrame(ramadd)
     Info_Frame.pack(expand="yes", padx=0, pady = 0)
     global id
     name = StringVar()
@@ -684,10 +689,10 @@ def addRAM():
     stockEntry = Entry(Info_Frame, textvariable = stock)
     stockEntry.grid(row=6, column=1, padx=0, pady=0)
 
-    Button_Frame = LabelFrame(add)
+    Button_Frame = LabelFrame(ramadd)
     Button_Frame.pack(expand="yes", padx=0, pady = 0)
 
-    def ramAdd():
+    def Add():
 
         global id
         name = nameEntry.get()
@@ -711,12 +716,12 @@ def addRAM():
         else:
             Label(Button_Frame, text = "Failed to add Part to the System,").grid(row=2, column=0, padx=0, pady=0)
 
-    Add_Button = Button(Button_Frame, text = "Add to System", width = 10, command = ramAdd)
+    Add_Button = Button(Button_Frame, text = "Add to System", width = 10, command = Add)
     Add_Button.config(font = ("Hevetica", 10,))
     Add_Button.grid(row=0, column=0, padx=0, pady=0)
 
     def close():
-        add.destroy()
+        ramadd.destroy()
 
     Close_Button = Button(Button_Frame, text = "Close", width = 10, command = close)
     Close_Button.config(font = ("Hevetica", 10,))
@@ -724,22 +729,22 @@ def addRAM():
 
 def addGPU():
 
-    add = Tk()
-    add.geometry('600x400')
+    gpuadd = Tk()
+    gpuadd.geometry('600x400')
 
-    Info_Label = Label(add, text = 'GPU Info')
+    Info_Label = Label(gpuadd, text = 'GPU Info')
     Info_Label.config(font = ("Hevetica", 15, "underline"))
     Info_Label.pack()
 
-    Label(add, text="").pack()
-    Label(add, text="").pack()
-    Label(add, text="").pack()
+    Label(gpuadd, text="").pack()
+    Label(gpuadd, text="").pack()
+    Label(gpuadd, text="").pack()
 
-    CPU_Button = Button(add, text = "View GPU's already in System", width = 25, height = 2, command = viewGPU)
+    CPU_Button = Button(gpuadd, text = "View GPU's already in System", width = 25, height = 2, command = viewGPU)
     CPU_Button.config(font = ("Hevetica", 15,))
     CPU_Button.pack()
 
-    Info_Frame = LabelFrame(add)
+    Info_Frame = LabelFrame(gpuadd)
     Info_Frame.pack(expand="yes", padx=0, pady = 0)
 
     global id
@@ -794,10 +799,10 @@ def addGPU():
     stockEntry = Entry(Info_Frame, textvariable = stock)
     stockEntry.grid(row=10, column=1, padx=0, pady=0)
 
-    Button_Frame = LabelFrame(add)
+    Button_Frame = LabelFrame(gpuadd)
     Button_Frame.pack(expand="yes", padx=0, pady = 0)
 
-    def ramAdd():
+    def Add():
 
         global id
         name = nameEntry.get()
@@ -823,33 +828,659 @@ def addGPU():
         else:
             Label(Button_Frame, text = "Failed to add Part to the System,").grid(row=2, column=0, padx=0, pady=0)
 
-    Add_Button = Button(Button_Frame, text = "Add to System", width = 10, command = ramAdd)
+    Add_Button = Button(Button_Frame, text = "Add to System", width = 10, command = Add)
     Add_Button.config(font = ("Hevetica", 10,))
     Add_Button.grid(row=0, column=0, padx=0, pady=0)
 
     def close():
-        add.destroy()
+        gpuadd.destroy()
 
     Close_Button = Button(Button_Frame, text = "Close", width = 10, command = close)
     Close_Button.config(font = ("Hevetica", 10,))
     Close_Button.grid(row=1, column=0, padx=0, pady=0)
     
 def addMother():
-    print('')
+   
+    motheradd = Tk()
+    motheradd.geometry('600x500')
+
+    Info_Label = Label(motheradd, text = 'Motherboard Info')
+    Info_Label.config(font = ("Hevetica", 15, "underline"))
+    Info_Label.pack()
+
+    Label(motheradd, text="").pack()
+    Label(motheradd, text="").pack()
+    Label(motheradd, text="").pack()
+
+    CPU_Button = Button(motheradd, text = "View Motherboard's already in System", width = 25, height = 2, command = viewMother)
+    CPU_Button.config(font = ("Hevetica", 15,))
+    CPU_Button.pack()
+
+    Info_Frame = LabelFrame(motheradd)
+    Info_Frame.pack(expand="yes", padx=0, pady = 0)
+
+    global id
+    name = StringVar()
+    form_factor = StringVar()
+    socket = StringVar()
+    memory_type = StringVar()
+    memory_slots = IntVar()
+    pci_16 = StringVar()
+    ethernet = StringVar()
+    sata = IntVar()
+    usb_2 = IntVar()
+    usb_3 = IntVar()
+    wireless = StringVar()
+    rgb = StringVar()
+    price = IntVar()
+    stock = IntVar()
+
+    Label(Info_Frame, text = "Enter the Motherboard Name: ").grid(row=0, column=0, padx=0, pady=0)
+    nameEntry = Entry(Info_Frame, textvariable = name)
+    nameEntry.grid(row=0, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "What is the form factor of the motherboard?: ").grid(row=1, column=0, padx=0, pady=0)
+    ffEntry = Entry(Info_Frame, textvariable = form_factor)
+    ffEntry.grid(row=1, column=1, padx=0, pady=0)
+    
+    Label(Info_Frame, text = "What type of socket does the motherboard have?: ").grid(row=2, column=0, padx=0, pady=0)
+    socketEntry = Entry(Info_Frame, textvariable = socket)
+    socketEntry.grid(row=2, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "What type of memory does the motherboard use?: ").grid(row=4, column=0, padx=0, pady=0)
+    mtypeEntry = Entry(Info_Frame, textvariable = memory_type)
+    mtypeEntry.grid(row=4, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "How many memory slots does the motherboard have?: ").grid(row=5, column=0, padx=0, pady=0)
+    mslotsEntry = Entry(Info_Frame, textvariable = memory_slots)
+    mslotsEntry.grid(row=5, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "Does the motherboard use PCIx16?: ").grid(row=6, column=0, padx=0, pady=0)
+    pciEntry = Entry(Info_Frame, textvariable = pci_16)
+    pciEntry.grid(row=6, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "Does the motherboard support ethernet?: ").grid(row=7, column=0, padx=0, pady=0)
+    ethernetEntry = Entry(Info_Frame, textvariable = ethernet)
+    ethernetEntry.grid(row=7, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "How manny sata ports does the motherboard have?: ").grid(row=8, column=0, padx=0, pady=0)
+    sataEntry = Entry(Info_Frame, textvariable = sata)
+    sataEntry.grid(row=8, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "How many usb 2.0 headers does the motherboard have?: ").grid(row=9, column=0, padx=0, pady=0)
+    usb2Entry = Entry(Info_Frame, textvariable = usb_2)
+    usb2Entry.grid(row=9, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "How many usb 3.0 headers does the motherboard have?: ").grid(row=10, column=0, padx=0, pady=0)
+    usb3Entry = Entry(Info_Frame, textvariable = usb_3)
+    usb3Entry.grid(row=10, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "Does the motherboard support wireless connection?: ").grid(row=11, column=0, padx=0, pady=0)
+    wirelessEntry = Entry(Info_Frame, textvariable = wireless)
+    wirelessEntry.grid(row=11, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "Does the motherboard have rgb?: ").grid(row=12, column=0, padx=0, pady=0)
+    rgbEntry = Entry(Info_Frame, textvariable = rgb)
+    rgbEntry.grid(row=12, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "What is the  price of the motherboard?: ").grid(row=13, column=0, padx=0, pady=0)
+    priceEntry = Entry(Info_Frame, textvariable = price)
+    priceEntry.grid(row=13, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "How much stock do you have?: ").grid(row=14, column=0, padx=0, pady=0)
+    stockEntry = Entry(Info_Frame, textvariable = stock)
+    stockEntry.grid(row=14, column=1, padx=0, pady=0)
+
+    Button_Frame = LabelFrame(motheradd)
+    Button_Frame.pack(expand="yes", padx=0, pady = 0)
+
+    def Add():
+
+        global id
+        name = nameEntry.get()
+        form_factor = ffEntry.get()
+        socket = socketEntry.get()
+        memory_type = mtypeEntry.get()
+        memory_slots = mslotsEntry.get()
+        pci_16 = pciEntry.get()
+        ethernet = ethernetEntry.get()
+        sata = sataEntry.get()
+        usb_2 = usb2Entry.get()
+        usb_3 = usb3Entry.get()
+        wireless = wirelessEntry.get()
+        rgb = rgbEntry.get()
+        price = priceEntry.get()
+        stock = stockEntry.get()
+
+        cursor.execute("INSERT INTO motherboard (company_id, name, form_factor, socket, memory_type, memory_slots, pci_16, ethernet, sata, usb_2, usb_3, wireless, rgb, price, in_stock)" +
+        "VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')".format(id, name, form_factor, socket, memory_type, memory_slots, pci_16, ethernet, sata, usb_2, usb_3, wireless, rgb, price, stock))
+        con.commit()
+
+        cursor.execute("SELECT * FROM motherboard WHERE company_id = %s AND name = %s", (id, name))
+        records = cursor.fetchall()
+        count = cursor.rowcount
+        if count == 1:
+            Label(Button_Frame, text = "The Part was added to the System").grid(row=2, column=0, padx=0, pady=0)
+        else:
+            Label(Button_Frame, text = "Failed to add Part to the System,").grid(row=2, column=0, padx=0, pady=0)
+
+    Add_Button = Button(Button_Frame, text = "Add to System", width = 10, command = Add)
+    Add_Button.config(font = ("Hevetica", 10,))
+    Add_Button.grid(row=0, column=0, padx=0, pady=0)
+
+    def close():
+        motheradd.destroy()
+
+    Close_Button = Button(Button_Frame, text = "Close", width = 10, command = close)
+    Close_Button.config(font = ("Hevetica", 10,))
+    Close_Button.grid(row=1, column=0, padx=0, pady=0)
+
 def addCase():
-    print('')
-def addCase():
-    print('')
+
+    caseadd = Tk()
+    caseadd.geometry('600x500')
+
+    Info_Label = Label(caseadd, text = 'Case Info')
+    Info_Label.config(font = ("Hevetica", 15, "underline"))
+    Info_Label.pack()
+
+    Label(caseadd, text="").pack()
+    Label(caseadd, text="").pack()
+    Label(caseadd, text="").pack()
+
+    CPU_Button = Button(caseadd, text = "View Case's already in System", width = 25, height = 2, command = viewCase)
+    CPU_Button.config(font = ("Hevetica", 15,))
+    CPU_Button.pack()
+
+    Info_Frame = LabelFrame(caseadd)
+    Info_Frame.pack(expand="yes", padx=0, pady = 0)
+
+    global id
+    name = StringVar()
+    case_type = StringVar()
+    side_panel = StringVar()
+    external_bay = IntVar()
+    internal_bay = IntVar()
+    max_gpu_size = IntVar()
+    max_fan_size = IntVar()
+    num_front_fan = IntVar()
+    num_top_fan = IntVar()
+    num_exhuast_fan = IntVar()
+    num_fan_included = IntVar()
+    max_radiator = IntVar()
+    rgb = StringVar()
+    price = IntVar()
+    stock = IntVar()
+
+    Label(Info_Frame, text = "Enter the Case Name: ").grid(row=0, column=0, padx=0, pady=0)
+    nameEntry = Entry(Info_Frame, textvariable = name)
+    nameEntry.grid(row=0, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "What is the case type?: ").grid(row=1, column=0, padx=0, pady=0)
+    ctypeEntry = Entry(Info_Frame, textvariable = case_type)
+    ctypeEntry.grid(row=1, column=1, padx=0, pady=0)
+    
+    Label(Info_Frame, text = "What is the type of side_panel the case has?: ").grid(row=2, column=0, padx=0, pady=0)
+    spanelEntry = Entry(Info_Frame, textvariable = side_panel)
+    spanelEntry.grid(row=2, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "How many external bays does the case have?: ").grid(row=4, column=0, padx=0, pady=0)
+    ebayEntry = Entry(Info_Frame, textvariable = external_bay)
+    ebayEntry.grid(row=4, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "How man internal bays does the the case have?: ").grid(row=5, column=0, padx=0, pady=0)
+    ibayEntry = Entry(Info_Frame, textvariable = internal_bay)
+    ibayEntry.grid(row=5, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "What the the maximum gpu size you can fit in the case?: ").grid(row=6, column=0, padx=0, pady=0)
+    mgsizeEntry = Entry(Info_Frame, textvariable = max_gpu_size)
+    mgsizeEntry.grid(row=6, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "What is the maximum size of fans that can fit in the case?: ").grid(row=7, column=0, padx=0, pady=0)
+    mfsizeEntry = Entry(Info_Frame, textvariable = max_fan_size)
+    mfsizeEntry.grid(row=7, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "What is the max number of front panel fans you can have?: ").grid(row=8, column=0, padx=0, pady=0)
+    nffEntry = Entry(Info_Frame, textvariable = num_front_fan)
+    nffEntry.grid(row=8, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "What is the maximum number of top panel fans you can have?: ").grid(row=9, column=0, padx=0, pady=0)
+    ntfEntry = Entry(Info_Frame, textvariable = num_top_fan)
+    ntfEntry.grid(row=9, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "What is the number of exhaust fans the case has?: ").grid(row=10, column=0, padx=0, pady=0)
+    nefEntry = Entry(Info_Frame, textvariable = num_exhuast_fan)
+    nefEntry.grid(row=10, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "How many fans are included in the case?: ").grid(row=11, column=0, padx=0, pady=0)
+    nfiEntry = Entry(Info_Frame, textvariable = num_fan_included)
+    nfiEntry.grid(row=11, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "What is the maximum radiator size?: ").grid(row=12, column=0, padx=0, pady=0)
+    mradEntry = Entry(Info_Frame, textvariable = max_radiator)
+    mradEntry.grid(row=12, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "Does the case have rgb?: ").grid(row=13, column=0, padx=0, pady=0)
+    rgbEntry = Entry(Info_Frame, textvariable = rgb)
+    rgbEntry.grid(row=13, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "What is the  price of the motherboard?: ").grid(row=14, column=0, padx=0, pady=0)
+    priceEntry = Entry(Info_Frame, textvariable = price)
+    priceEntry.grid(row=14, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "How much stock do you have?: ").grid(row=15, column=0, padx=0, pady=0)
+    stockEntry = Entry(Info_Frame, textvariable = stock)
+    stockEntry.grid(row=15, column=1, padx=0, pady=0)
+
+    Button_Frame = LabelFrame(caseadd)
+    Button_Frame.pack(expand="yes", padx=0, pady = 0)
+
+    def Add():
+
+        global id
+        name = nameEntry.get()
+        case_type = ctypeEntry.get()
+        side_panel = spanelEntry.get()
+        external_bay = ebayEntry.get()
+        internal_bay = ibayEntry.get()
+        max_gpu_size = mgsizeEntry.get()
+        max_fan_size = mfsizeEntry.get()
+        num_front_fan = nffEntry.get()
+        num_top_fan = ntfEntry.get()
+        num_exhuast_fan = nefEntry.get()
+        num_fan_included = nfiEntry.get()
+        max_radiator = mradEntry.get()
+        rgb = rgbEntry.get()
+        price = priceEntry.get()
+        stock = stockEntry.get()
+
+        cursor.execute("INSERT INTO cases (company_id, name, case_type, side_panel, external_bay, internal_bay, max_gpu_size, max_fan_size, num_front_fan, num_top_fan, num_exhaust_fan, num_fan_included, max_radiator, rgb, price, in_stock)" +
+        "VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')".format(id, name, case_type, side_panel, external_bay, internal_bay, max_gpu_size, max_fan_size, num_front_fan, num_top_fan, num_exhuast_fan, num_fan_included, max_radiator, rgb, price, stock))
+        con.commit()
+
+        cursor.execute("SELECT * FROM cases WHERE company_id = %s AND name = %s", (id, name))
+        records = cursor.fetchall()
+        count = cursor.rowcount
+        if count == 1:
+            Label(Button_Frame, text = "The Part was added to the System").grid(row=2, column=0, padx=0, pady=0)
+        else:
+            Label(Button_Frame, text = "Failed to add Part to the System,").grid(row=2, column=0, padx=0, pady=0)
+
+    Add_Button = Button(Button_Frame, text = "Add to System", width = 10, command = motherAdd)
+    Add_Button.config(font = ("Hevetica", 10,))
+    Add_Button.grid(row=0, column=0, padx=0, pady=0)
+
+    def close():
+        caseadd.destroy()
+
+    Close_Button = Button(Button_Frame, text = "Close", width = 10, command = close)
+    Close_Button.config(font = ("Hevetica", 10,))
+    Close_Button.grid(row=1, column=0, padx=0, pady=0)
+
 def addStorage():
-    print('')
+
+    storageadd = Tk()
+    storageadd.geometry('600x500')
+
+    Info_Label = Label(storageadd, text = 'Case Info')
+    Info_Label.config(font = ("Hevetica", 15, "underline"))
+    Info_Label.pack()
+
+    Label(storageadd, text="").pack()
+    Label(storageadd, text="").pack()
+    Label(storageadd, text="").pack()
+
+    CPU_Button = Button(storageadd, text = "View Case's already in System", width = 25, height = 2, command = viewCase)
+    CPU_Button.config(font = ("Hevetica", 15,))
+    CPU_Button.pack()
+
+    Info_Frame = LabelFrame(storageadd)
+    Info_Frame.pack(expand="yes", padx=0, pady = 0)
+
+    global id
+    name = StringVar()
+    capacity = StringVar()
+    type = StringVar()
+    form_factor = StringVar()
+    interface = StringVar()
+    price = IntVar()
+    stock = IntVar()
+
+    Label(Info_Frame, text = "Enter the Storage Device Name: ").grid(row=0, column=0, padx=0, pady=0)
+    nameEntry = Entry(Info_Frame, textvariable = name)
+    nameEntry.grid(row=0, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "What is the total capacity of the storage device?: ").grid(row=1, column=0, padx=0, pady=0)
+    capacityEntry = Entry(Info_Frame, textvariable = capacity)
+    capacityEntry.grid(row=1, column=1, padx=0, pady=0)
+    
+    Label(Info_Frame, text = "What is the form factor of the storage device?: ").grid(row=2, column=0, padx=0, pady=0)
+    typeEntry = Entry(Info_Frame, textvariable = type)
+    typeEntry.grid(row=2, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "How many external bays does the case have?: ").grid(row=4, column=0, padx=0, pady=0)
+    ffEntry = Entry(Info_Frame, textvariable = form_factor)
+    ffEntry.grid(row=4, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "What interface does the storage device use? ").grid(row=5, column=0, padx=0, pady=0)
+    interfaceEntry = Entry(Info_Frame, textvariable = interface)
+    interfaceEntry.grid(row=5, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "What is the  price of the storage device?: ").grid(row=6, column=0, padx=0, pady=0)
+    priceEntry = Entry(Info_Frame, textvariable = price)
+    priceEntry.grid(row=6, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "How much stock do you have?: ").grid(row=7, column=0, padx=0, pady=0)
+    stockEntry = Entry(Info_Frame, textvariable = stock)
+    stockEntry.grid(row=7, column=1, padx=0, pady=0)
+
+    Button_Frame = LabelFrame(storageadd)
+    Button_Frame.pack(expand="yes", padx=0, pady = 0)
+
+    def Add():
+
+        global id
+        name = nameEntry.get()
+        capacity = capacityEntry.get()
+        type = typeEntry.get()
+        form_factor = ffEntry.get()
+        interface = interfaceEntry.get()
+        price = priceEntry.get()
+        stock = stockEntry.get()
+
+        cursor.execute("INSERT INTO storage (company_id, name, capacity, type, form_factor, Interface, price, in_stock)" +
+        "VALUES ('{}','{}','{}','{}','{}','{}','{}','{}')".format(id, name, capacity, type, form_factor, interface, price, stock))
+        con.commit()
+
+        cursor.execute("SELECT * FROM storage WHERE company_id = %s AND name = %s", (id, name))
+        records = cursor.fetchall()
+        count = cursor.rowcount
+        if count == 1:
+            Label(Button_Frame, text = "The Part was added to the System").grid(row=2, column=0, padx=0, pady=0)
+        else:
+            Label(Button_Frame, text = "Failed to add Part to the System,").grid(row=2, column=0, padx=0, pady=0)
+
+    Add_Button = Button(Button_Frame, text = "Add to System", width = 10, command = Add)
+    Add_Button.config(font = ("Hevetica", 10,))
+    Add_Button.grid(row=0, column=0, padx=0, pady=0)
+
+    def close():
+        storageadd.destroy()
+
+    Close_Button = Button(Button_Frame, text = "Close", width = 10, command = close)
+    Close_Button.config(font = ("Hevetica", 10,))
+    Close_Button.grid(row=1, column=0, padx=0, pady=0)
+
 def addCooler():
-    print('')
+
+    cooleradd = Tk()
+    cooleradd.geometry('600x500')
+
+    Info_Label = Label(cooleradd, text = 'CPU Cooler Info')
+    Info_Label.config(font = ("Hevetica", 15, "underline"))
+    Info_Label.pack()
+
+    Label(cooleradd, text="").pack()
+    Label(cooleradd, text="").pack()
+    Label(cooleradd, text="").pack()
+
+    CPU_Button = Button(cooleradd, text = "View Coolers already in System", width = 25, height = 2, command = viewCase)
+    CPU_Button.config(font = ("Hevetica", 15,))
+    CPU_Button.pack()
+
+    Info_Frame = LabelFrame(cooleradd)
+    Info_Frame.pack(expand="yes", padx=0, pady = 0)
+
+    global id
+    name = StringVar()
+    fan_rpm = StringVar()
+    type_of_cooler = StringVar()
+    radiator = IntVar()
+    socket = StringVar()
+    rgb = StringVar()
+    price = IntVar()
+    stock = IntVar()
+
+    Label(Info_Frame, text = "Enter the Cooler Name: ").grid(row=0, column=0, padx=0, pady=0)
+    nameEntry = Entry(Info_Frame, textvariable = name)
+    nameEntry.grid(row=0, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "What is the fan rpm of the cooler?: ").grid(row=1, column=0, padx=0, pady=0)
+    frpmEntry = Entry(Info_Frame, textvariable = fan_rpm)
+    frpmEntry.grid(row=1, column=1, padx=0, pady=0)
+    
+    Label(Info_Frame, text = "What type of cooler is it?: ").grid(row=2, column=0, padx=0, pady=0)
+    tocEntry = Entry(Info_Frame, textvariable = type_of_cooler)
+    tocEntry.grid(row=2, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "How big is the radiator? If no radiator type 0: ").grid(row=4, column=0, padx=0, pady=0)
+    radiatorEntry = Entry(Info_Frame, textvariable = radiator)
+    radiatorEntry.grid(row=4, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "What sockets does the cooler support? ").grid(row=5, column=0, padx=0, pady=0)
+    socketEntry = Entry(Info_Frame, textvariable = socket)
+    socketEntry.grid(row=5, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "Does the cooler have rgb? ").grid(row=6, column=0, padx=0, pady=0)
+    rgbEntry = Entry(Info_Frame, textvariable = rgb)
+    rgbEntry.grid(row=6, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "What is the  price of the cooler device?: ").grid(row=7, column=0, padx=0, pady=0)
+    priceEntry = Entry(Info_Frame, textvariable = price)
+    priceEntry.grid(row=7, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "How much stock do you have?: ").grid(row=8, column=0, padx=0, pady=0)
+    stockEntry = Entry(Info_Frame, textvariable = stock)
+    stockEntry.grid(row=8, column=1, padx=0, pady=0)
+
+    Button_Frame = LabelFrame(cooleradd)
+    Button_Frame.pack(expand="yes", padx=0, pady = 0)
+
+    def Add():
+
+        global id
+        name = nameEntry.get()
+        fan_rpm = frpmEntry.get()
+        type_of_cooler = tocEntry.get()
+        radiator = radiatorEntry.get()
+        socket = socketEntry.get()
+        rgb = rgbEntry.get()
+        price = priceEntry.get()
+        stock = stockEntry.get()
+
+        cursor.execute("INSERT INTO cooler (company_id, name, fan_rpm, type_of_cooler, Radiator, socket, rgb, price, in_stock)" +
+        "VALUES ('{}','{}','{}','{}','{}','{}','{}','{}', '{}')".format(id, name, fan_rpm, type_of_cooler, radiator, socket, rgb, price, stock))
+        con.commit()
+
+        cursor.execute("SELECT * FROM cooler WHERE company_id = %s AND name = %s", (id, name))
+        records = cursor.fetchall()
+        count = cursor.rowcount
+        if count == 1:
+            Label(Button_Frame, text = "The Part was added to the System").grid(row=2, column=0, padx=0, pady=0)
+        else:
+            Label(Button_Frame, text = "Failed to add Part to the System,").grid(row=2, column=0, padx=0, pady=0)
+
+    Add_Button = Button(Button_Frame, text = "Add to System", width = 10, command = Add)
+    Add_Button.config(font = ("Hevetica", 10,))
+    Add_Button.grid(row=0, column=0, padx=0, pady=0)
+
+    def close():
+        cooleradd.destroy()
+
+    Close_Button = Button(Button_Frame, text = "Close", width = 10, command = close)
+    Close_Button.config(font = ("Hevetica", 10,))
+    Close_Button.grid(row=1, column=0, padx=0, pady=0)
+
 def addPower():
-    print('')
 
+    poweradd = Tk()
+    poweradd.geometry('600x500')
 
+    Info_Label = Label(poweradd, text = 'Power Supply Info')
+    Info_Label.config(font = ("Hevetica", 15, "underline"))
+    Info_Label.pack()
 
+    Label(poweradd, text="").pack()
+    Label(poweradd, text="").pack()
+    Label(poweradd, text="").pack()
 
+    CPU_Button = Button(poweradd, text = "View Power Supplies already in System", width = 25, height = 2, command = viewCase)
+    CPU_Button.config(font = ("Hevetica", 15,))
+    CPU_Button.pack()
+
+    Info_Frame = LabelFrame(poweradd)
+    Info_Frame.pack(expand="yes", padx=0, pady = 0)
+
+    global id
+    name = StringVar()
+    form_factor = StringVar()
+    efficency = StringVar()
+    wattage = IntVar()
+    modular = StringVar()
+    price = IntVar()
+    stock = IntVar()
+
+    Label(Info_Frame, text = "Enter the power supply Name: ").grid(row=0, column=0, padx=0, pady=0)
+    nameEntry = Entry(Info_Frame, textvariable = name)
+    nameEntry.grid(row=0, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "What is the form factor of the power supply?: ").grid(row=1, column=0, padx=0, pady=0)
+    ffEntry = Entry(Info_Frame, textvariable = form_factor)
+    ffEntry.grid(row=1, column=1, padx=0, pady=0)
+    
+    Label(Info_Frame, text = "What is the efficency of the power supply?: ").grid(row=2, column=0, padx=0, pady=0)
+    efficencyEntry = Entry(Info_Frame, textvariable = efficency)
+    efficencyEntry.grid(row=2, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "What is the total wattage of the power supply: ").grid(row=4, column=0, padx=0, pady=0)
+    wattageEntry = Entry(Info_Frame, textvariable = wattage)
+    wattageEntry.grid(row=4, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "If the power supply modular? ").grid(row=5, column=0, padx=0, pady=0)
+    modularEntry = Entry(Info_Frame, textvariable = modular)
+    modularEntry.grid(row=5, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "What is the  price of the cooler device?: ").grid(row=6, column=0, padx=0, pady=0)
+    priceEntry = Entry(Info_Frame, textvariable = price)
+    priceEntry.grid(row=6, column=1, padx=0, pady=0)
+
+    Label(Info_Frame, text = "How much stock do you have?: ").grid(row=7, column=0, padx=0, pady=0)
+    stockEntry = Entry(Info_Frame, textvariable = stock)
+    stockEntry.grid(row=7, column=1, padx=0, pady=0)
+
+    Button_Frame = LabelFrame(poweradd)
+    Button_Frame.pack(expand="yes", padx=0, pady = 0)
+
+    def Add():
+
+        global id
+        name = nameEntry.get()
+        form_factor = ffEntry.get()
+        efficency = efficencyEntry.get()
+        wattage = wattageEntry.get()
+        modular = modularEntry.get()
+        price = priceEntry.get()
+        stock = stockEntry.get()
+
+        cursor.execute("INSERT INTO powersupply (company_id, name, form_factor, efficency, wattage, modular, price, in_stock)" +
+        "VALUES ('{}','{}','{}','{}','{}','{}','{}','{}')".format(id, name, form_factor, efficency, wattage, modular, price, stock))
+        con.commit()
+
+        cursor.execute("SELECT * FROM powersupply WHERE company_id = %s AND name = %s", (id, name))
+        records = cursor.fetchall()
+        count = cursor.rowcount
+        if count == 1:
+            Label(Button_Frame, text = "The Part was added to the System").grid(row=2, column=0, padx=0, pady=0)
+        else:
+            Label(Button_Frame, text = "Failed to add Part to the System,").grid(row=2, column=0, padx=0, pady=0)
+
+    Add_Button = Button(Button_Frame, text = "Add to System", width = 10, command = Add)
+    Add_Button.config(font = ("Hevetica", 10,))
+    Add_Button.grid(row=0, column=0, padx=0, pady=0)
+
+    def close():
+        poweradd.destroy()
+
+    Close_Button = Button(Button_Frame, text = "Close", width = 10, command = close)
+    Close_Button.config(font = ("Hevetica", 10,))
+    Close_Button.grid(row=1, column=0, padx=0, pady=0)
+
+def viewWallet():
+
+    wallet = Tk()
+    wallet.geometry('500x450')
+
+    #CPU Total
+    cursor.execute("SELECT SUM(total_profit) FROM cpu WHERE company_id = %s", (id,))
+    cpusum = cursor.fetchall()[0][0]
+    if cpusum is None:
+        cpusum = 0
+    #print(cpusum)
+    #RAM Total
+    cursor.execute("SELECT SUM(total_profit) FROM ram WHERE company_id = %s", (id,))
+    ramsum = cursor.fetchall()[0][0]
+    if ramsum is None:
+        ramsum = 0
+    #print(ramsum)
+    #GPU Total
+    cursor.execute("SELECT SUM(total_profit) FROM gpu WHERE company_id = %s", (id,))
+    gpusum = cursor.fetchall()[0][0]
+    if gpusum is None:
+        gpusum = 0
+    #print(gpusum)
+    #Mother Total
+    cursor.execute("SELECT SUM(total_profit) FROM motherboard WHERE company_id = %s", (id,))
+    mothersum = cursor.fetchall()[0][0]
+    if mothersum is None:
+        mothersum = 0
+    #print(mothersum)
+    #Case Total
+    cursor.execute("SELECT SUM(total_profit) FROM cases WHERE company_id = %s", (id,))
+    casesum = cursor.fetchall()[0][0]
+    if casesum is None:
+        casesum = 0
+    #print(casesum)
+    #Storage Total
+    cursor.execute("SELECT SUM(total_profit) FROM storage WHERE company_id = %s", (id,))
+    storagesum = cursor.fetchall()[0][0]
+    if storagesum is None:
+        storagesum = 0
+    #print(storagesum)
+    #Cooler Total
+    cursor.execute("SELECT SUM(total_profit) FROM cooler WHERE company_id = %s", (id,))
+    coolersum = cursor.fetchall()[0][0]
+    if coolersum is None:
+        coolersum = 0
+    #print(coolersum)
+    #Power Total 
+    cursor.execute("SELECT SUM(total_profit) FROM powersupply WHERE company_id = %s", (id,))
+    powersum = cursor.fetchall()[0][0]
+    if powersum is None:
+        powersum = 0
+    #print(powersum)
+
+    #Total Sum:
+    totalSum = cpusum + ramsum + gpusum + mothersum + casesum + storagesum + coolersum + powersum
+    print(totalSum)
+
+    Title_Label = Label(wallet, text = 'Wallet')
+    Title_Label.config(font = ("Hevetica", 20, "underline"))
+    Title_Label.pack()
+
+    Label(wallet, text="").pack()
+    Label(wallet, text="").pack()
+    Label(wallet, text="").pack()
+
+    Cash_Frame = LabelFrame(wallet)
+    Cash_Frame.pack(expand="yes", padx=0, pady = 0)
+
+    Cash_Label = Label(Cash_Frame, text = "Cash: ")
+    Cash_Label.config(font = ("Hevetica", 30))
+    Cash_Label.grid(row=0, column=0, padx=0, pady=0)
+    
+    totalSum_Label = Label(Cash_Frame, text = "$%s" % (totalSum))
+    totalSum_Label.config(font = ("Hevetica", 30))
+    totalSum_Label.grid(row=0, column=1, padx=0, pady=0)
 
 id = 1
-CPC_GUI(id)
+#CPC_GUI(id)
