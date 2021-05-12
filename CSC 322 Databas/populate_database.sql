@@ -25,10 +25,10 @@ USE `computer_store`;
 -- Table structure for table `cases`
 --
 
-DROP TABLE IF EXISTS `cases`;
+DROP TABLE IF EXISTS `case`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `cases` (
+CREATE TABLE `case` (
   `case_id` int NOT NULL AUTO_INCREMENT,
   `company_id` int DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE `cases` (
   `total_profit` int DEFAULT NULL,
   PRIMARY KEY (`case_id`),
   KEY `company_id` (`company_id`),
-  CONSTRAINT `cases_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
+  CONSTRAINT `case_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -58,10 +58,10 @@ CREATE TABLE `cases` (
 -- Dumping data for table `cases`
 --
 
-LOCK TABLES `cases` WRITE;
-/*!40000 ALTER TABLE `cases` DISABLE KEYS */;
-INSERT INTO `cases` VALUES (1,10,'NZXT H510','ATX','Tempered Glass',0,2,381,140,2,1,1,1,280,'No',80,20,14,1120),(2,11,'Lian Li PC-O11 Dynamic','E-ATX','Tempered Glass',0,2,420,140,3,2,1,0,420,'No',160,22,22,3520),(3,3,'Corsair iCUE 4000X','ATX','Tempered Glass',0,2,360,140,3,2,1,3,420,'Yes',135,32,12,1620),(4,3,'Corsair Crystal 280X','Micro-ATX','Tempered Glass',0,2,300,140,2,2,1,1,280,'No',106,12,13,1378);
-/*!40000 ALTER TABLE `cases` ENABLE KEYS */;
+LOCK TABLES `case` WRITE;
+/*!40000 ALTER TABLE `case` DISABLE KEYS */;
+INSERT INTO `case` VALUES (1,10,'NZXT H510','ATX','Tempered Glass',0,2,381,140,2,1,1,1,280,'No',80,20,14,1120),(2,11,'Lian Li PC-O11 Dynamic','E-ATX','Tempered Glass',0,2,420,140,3,2,1,0,420,'No',160,22,22,3520),(3,3,'Corsair iCUE 4000X','ATX','Tempered Glass',0,2,360,140,3,2,1,3,420,'Yes',135,32,12,1620),(4,3,'Corsair Crystal 280X','Micro-ATX','Tempered Glass',0,2,300,140,2,2,1,1,280,'No',106,12,13,1378);
+/*!40000 ALTER TABLE `case` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -801,3 +801,47 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2021-05-11 17:00:04
+
+DROP TABLE IF EXISTS `discussion`;
+CREATE TABLE `discussion` (
+  `discussion_id` int NOT NULL AUTO_INCREMENT,
+  `part_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`discussion_id`)
+);
+
+-- UNLOCK TABLES;
+-- LOCK TABLES `discussion` WRITE;
+INSERT INTO discussion (part_name)
+SELECT name FROM computer_store.case
+UNION
+SELECT name FROM computer_store.cooler
+UNION
+SELECT name FROM computer_store.cpu
+UNION
+SELECT name FROM computer_store.gpu
+UNION
+SELECT name FROM computer_store.motherboard
+UNION
+SELECT name FROM computer_store.powersupply
+UNION
+SELECT name FROM computer_store.ram
+UNION
+SELECT name FROM computer_store.storage;
+-- UNLOCK TABLES;
+
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE `comment` (
+  `comment_id` int NOT NULL AUTO_INCREMENT,
+  `discussion_id` int DEFAULT NULL,
+  `registered_id` int DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`comment_id`),
+  KEY `discussion_id` (`discussion_id`), 
+  KEY `registered_id` (`registered_id`),
+  CONSTRAINT `discussion_ibfk_1` FOREIGN KEY (`discussion_id`) REFERENCES `discussion` (`discussion_id`),
+  CONSTRAINT `registered_customers_ibfk_1` FOREIGN KEY (`registered_id`) REFERENCES `registered` (`registered_id`)
+);
+
+LOCK TABLES `comment` WRITE;
+INSERT INTO `comment` VALUES (1, 1, 1, 'hello i like this product, very nice!!1'), (2, 1, 1, 'it is me again!! i love this item');
+UNLOCK TABLES;

@@ -8,12 +8,33 @@ def browse_discussion_detail(item_id, item_type):
     def onFrameConfigure(canvas):
         canvas.configure(scrollregion=canvas.bbox("all"))
 
-    def get_text():
-        # text = comment_box.get()
-        # comment_box.delete(1.0, END)
-        text = text_box.getvar(1.0, END)
+    def get_text(comment_box):
+        text = comment_box.get()
         print(text)
-        text_box.delete(1.0, END)
+        comment_box.delete("1.0", END)
+        # text = txtbox.get("1.0", 'end-1c')
+        # print(str(text))
+        # txtbox.delete("1.0", 'end-1c')
+        # print("?")
+
+    def get_comments(discussion_id):
+        print("grabbing discussion id" + str(discussion_id))
+        sql_query = "SELECT * FROM computer_store.comment WHERE discussion_id=" + str(discussion_id)
+        cursor.execute(sql_query)
+        comment_data = cursor.fetchall()
+        return comment_data
+
+    def get_comment_author(registered_id):
+        sql_query = "SELECT name FROM computer_store.registered_customers WHERE registered_id=" + str(registered_id)
+        cursor.execute(sql_query)
+        name = cursor.fetchall()
+        print(name[0][0])
+        return name[0][0]
+
+    def return_entry():
+        text = entry.get()
+        entry.delete(0, 'end')
+        print(text)
 
     def get_item_data(frame, item_id, item_type):
         print("huh?")
@@ -21,6 +42,13 @@ def browse_discussion_detail(item_id, item_type):
         cursor.execute(sql_query)
         item_data = cursor.fetchall()
         print(item_data)
+        name = item_data[0][0]
+        print(name)
+
+        sql_query = "SELECT * FROM computer_store.discussion WHERE part_name='" + name + "'"
+        cursor.execute(sql_query)
+        disscussion_data = cursor.fetchall()
+        print(disscussion_data)
 
         # SQL queries to find the discussion and comments
 
@@ -32,7 +60,7 @@ def browse_discussion_detail(item_id, item_type):
         # cursor.execute(sql_query)
         # comment_data = cursor.fetchall()
 
-        name = item_data[0][0]
+        # name = item_data[0][0]
         item_label = Label(frame, text=name, borderwidth=1, font=('Helvetica', 60)).grid(row=0, column=1)
 
         comment_title_label = Label(frame, text="Comments", borderwidth=1, font=('Helvetica', 45)).grid(row=1, column=1)
@@ -41,31 +69,51 @@ def browse_discussion_detail(item_id, item_type):
 
         # retrieve comment owner & comment
         # this would be in a for loop
-        comment_author_label = Label(frame, text="Made by John", borderwidth=1, font=('Helvetica', 20)).grid(row=2, column=1)
-        random_text = "jadvblvnalvnalkvnavakjlvn;kvba;jvakvhba;dhvba;kdabvkahbdvaabakbkjvbadbbvbdvbdvbjwenhofiehfoiwhnofihewofihwefhwfnevnovnowvnkldsbkjvbs.dhivabldv sjbcvadhacvludvcalushvcaushcvajhsc ahjs cajhsv cahsv cahsvailcvauscvax"
-        comment_label = Label(frame, text=random_text * 5, borderwidth=1, font=('Helvetica', 15), wraplength=500).grid(row=3, column=1)
+        comment_author_label = Label(frame, text="ENTER YOU COMMENT BELOW!!", borderwidth=1, font=('Helvetica', 20)).grid(row=2, column=1)
+        random_text = "Act civil in discussion and be nice to one another! Enjoy dicussing!"
+        comment_label = Label(frame, text=random_text, borderwidth=1, font=('Helvetica', 15), wraplength=500).grid(row=3, column=1)
 
         break_label = Label(frame, text=" " * 3000, borderwidth=1, font=('Helvetica', 15), wraplength=500).grid(row=4, column=1)
 
-        comment_author_label = Label(frame, text="Made by John", borderwidth=1, font=('Helvetica', 20)).grid(row=5, column=1)
-        random_text = "jadvblvnalvnalkvnavakjlvn;kvba;jvakvhba;dhvba;kdabvkahbdvaabakbkjvbadbbvbdvbdvbjwenhofiehfoiwhnofihewofihwefhwfnevnovnowvnkldsbkjvbs.dhivabldv sjbcvadhacvludvcalushvcaushcvajhsc ahjs cajhsv cahsv cahsvailcvauscvax"
-        comment_label = Label(frame, text=random_text * 5, borderwidth=1, font=('Helvetica', 15), wraplength=500).grid(row=6, column=1)
+        discussion_id = disscussion_data[0][0]
+        comment_data = get_comments(discussion_id)
+        print(comment_data)
 
-        break_label = Label(frame, text=" " * 3000, borderwidth=1, font=('Helvetica', 15), wraplength=500).grid(row=7, column=1)
+        row_num = 5
+        for comment in comment_data:
+            author_id = comment[2]
+            author_name = get_comment_author(author_id)
+            comment = comment[3]
+            print(comment[2])
+            print(comment[3])
 
-        comment_author_label = Label(frame, text="Made by John", borderwidth=1, font=('Helvetica', 20)).grid(row=8, column=1)
-        random_text = "jadvblvnalvnalkvnavakjlvn;kvba;jvakvhba;dhvba;kdabvkahbdvaabakbkjvbadbbvbdvbdvbjwenhofiehfoiwhnofihewofihwefhwfnevnovnowvnkldsbkjvbs.dhivabldv sjbcvadhacvludvcalushvcaushcvajhsc ahjs cajhsv cahsv cahsvailcvauscvax"
-        comment_label = Label(frame, text=random_text * 5, borderwidth=1, font=('Helvetica', 15), wraplength=500).grid(row=9, column=1)
+            comment_author_label = Label(frame, text=author_name, borderwidth=1, font=('Helvetica', 20)).grid(row=row_num, column=1)
+            row_num += 1
+            comment_label = Label(frame, text=comment, borderwidth=1, font=('Helvetica', 15), wraplength=500).grid(row=row_num, column=1)
+            row_num += 1
+            break_label = Label(frame, text=" " * 3000, borderwidth=1, font=('Helvetica', 15), wraplength=500).grid(row=row_num, column=1)
+            row_num += 1
 
-        break_label = Label(frame, text=" " * 3000, borderwidth=1, font=('Helvetica', 15), wraplength=500).grid(row=10, column=1)
+        return row_num
+        # comment_author_label = Label(frame, text="Made by John", borderwidth=1, font=('Helvetica', 20)).grid(row=5, column=1)
+        # random_text = "jadvblvnalvnalkvnavakjlvn;kvba;jvakvhba;dhvba;kdabvkahbdvaabakbkjvbadbbvbdvbdvbjwenhofiehfoiwhnofihewofihwefhwfnevnovnowvnkldsbkjvbs.dhivabldv sjbcvadhacvludvcalushvcaushcvajhsc ahjs cajhsv cahsv cahsvailcvauscvax"
+        # comment_label = Label(frame, text=random_text * 5, borderwidth=1, font=('Helvetica', 15), wraplength=500).grid(row=6, column=1)
+
+        # break_label = Label(frame, text=" " * 3000, borderwidth=1, font=('Helvetica', 15), wraplength=500).grid(row=7, column=1)
+
+        # comment_author_label = Label(frame, text="Made by John", borderwidth=1, font=('Helvetica', 20)).grid(row=8, column=1)
+        # random_text = "jadvblvnalvnalkvnavakjlvn;kvba;jvakvhba;dhvba;kdabvkahbdvaabakbkjvbadbbvbdvbdvbjwenhofiehfoiwhnofihewofihwefhwfnevnovnowvnkldsbkjvbs.dhivabldv sjbcvadhacvludvcalushvcaushcvajhsc ahjs cajhsv cahsv cahsvailcvauscvax"
+        # comment_label = Label(frame, text=random_text * 5, borderwidth=1, font=('Helvetica', 15), wraplength=500).grid(row=9, column=1)
+
+        # break_label = Label(frame, text=" " * 3000, borderwidth=1, font=('Helvetica', 15), wraplength=500).grid(row=10, column=1)
 
         # comment_box = tk.Entry(root)
-        comment_box = Text(frame, height=10, width=60).grid(row=11, column=1)
+        # comment_box = Text(frame, height=10, width=60).grid(row=11, column=1)
         # comment_canvas = tk.Canvas(frame, height=480, width=500, borderwidth=0)
         # comment_canvas.create_window(0,0, window=comment_box)
         # comment_canvas.grid(row=11, column=1)
 
-        text = ""
+        # text = ""
         # tk.Button(frame, text="Post Comment", command=lambda comment_box=comment_box: get_text(comment_box), borderwidth=0, font=('Helvetica', 12)).grid(row=12, column=1, padx=10)
         # tk.Button(frame, text="Post Comment", command=get_text, borderwidth=0, font=('Helvetica', 12)).grid(row=12, column=1, padx=10)
 
@@ -86,10 +134,35 @@ def browse_discussion_detail(item_id, item_type):
 
     frame.bind("<Configure>", lambda event, canvas=canvas: onFrameConfigure(canvas))
 
-    get_item_data(frame, item_id, item_type)
+    row_num = get_item_data(frame, item_id, item_type)
     print(item_id, " ", item_type)
 
-    text_box = Text(frame, height=10, width=60)
-    tk.Button(frame, text="Post Comment", command=get_text, borderwidth=0, font=('Helvetica', 12)).grid(row=12, column=1, padx=10)
+    # text_box = Text(frame, height=10, width=60)
+    # text_box.bind('<Return>', get_text)
+    # tk.Button(frame, text="Post Comment", command=lambda text_box=text_box: get_text(text_box), borderwidth=0, font=('Helvetica', 12)).grid(row=12, column=1, padx=10)
+ ##########
+
+
+    # entry = Entry(master)
+    # entry.grid(row=0, column=1)
+
+    # # Connect the entry with the return button
+    # entry.bind('<Return>', return_entry) 
+
+
+    # txtbox = Entry(frame)
+    # txtbox.grid(row=13, column=1, padx=10)
+    # tk.Button(frame, text="Post Comment", command=get_text, borderwidth=0, font=('Helvetica', 12)).grid(row=14, column=1, padx=10)
+
+    entry = Entry(frame)
+    entry.grid(row=row_num, column=1, padx=10)
+    row_num += 1
+    tk.Button(frame, text="Post Comment", command=return_entry, borderwidth=0, font=('Helvetica', 12)).grid(row=row_num, column=1, padx=10)
+
+    # entry.bind('<Return>', return_entry) 
+
+    # comment_box = Text(frame, height=10, width=60).grid(row=11, column=1)
+    # tk.Button(frame, text="Post Comment", command=lambda comment_box=comment_box: get_text(comment_box), borderwidth=0, font=('Helvetica', 12)).grid(row=12, column=1, padx=10)
+
 
     root.mainloop()

@@ -219,7 +219,7 @@ def browsing_catalog_choice():
         print(case_name)
         for child in mainFrame.winfo_children():
             child.destroy()
-        sql_query = "SELECT * FROM computer_store.cases WHERE name = '" + case_name + "'"
+        sql_query = "SELECT * FROM computer_store.case WHERE name = '" + case_name + "'"
         cursor.execute(sql_query)
         data = cursor.fetchall()
         print(data)
@@ -460,7 +460,7 @@ def browsing_catalog_choice():
     def browse_case():
         for child in mainFrame.winfo_children():
             child.destroy()
-        cursor.execute("SELECT name FROM computer_store.cases")
+        cursor.execute("SELECT name FROM computer_store.case")
         data = cursor.fetchall()
         print(data)
         case_frame = Frame(mainFrame, width= 720, height=550)
