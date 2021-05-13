@@ -590,7 +590,7 @@ CREATE TABLE `customer_purchases` (
 --
 
 LOCK TABLES `customer_purchases` WRITE;
-INSERT INTO `customer_purchases` VALUES (7,5,1,'Seagate Barracuda Compute ',1,53),(8,5,1,'124',1,2134);
+INSERT INTO `customer_purchases` VALUES (7,5,1,'Seagate Barracuda Compute ',1,53);
 UNLOCK TABLES;
 
 --
@@ -634,4 +634,39 @@ CREATE TABLE `avoid_list` (
 
 LOCK TABLES `avoid_list` WRITE;
 -- INSERT INTO `avoid_list` (email) VALUES ('email@.com');
+UNLOCK TABLES;
+
+--
+-- Table structure for table `prebuild`
+--
+
+DROP TABLE IF EXISTS `prebuild`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `prebuild` (
+  `prebuild_id` int NOT NULL AUTO_INCREMENT,
+  `company_id` int DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `cpu` varchar(255) DEFAULT NULL,
+  `ram` varchar(255) DEFAULT NULL,
+  `gpu` varchar(255) DEFAULT NULL,
+  `storage` varchar(255) DEFAULT NULL,
+  `powersupply` varchar(255) DEFAULT NULL,
+  `OS` varchar(255) DEFAULT NULL,
+  `price` int DEFAULT NULL,
+  `in_stock` int DEFAULT NULL,
+  `sold` int DEFAULT NULL,
+  `total_profit` int DEFAULT NULL,
+  `photo_location` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`prebuild_id`),
+  KEY `company_id` (`company_id`),
+  CONSTRAINT `prebuild_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
+);
+
+--
+-- Dumping data for table `prebuild`
+--
+
+LOCK TABLES `prebuild` WRITE;
+INSERT INTO `prebuild` VALUES (1,18,'ABS Challenger Gaming PC - Ryzen 5 3600 - GeForce GTX 1650 - 16GB DDR4 3000MHz - 512GB SSD','AMD Ryzen 5 3600 3.6GHz (4.2GHz Boost) 6-Core 12-Thread','16GB DDR4','NVIDIA GeForce GTX 1650 4GB','16GB DDR4','550W 80 Plus Bronze','Windows 10 Home 64-bit',919,30,32,29408,'images/suggested-system-1.png'),(2,18,'ABS Challenger Gaming PC - Intel i5 10400F - GeForce GTX 1660 Super - 16GB DDR4 - 512GB Intel M.2 NVMe SSD','Intel Core i5 10th Gen 10400F 2.90GHz (4.30GHz) 6-Core 12-Thread','16GB DDR4 3000MHz','NVIDIA GeForce GTX 1660 Super 6GB','512GB Intel 660P M.2 NVME SSD','500W 80 Plus','Windows 10 Home 64-bit',1049,20,32,20980,'images/suggested-system-6.png'),(3,18,'Dell Inspiron 3880 Desktop, 10th Gen Intel Core i5-10400 6-Core Processor,12GB DDR4,256GB SSD Plus 1TB HDD,Intel UHD Graphics 630, DVD-RW, Wifi-AC, Bluetooth, USB,HDMI,VGA, Windows 10 Home','10th Generation Intel Core i5-10400 6-Core Processor 2.90 GHz Up to 4.30 GHz','12GB DDR4 RAM','Intel UHD Graphics 630','1TB HDD **DUAL HARD DRIVE**','Dell Power 80 Plus','Linux',600,50,22,13200,'images/suggested-system-5.png'),(4,18,'iBUYPOWER - Ryzen 3 3100 - 8 GB DDR4 - 1 TB HDD - GeForce GT 710 - Windows 10 Home - Desktop PC (ARCB 108AV2)','Ryzen 3 3rd Gen 3100 (3.60 GHz)','8 GB DDR4','NVIDIA GeForce GT 710 1 GB','1 TB HDD','550W 80 Plus Bronze','Windows 10 Home 64-bit',549,30,60,32940,'images/suggested-system-2.png'),(5,18,'Skytech Shiva - AMD Ryzen 5 5600X - RTX 3080 - 16 GB DDR4 3200 - 1 TB SSD - B550M - 750W Gold PSU - AC WiFi - Windows 10 Home - Gaming Desktop','AMD Ryzen 5 5600X 6-Core 3.7 GHz (4.6 GHz Turbo) CPU Processor','16 GB DDR4 3200 MHz Gaming Memory','GeForce RTX 3080 10 GB GDDR6X Graphics Card (Brand May Vary)','1 TB NVMe SSD','0 Plus Gold Certified 750 Watt','Windows 10 Home 64-bit',1500,20,30,45000,'images/suggested-system-3.png'),(6,18,'Lenovo ThinkStation P330 Desktop, Intel Core i5-9500 Upto 4.4GHz, 16GB RAM, 512GB SSD, DVDRW, DisplayPort, Wi-Fi, Bluetooth, Windows 10 Pro','Intel Core i5-9500 3.0 - 4.4GHz','16GB DDR4 RAM','Intel UHD Graphics 630','Upgraded 512GB SSD','Lennovo Power Supply','Windows 10 Pro',630,66,10,6300,'images/suggested-system-4.png');
 UNLOCK TABLES;
