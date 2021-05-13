@@ -27,6 +27,8 @@ CREATE TABLE `delivery_companies` (
   `Company_Name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
+  `pending_warnings` int DEFAULT NULL,
+  `standing_warnings` int DEFAULT NULL,
   PRIMARY KEY (`delivery_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -37,7 +39,7 @@ CREATE TABLE `delivery_companies` (
 
 LOCK TABLES `delivery_companies` WRITE;
 /*!40000 ALTER TABLE `delivery_companies` DISABLE KEYS */;
-INSERT INTO `delivery_companies` VALUES (1,'UPS','ups@gmail.com','password'),(2,'FedEx','fedex@gmail.com','password');
+INSERT INTO `delivery_companies` VALUES (1,'UPS','ups@gmail.com','password',NULL,3),(2,'FedEx','fedex@gmail.com','password',NULL,NULL);
 /*!40000 ALTER TABLE `delivery_companies` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-11 17:00:04
+-- Dump completed on 2021-05-13  1:45:29

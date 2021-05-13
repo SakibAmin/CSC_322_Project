@@ -27,6 +27,8 @@ CREATE TABLE `store_clerk` (
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
+  `pending_warnings` int DEFAULT NULL,
+  `standing_warnings` int DEFAULT NULL,
   PRIMARY KEY (`clerk_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -37,7 +39,7 @@ CREATE TABLE `store_clerk` (
 
 LOCK TABLES `store_clerk` WRITE;
 /*!40000 ALTER TABLE `store_clerk` DISABLE KEYS */;
-INSERT INTO `store_clerk` VALUES (1,'Lebron James','lebronjames@gmail.com','password'),(2,'Kyrie Irving','kyrieirving@gmail.com','password');
+INSERT INTO `store_clerk` VALUES (1,'Lebron James','lebronjames@gmail.com','password',NULL,3),(2,'Kyrie Irving','kyrieirving@gmail.com','password',NULL,NULL);
 /*!40000 ALTER TABLE `store_clerk` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-11 17:00:05
+-- Dump completed on 2021-05-13  1:45:30

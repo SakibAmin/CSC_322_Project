@@ -16,38 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `storage`
+-- Table structure for table `cart`
 --
 
-DROP TABLE IF EXISTS `storage`;
+DROP TABLE IF EXISTS `cart`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `storage` (
-  `storage_id` int NOT NULL AUTO_INCREMENT,
-  `company_id` int DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `capacity` varchar(255) DEFAULT NULL,
-  `type` varchar(255) DEFAULT NULL,
-  `form_factor` varchar(255) DEFAULT NULL,
-  `Interface` varchar(255) DEFAULT NULL,
+CREATE TABLE `cart` (
+  `cart_id` int NOT NULL AUTO_INCREMENT,
+  `registered_id` int DEFAULT NULL,
+  `product_name` varchar(255) DEFAULT NULL,
+  `quantity` int DEFAULT NULL,
   `price` int DEFAULT NULL,
-  `in_stock` int DEFAULT NULL,
-  `sold` int DEFAULT NULL,
-  `total_profit` int DEFAULT NULL,
-  PRIMARY KEY (`storage_id`),
-  KEY `company_id` (`company_id`),
-  CONSTRAINT `storage_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`cart_id`),
+  KEY `registered_id` (`registered_id`),
+  CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`registered_id`) REFERENCES `registered_customers` (`registered_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `storage`
+-- Dumping data for table `cart`
 --
 
-LOCK TABLES `storage` WRITE;
-/*!40000 ALTER TABLE `storage` DISABLE KEYS */;
-INSERT INTO `storage` VALUES (1,12,'Seagate Barracuda Compute ','2TB','7200RPM','3.5','SATA 6 Gbb/s',53,33,34,1802),(2,13,'Samsung 860 Evo ','1 TB','SSD','2.5','SATA 6 Gbb/s',110,32,22,2420),(3,13,'Samsung 980 Pro','1 TB','SSD','M.2','M.2',200,12,8,1600),(4,14,'Kingston A400 240','240 GB','SSD','2.5','SATA 6 Gbb/s',40,13,12,480);
-/*!40000 ALTER TABLE `storage` ENABLE KEYS */;
+LOCK TABLES `cart` WRITE;
+/*!40000 ALTER TABLE `cart` DISABLE KEYS */;
+INSERT INTO `cart` VALUES (1,1,'blah',1,244),(2,1,'Seagate Barracuda Compute ',1,53),(3,1,'124',1,2134);
+/*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

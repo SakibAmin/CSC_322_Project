@@ -28,8 +28,10 @@ CREATE TABLE `registered_customers` (
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
+  `pending_warning` int DEFAULT NULL,
+  `standing_warning` int DEFAULT NULL,
   PRIMARY KEY (`registered_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +40,7 @@ CREATE TABLE `registered_customers` (
 
 LOCK TABLES `registered_customers` WRITE;
 /*!40000 ALTER TABLE `registered_customers` DISABLE KEYS */;
-INSERT INTO `registered_customers` VALUES (1,'Bob Jones','bobjones@gmail.com','password','114-11 134st');
+INSERT INTO `registered_customers` VALUES (1,'Bob Jones','bobjones@gmail.com','password','114-11 134st',2,3),(2,'John Doe','johndoe@gmail.com','password','123 5th street',1,2);
 /*!40000 ALTER TABLE `registered_customers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-11 17:00:05
+-- Dump completed on 2021-05-13  1:45:31

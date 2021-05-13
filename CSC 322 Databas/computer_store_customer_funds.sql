@@ -16,38 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `storage`
+-- Table structure for table `customer_funds`
 --
 
-DROP TABLE IF EXISTS `storage`;
+DROP TABLE IF EXISTS `customer_funds`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `storage` (
-  `storage_id` int NOT NULL AUTO_INCREMENT,
-  `company_id` int DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `capacity` varchar(255) DEFAULT NULL,
-  `type` varchar(255) DEFAULT NULL,
-  `form_factor` varchar(255) DEFAULT NULL,
-  `Interface` varchar(255) DEFAULT NULL,
-  `price` int DEFAULT NULL,
-  `in_stock` int DEFAULT NULL,
-  `sold` int DEFAULT NULL,
-  `total_profit` int DEFAULT NULL,
-  PRIMARY KEY (`storage_id`),
-  KEY `company_id` (`company_id`),
-  CONSTRAINT `storage_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `customer_funds` (
+  `customer_id` int NOT NULL,
+  `cc_number` bigint DEFAULT NULL,
+  `cc_cvv` int DEFAULT NULL,
+  `exp_month` int DEFAULT NULL,
+  `exp_year` int DEFAULT NULL,
+  `funds` int DEFAULT '0',
+  KEY `customer_id` (`customer_id`),
+  CONSTRAINT `customer_funds_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `registered_customers` (`registered_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `storage`
+-- Dumping data for table `customer_funds`
 --
 
-LOCK TABLES `storage` WRITE;
-/*!40000 ALTER TABLE `storage` DISABLE KEYS */;
-INSERT INTO `storage` VALUES (1,12,'Seagate Barracuda Compute ','2TB','7200RPM','3.5','SATA 6 Gbb/s',53,33,34,1802),(2,13,'Samsung 860 Evo ','1 TB','SSD','2.5','SATA 6 Gbb/s',110,32,22,2420),(3,13,'Samsung 980 Pro','1 TB','SSD','M.2','M.2',200,12,8,1600),(4,14,'Kingston A400 240','240 GB','SSD','2.5','SATA 6 Gbb/s',40,13,12,480);
-/*!40000 ALTER TABLE `storage` ENABLE KEYS */;
+LOCK TABLES `customer_funds` WRITE;
+/*!40000 ALTER TABLE `customer_funds` DISABLE KEYS */;
+INSERT INTO `customer_funds` VALUES (1,1234567812345678,123,6,21,0);
+/*!40000 ALTER TABLE `customer_funds` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
