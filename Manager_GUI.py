@@ -561,5 +561,5 @@ def viewClerks():
     select_button = Button(clerk, text="Select Clerk", command=select_clerk)
     select_button.pack(pady=20)
 
-id = 1
-manager_view(id)
+# id = 1
+# manager_view(id)
