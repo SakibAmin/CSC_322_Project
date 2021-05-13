@@ -6,7 +6,7 @@ import sqlite3
 con = mysql.connector.connect(
         host = "127.0.0.1",
         user = "root",
-        password = "password",
+        password = "dbvb72^^DATAf2fa1#$",
         database = "computer_store",
         port = 3306
 )

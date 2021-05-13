@@ -16,29 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `computer_parts_companies`
+-- Table structure for table `store_manager`
 --
 
-DROP TABLE IF EXISTS `computer_parts_companies`;
+DROP TABLE IF EXISTS `store_manager`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `computer_parts_companies` (
-  `company_id` int NOT NULL AUTO_INCREMENT,
-  `Company_Name` varchar(255) DEFAULT NULL,
+CREATE TABLE `store_manager` (
+  `manager_id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`company_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`manager_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `computer_parts_companies`
+-- Dumping data for table `store_manager`
 --
 
-LOCK TABLES `computer_parts_companies` WRITE;
-/*!40000 ALTER TABLE `computer_parts_companies` DISABLE KEYS */;
-INSERT INTO `computer_parts_companies` VALUES (1,'Intel','intel@gamil.com','password'),(2,'AMD','amd@gmail.com','password'),(3,'Corsair','corsair@gmail.com','password'),(4,'G.Skill','gskill@gmail.com','password'),(5,'Crucial','crucial@gmail.com','password'),(6,'NVIDIA','nvidia@gmail.com','password'),(7,'EVGA','evga@gmail.com','password'),(8,'ASUS','asus@gmail.com','password'),(9,'AsRock','asrock@gmail.com','password'),(10,'NZXT','nzxt@gmail.com','password'),(11,'Lian Li','lianli@gmail.com','password');
-/*!40000 ALTER TABLE `computer_parts_companies` ENABLE KEYS */;
+LOCK TABLES `store_manager` WRITE;
+/*!40000 ALTER TABLE `store_manager` DISABLE KEYS */;
+INSERT INTO `store_manager` VALUES (1,'Adam Silver','nba@gmail.com','password');
+/*!40000 ALTER TABLE `store_manager` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-03 16:19:20
+-- Dump completed on 2021-05-13  5:56:37

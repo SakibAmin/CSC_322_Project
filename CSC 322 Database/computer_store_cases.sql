@@ -16,38 +16,46 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `gpu`
+-- Table structure for table `cases`
 --
 
-DROP TABLE IF EXISTS `gpu`;
+DROP TABLE IF EXISTS `cases`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `gpu` (
-  `gpu_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `cases` (
+  `case_id` int NOT NULL AUTO_INCREMENT,
   `company_id` int DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `memory` int DEFAULT NULL,
-  `clock_speed` varchar(255) DEFAULT NULL,
-  `boosted_clock_speed` varchar(255) DEFAULT NULL,
-  `interface` varchar(255) DEFAULT NULL,
-  `length` int DEFAULT NULL,
-  `hdmi_ports` int DEFAULT NULL,
-  `display_ports` int DEFAULT NULL,
+  `case_type` varchar(255) DEFAULT NULL,
+  `side_panel` varchar(255) DEFAULT NULL,
+  `external_bay` int DEFAULT NULL,
+  `internal_bay` int DEFAULT NULL,
+  `max_gpu_size` int DEFAULT NULL,
+  `max_fan_size` int DEFAULT NULL,
+  `num_front_fan` int DEFAULT NULL,
+  `num_top_fan` int DEFAULT NULL,
+  `num_exhaust_fan` int DEFAULT NULL,
+  `num_fan_included` int DEFAULT NULL,
+  `max_radiator` int DEFAULT NULL,
+  `rgb` varchar(255) DEFAULT NULL,
   `price` int DEFAULT NULL,
-  PRIMARY KEY (`gpu_id`),
+  `in_stock` int DEFAULT NULL,
+  `sold` int DEFAULT NULL,
+  `total_profit` int DEFAULT NULL,
+  PRIMARY KEY (`case_id`),
   KEY `company_id` (`company_id`),
-  CONSTRAINT `gpu_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `cases_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `gpu`
+-- Dumping data for table `cases`
 --
 
-LOCK TABLES `gpu` WRITE;
-/*!40000 ALTER TABLE `gpu` DISABLE KEYS */;
-INSERT INTO `gpu` VALUES (1,6,'NVIDIA Founders Edition Gefore RTX 3060',8,'1410','1670','PClex16',242,1,3,400),(2,6,'NVIDIA Founders Edition Gefore RTX 3070',8,'1500','1730','PClex16',242,1,3,600),(4,6,'NVIDIA Founders Edition Gefore RTX 3080',10,'1440','1710','PClex16',285,1,3,800),(5,7,'EVGA Gefore RTX 3060 12GB ',12,'1320','1882','PClex16',202,1,3,389),(6,8,'ASUS Gefore RTX 3070 8 GB ',8,'1500','14000','PClex16',300,2,3,749),(7,8,'ASUS Gefore RTX 3080 10GB',10,'1440','19500','PClex16',300,2,3,2799);
-/*!40000 ALTER TABLE `gpu` ENABLE KEYS */;
+LOCK TABLES `cases` WRITE;
+/*!40000 ALTER TABLE `cases` DISABLE KEYS */;
+INSERT INTO `cases` VALUES (1,10,'NZXT H510','ATX','Tempered Glass',0,2,381,140,2,1,1,1,280,'No',80,20,14,1120),(2,11,'Lian Li PC-O11 Dynamic','E-ATX','Tempered Glass',0,2,420,140,3,2,1,0,420,'No',160,22,22,3520),(3,3,'Corsair iCUE 4000X','ATX','Tempered Glass',0,2,360,140,3,2,1,3,420,'Yes',135,32,12,1620),(4,3,'Corsair Crystal 280X','Micro-ATX','Tempered Glass',0,2,300,140,2,2,1,1,280,'No',106,12,13,1378);
+/*!40000 ALTER TABLE `cases` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -59,4 +67,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-03 16:19:20
+-- Dump completed on 2021-05-13  5:56:37
