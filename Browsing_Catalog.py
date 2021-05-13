@@ -1,5 +1,7 @@
 from tkinter import *
 from tkinter import ttk
+import PIL.Image
+import PIL.ImageTk
 from Connect_DB import *
 from Discussion_Detail import *
 from Buy_GUI import *
@@ -23,6 +25,7 @@ def browsing_catalog_choice(user_id):
         # do something with id
         print("buying")
         addtoCart(name, user_id)
+        viewCart(user_id)
 
     def browse_cpu_detail(cpu_name):
         print("WE BROWSIN!!")
@@ -566,13 +569,14 @@ def browsing_catalog_choice(user_id):
     # drop_menu = OptionMenu(browse, clickedOption, *browsingOptions, command=selected)
     # drop_menu.pack(pady=20)
 
- 
-    logo_image = PhotoImage(file = 'images/Logo.png')
-    logo_label = Label(image = logo_image)
     
-    logo_button = Button(browse, image = logo_image, command=return_home, borderwidth = 0)
+    #logo_image = PhotoImage(file = 'images/Logo.png')
+    #logo_label = Label(image = logo_image)
+    
+    logo_button = Button(browse, text = 'SMN PARTS', width = 20, height = 5, font = ("Hevetica", 20), command=return_home, borderwidth = 0)
     logo_button.place(x = 640, y = 0)
     logo_button.pack(pady=20, padx=20)
+
 
     myCombo = ttk.Combobox(browse, value=browsingOptions)
     myCombo.current(0)

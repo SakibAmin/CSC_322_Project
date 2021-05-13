@@ -1469,7 +1469,7 @@ def viewWallet(id):
         mothersum = 0
     #print(mothersum)
     #Case Total
-    cursor.execute("SELECT SUM(total_profit) FROM case WHERE company_id = %s", (id,))
+    cursor.execute("SELECT SUM(total_profit) FROM computer_store.case WHERE company_id = %s", (id,))
     casesum = cursor.fetchall()[0][0]
     if casesum is None:
         casesum = 0

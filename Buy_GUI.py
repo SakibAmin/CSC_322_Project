@@ -223,6 +223,14 @@ def viewCart(id):
         order_Label.config(font = ("Hevetica", 10))
         order_Label.grid(row=0, column=0, padx=0, pady=0)
 
+        def closeCart():
+
+            obuy.destroy()
+            cart.destroy()
+
+        closecart_Button = Button(obuy, text = "Ok", width = 13, command = closeCart)
+        closecart_Button.grid(row=1, column=1, padx=0, pady=0)
+
         def destroy():
 
             obuy.destroy()

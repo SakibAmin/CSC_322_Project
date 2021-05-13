@@ -25,7 +25,7 @@ def create_logged_home(id):
         print("logout")
 
     def Browse_Catalog(id):
-        root.destroy()
+        #root.destroy()
         browsing_catalog_choice(id)
 
         print("WIP")
@@ -38,7 +38,7 @@ def create_logged_home(id):
         print("Work in Progress")
 
     def B_Y_O(id): #This function will launch the build your own PC function
-        Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage_name, cooler_name, power_name)
+        Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage_name, cooler_name, power_name, id)
 
         print("Work in Progress")
 

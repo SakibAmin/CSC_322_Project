@@ -16,7 +16,7 @@ con = mysql.connector.connect(
 cursor = con.cursor()
 
 
-def Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage_name, cooler_name, power_name):
+def Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage_name, cooler_name, power_name, id):
     
     global Build
     Build = Tk()
@@ -39,7 +39,7 @@ def Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage
     cpu_name_Label.config(font = ("Hevetica", 12,))
     cpu_name_Label.grid(row=0, column=2, padx=0, pady=0)
 
-    CPU_Button = Button(CPU_Frame, text = "Select CPU", width = 10, command = selectCPU)
+    CPU_Button = Button(CPU_Frame, text = "Select CPU", width = 10, command=lambda id=id: selectCPU(id))
     CPU_Button.grid(row=0, column=1, padx=0, pady=0)
     
     #RAM Selection
@@ -54,7 +54,7 @@ def Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage
     ram_name_Label.config(font = ("Hevetica", 12,))
     ram_name_Label.grid(row=0, column=2, padx=0, pady=0)
     
-    RAM_Button = Button(RAM_Frame, text = "Select RAM", width = 10, command = selectRAM)
+    RAM_Button = Button(RAM_Frame, text = "Select RAM", width = 10, command=lambda id=id: selectRAM(id))
     RAM_Button.grid(row=0, column=1, padx=0, pady=0)
 
     #GPU Label
@@ -69,7 +69,7 @@ def Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage
     gpu_name_Label.config(font = ("Hevetica", 12,))
     gpu_name_Label.grid(row=0, column=2, padx=0, pady=0)
     
-    GPU_Button = Button(GPU_Frame, text = "Select GPU", width = 10, command = selectGPU)
+    GPU_Button = Button(GPU_Frame, text = "Select GPU", width = 10, command=lambda id=id: selectGPU(id))
     GPU_Button.grid(row=0, column=1, padx=0, pady=0)
 
     #Motherboard Label
@@ -84,7 +84,7 @@ def Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage
     mother_name_Label.config(font = ("Hevetica", 12,))
     mother_name_Label.grid(row=0, column=2, padx=0, pady=0)
     
-    Mother_Button = Button(Mother_Frame, text = "Select MotherBoard", width = 12, command = selectMotherboard)
+    Mother_Button = Button(Mother_Frame, text = "Select MotherBoard", width = 12, command=lambda id=id: selectMotherboard(id))
     Mother_Button.grid(row=0, column=1, padx=0, pady=0)
 
     #Case Label
@@ -99,7 +99,7 @@ def Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage
     case_name_Label.config(font = ("Hevetica", 12,))
     case_name_Label.grid(row=0, column=2, padx=0, pady=0)
     
-    Case_Button = Button(Case_Frame, text = "Select Case", width = 10, command = selectCase)
+    Case_Button = Button(Case_Frame, text = "Select Case", width = 10, command=lambda id=id: selectCase(id))
     Case_Button.grid(row=0, column=1, padx=0, pady=0)
 
     #Storage Label
@@ -114,7 +114,7 @@ def Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage
     storage_name_Label.config(font = ("Hevetica", 12,))
     storage_name_Label.grid(row=0, column=2, padx=0, pady=0)
     
-    Storage_Button = Button(Storage_Frame, text = "Select Storage", width = 10, command = selectStorage)
+    Storage_Button = Button(Storage_Frame, text = "Select Storage", width = 10, command=lambda id=id: selectStorage(id))
     Storage_Button.grid(row=0, column=1, padx=0, pady=0)
 
     #Cooler Label
@@ -129,7 +129,7 @@ def Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage
     cooler_name_Label.config(font = ("Hevetica", 12,))
     cooler_name_Label.grid(row=0, column=2, padx=0, pady=0)
     
-    Cooler_Button = Button(Cooler_Frame, text = "Select Cooler", width = 10, command = selectCooler)
+    Cooler_Button = Button(Cooler_Frame, text = "Select Cooler", width = 10, command=lambda id=id: selectCooler(id))
     Cooler_Button.grid(row=0, column=1, padx=0, pady=0)
 
     #Power Label
@@ -144,7 +144,7 @@ def Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage
     power_name_Label.config(font = ("Hevetica", 12,))
     power_name_Label.grid(row=0, column=2, padx=0, pady=0)
     
-    Power_Button = Button(Power_Frame, text = "Select Power Supply", width = 13, command = selectPower)
+    Power_Button = Button(Power_Frame, text = "Select Power Supply", width = 13, command=lambda id=id: selectPower(id))
     Power_Button.grid(row=0, column=1, padx=0, pady=0)
 
     #Compatiable Label
@@ -238,14 +238,16 @@ def Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage
 
     def buyBuild():
        
-       addtoCart(cpu_name)
-       addtoCart(ram_name)
-       addtoCart(gpu_name)
-       addtoCart(mother_name)
-       addtoCart(case_name)
-       addtoCart(storage_name)
-       addtoCart(cooler_name)
-       addtoCart(power_name)
+       #print(id)
+       addtoCart(cpu_name, id)
+       addtoCart(ram_name, id)
+       addtoCart(gpu_name, id)
+       addtoCart(mother_name, id)
+       addtoCart(case_name, id)
+       addtoCart(storage_name, id)
+       addtoCart(cooler_name, id)
+       addtoCart(power_name, id)
+       viewCart(id)
 
     if cpu_name != 'N/A' and ram_name != 'N/A' and gpu_name != 'N/A' and mother_name != 'N/A' and case_name != 'N/A' and storage_name != 'N/A' and cooler_name != 'N/A' and power_name != 'N/A':
         Buy_Button = Button(Compatiable_Frame, text = "Buy this Build", width = 13, command = buyBuild)
@@ -253,7 +255,7 @@ def Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage
         
     Build.mainloop()
 
-def selectCPU():
+def selectCPU(id):
 
     Build.destroy()
 
@@ -322,12 +324,12 @@ def selectCPU():
         cpu_name = cpuSelected
         cpu_socket = values[5]
         cpuroot.destroy()
-        Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage_name, cooler_name, power_name)
+        Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage_name, cooler_name, power_name, id)
 
     Select_Button = Button(button_frame, text = "Select", command = CPU_updateSelection)
     Select_Button.grid(row = 0, column = 0, padx = 0, pady = 0)
 
-def selectRAM():
+def selectRAM(id):
 
     Build.destroy()
 
@@ -394,7 +396,7 @@ def selectRAM():
         ram_type = values[1]
         ram_sticks = values[4]
         ramroot.destroy()
-        Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage_name, cooler_name, power_name)
+        Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage_name, cooler_name, power_name, id)
 
         
     button_frame = LabelFrame(ramroot)
@@ -403,7 +405,7 @@ def selectRAM():
     Select_Button = Button(button_frame, text = "Select", command = RAM_updateSelection)
     Select_Button.grid(row = 0, column = 0, padx = 0, pady = 0)
 
-def selectGPU():
+def selectGPU(id):
 
     Build.destroy()
 
@@ -472,7 +474,7 @@ def selectGPU():
         gpu_name = gpuSelected
         gpu_length = values[5]
         gpuroot.destroy()
-        Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage_name, cooler_name, power_name)
+        Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage_name, cooler_name, power_name, id)
 
     button_frame = LabelFrame(gpuroot)
     button_frame.pack(fill="x", expand="yes", padx=500)
@@ -480,7 +482,7 @@ def selectGPU():
     Select_Button = Button(button_frame, text = "Select", command = GPU_updateSelection)
     Select_Button.grid(row = 0, column = 0, padx = 0, pady = 0)
 
-def selectMotherboard():
+def selectMotherboard(id):
     
     Build.destroy()
 
@@ -563,7 +565,7 @@ def selectMotherboard():
         mother_ram_sticks = values[4]
         mother_formfactor = values[1]
         motherroot.destroy()
-        Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage_name, cooler_name, power_name)
+        Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage_name, cooler_name, power_name, id)
 
     button_frame = LabelFrame(motherroot)
     button_frame.pack(fill="x", expand="yes", padx=500)
@@ -571,7 +573,7 @@ def selectMotherboard():
     Select_Button = Button(button_frame, text = "Select", command = Mother_updateSelection)
     Select_Button.grid(row = 0, column = 0, padx = 0, pady = 0)
 
-def selectCase():
+def selectCase(id):
 
     Build.destroy()
 
@@ -654,7 +656,7 @@ def selectCase():
         case_formfactor = values[1]
         case_radiator = values[11]
         caseroot.destroy()
-        Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage_name, cooler_name, power_name)
+        Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage_name, cooler_name, power_name, id)
 
     button_frame = LabelFrame(caseroot)
     button_frame.pack(fill="x", expand="yes", padx=500)
@@ -662,7 +664,7 @@ def selectCase():
     Select_Button = Button(button_frame, text = "Select", command = Case_updateSelection)
     Select_Button.grid(row = 0, column = 0, padx = 0, pady = 0)
 
-def selectStorage():
+def selectStorage(id):
 
     Build.destroy()
 
@@ -723,7 +725,7 @@ def selectStorage():
         global storage_name
         storage_name = storageSelected
         storageroot.destroy()
-        Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage_name, cooler_name, power_name)
+        Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage_name, cooler_name, power_name, id)
 
     button_frame = LabelFrame(storageroot)
     button_frame.pack(fill="x", expand="yes", padx=200)
@@ -731,7 +733,7 @@ def selectStorage():
     Select_Button = Button(button_frame, text = "Select", command = Storage_updateSelection)
     Select_Button.grid(row = 0, column = 0, padx = 0, pady = 0)
 
-def selectCooler():
+def selectCooler(id):
 
     Build.destroy()
 
@@ -798,7 +800,7 @@ def selectCooler():
         cooler_socket = values[4]
         cooler_radiator = values[3]
         coolerroot.destroy()
-        Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage_name, cooler_name, power_name)
+        Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage_name, cooler_name, power_name, id)
 
     button_frame = LabelFrame(coolerroot)
     button_frame.pack(fill="x", expand="yes", padx=200)
@@ -806,7 +808,7 @@ def selectCooler():
     Select_Button = Button(button_frame, text = "Select", command = Cooler_updateSelection)
     Select_Button.grid(row = 0, column = 0, padx = 0, pady = 0)
 
-def selectPower():
+def selectPower(id):
 
     Build.destroy()
 
@@ -867,7 +869,7 @@ def selectPower():
         global power_name
         power_name = powerSelected
         powerroot.destroy()
-        Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage_name, cooler_name, power_name)
+        Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage_name, cooler_name, power_name, id)
 
     button_frame = LabelFrame(powerroot)
     button_frame.pack(fill="x", expand="yes", padx=200)
