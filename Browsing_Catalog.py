@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import ttk
 from Connect_DB import *
-from Browse_Item import *
 from Discussion_Detail import *
 # from Visitor_Home import create_visitor_home
 

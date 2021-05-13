@@ -864,7 +864,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `complain`;
 CREATE TABLE `complain` (
   `complain_id` int NOT NULL AUTO_INCREMENT,
-  `complainee_name` varchar(255) DEFAULT NULL,
+  `complainee_email` varchar(255) DEFAULT NULL,
   `complainant_id` int DEFAULT NULL,
   `reason` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`complain_id`),
@@ -873,22 +873,22 @@ CREATE TABLE `complain` (
 );
 
 LOCK TABLES `complain` WRITE;
-INSERT INTO `complain` VALUES (1, 'John Doe', 1, 'i dont like what they commented'),(2, 'John Doe', 1, 'i dont like them'),(3, 'John Doe', 1, 'hate him');
+INSERT INTO `complain` VALUES (1, 'johndoe@gmail.com', 1, 'i dont like what they commented'),(2, 'johndoe@gmail.com', 1, 'i dont like them'),(3, 'johndoe@gmail.com', 1, 'hate him'), (4, 'ups@gmail.com', 1, 'bad service'), (5, 'lebronjames@gmail.com', 1, 'bad clerk'), (6, 'intel@gmail.com', 1, 'faulty item');
 UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `appeal`;
 CREATE TABLE `appeal` (
   `appeal_id` int NOT NULL AUTO_INCREMENT,
   `complain_id` int NOT NULL,
-  `registered_id` int DEFAULT NULL,
+--   `registered_id` int DEFAULT NULL,
   `reason` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`appeal_id`),
-  KEY `registered_id` (`registered_id`),   
+--   KEY `registered_id` (`registered_id`),   
   KEY `complain_id` (`complain_id`), 
-  CONSTRAINT registered_id_ibfk_1 FOREIGN KEY (registered_id) REFERENCES registered_customers(registered_id),
+--   CONSTRAINT registered_id_ibfk_1 FOREIGN KEY (registered_id) REFERENCES registered_customers(registered_id),
   CONSTRAINT complain_id_ibfk_1 FOREIGN KEY (complain_id) REFERENCES complain(complain_id)
 );
 
 LOCK TABLES `appeal` WRITE;
-INSERT INTO `appeal` VALUES (1, 1, 2, 'i did not mean to say it like that, i apologize'),(2, 2, 2, 'i dont deserve this!');
+INSERT INTO `appeal` VALUES (1, 1, 'i did not mean to say it like that, i apologize'),(2, 2, 'i dont deserve this!');
 UNLOCK TABLES;

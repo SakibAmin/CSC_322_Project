@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import ttk
 from Connect_DB import *
-from Browse_Item import *
 import tkinter as tk
 
 def browse_discussion_detail(item_id, item_type):
@@ -25,13 +24,13 @@ def browse_discussion_detail(item_id, item_type):
                     label = Label(success, text = "Successful complain!")
                     label.pack()
                     tk.Button(success, text="Ok", command=delete_success, borderwidth=0, font=('Helvetica', 12)).pack()
-                sql_query = "SELECT name FROM computer_store.registered_customers WHERE registered_id=" + str(author_id)
+                sql_query = "SELECT email FROM computer_store.registered_customers WHERE registered_id=" + str(author_id)
                 cursor.execute(sql_query)
-                author_name = cursor.fetchall()
+                author_email = cursor.fetchall()
                 print(author_name)
-                author_name = author_name[0][0]
+                author_email = author_email[0][0]
 
-                sql_query = "INSERT INTO computer_store.complain (complainee_name, complainant_id, reason) VALUES ('"+ author_name + "'," +  str(CUSTOMER_ID) + ","    + "'" + text + "')"
+                sql_query = "INSERT INTO computer_store.complain (complainee_email, complainant_id, reason) VALUES ('"+ author_email + "'," +  str(CUSTOMER_ID) + ","    + "'" + text + "')"
                 cursor.execute(sql_query)
                 con.commit()
                 notify_success()

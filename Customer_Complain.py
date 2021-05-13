@@ -7,7 +7,6 @@ def browse_all_complains(USER_ID):
         def deny_self():
             sql_query = "SELECT * FROM computer_store.appeal WHERE complain_id=" + str(data[0])
             cursor.execute(sql_query)
-            # appeal_data = cursor.fetchall()
             if cursor.rowcount == 0:
                 return False
             else:
@@ -34,7 +33,7 @@ def browse_all_complains(USER_ID):
                     print(author_name)
                     author_name = author_name[0][0]
 
-                    sql_query = "INSERT INTO computer_store.appeal (complain_id, registered_id, reason) VALUES ("+ str(data[0]) + "," +  str(USER_ID) + ",'" + text + "')"
+                    sql_query = "INSERT INTO computer_store.appeal (complain_id, reason) VALUES ("+ str(data[0]) + ",'" + text + "')"
                     cursor.execute(sql_query)
                     con.commit()
                     notify_success()
@@ -65,28 +64,6 @@ def browse_all_complains(USER_ID):
                 reason.pack()
                 Button(appeal, text="Confirm", command=return_reason, borderwidth=0, font=('Helvetica', 12)).pack()
                 print("appeal")
-            # print(data)
-            # print(appeal_data)
-            # print(reporter_data)
-            # print(data[0])
-            # print(appeal_data[0][0])
-
-            # sql_query = "DELETE FROM computer_store.appeal WHERE appeal_id=" + str(appeal_data[0][0])
-            # cursor.execute(sql_query)
-            # con.commit()
-
-            # sql_query = "DELETE FROM computer_store.complain WHERE complain_id=" + str(data[0])
-            # cursor.execute(sql_query)
-            # con.commit()
-            # detail.destroy()
-            # complain.destroy()
-            # viewComplaints()
-
-        # print(data)
-        # sql_query = "SELECT * FROM computer_store.appeal WHERE complain_id=" + str(data[0])
-        # cursor.execute(sql_query)
-        # appeal_data = cursor.fetchall()
-        # print(appeal_data)
 
         sql_query = "SELECT * FROM computer_store.registered_customers WHERE registered_id=" + str(data[2])
         cursor.execute(sql_query)
@@ -106,27 +83,17 @@ def browse_all_complains(USER_ID):
 
         reporter_label = Label(leftFrame, text="Reporter Name: " + reporter_data[0][1], font=("Hevetica", 20)).grid(row=0, column=1)
         reporter_id_label = Label(leftFrame, text="Reporter ID: " + str(reporter_data[0][0]), font=("Hevetica", 20)).grid(row=0, column=0)
-        reported_name_label = Label(leftFrame, text="Receiver Name: " + data[1], font=("Hevetica", 20)).grid(row=1, column=1)
-        # reported_id_name = Label(leftFrame, text="Receiver ID: " + str(appeal_data[0][2]), font=("Hevetica", 20)).grid(row=1, column=0)
+        reported_name_label = Label(leftFrame, text="Receiver Email: " + data[1], font=("Hevetica", 20)).grid(row=1, column=1)
         reason_label = Label(leftFrame, text="Reason: ", font=("Hevetica", 20)).grid(row=2, column=0)
         reason_description_label = Label(leftFrame, text=data[3], font=("Hevetica", 20)).grid(row=2, column=1)
-
-        # rightFrame = Frame(detail, width=600, height=400, borderwidth = 1)
-        # rightFrame.pack(side=RIGHT, fill=X, expand=1, anchor=N, pady=20)
-
-        # appeal_reason = Label(rightFrame, text=appeal_data[0][3], font=("Hevetica", 20)).grid(row=1, column=1)
-        # appeal_label = Label(rightFrame, text="Appeal: ", font=("Hevetica", 20)).grid(row=1, column=0)
 
         appeal_button = Button(detail, text = "Appeal Complain", width = 20, height = 3, command = appealComplain)
         appeal_button.config(font = ("Hevetica", 15,))
         appeal_button.pack()
-        # apepal_button.grid(row=3, column=0)
-
 
     def select_complain():
         selected = my_tree.focus()
         values = my_tree.item(selected, 'values')
-        # temp_label.config(text=values)
         view_complain(values)
 
     sql_query = "SELECT * FROM computer_store.registered_customers WHERE registered_id=" + str(USER_ID)
@@ -173,7 +140,7 @@ def browse_all_complains(USER_ID):
     my_tree.tag_configure('oddrow', background = "white")
     my_tree.tag_configure('evenrow', background = "lightblue")
 
-    cursor.execute("Select complain_id, complainee_name, complainant_id, reason FROM computer_store.complain WHERE complainee_name='" + customer_data[0][1] + "'")
+    cursor.execute("Select complain_id, complainee_email, complainant_id, reason FROM computer_store.complain WHERE complainee_email='" + customer_data[0][2] + "'")
     records = cursor.fetchall()
     count = 0
     for record in records:
@@ -191,5 +158,5 @@ def browse_all_complains(USER_ID):
 
     complain.mainloop()
 
-id = 2
+id = 1
 browse_all_complains(id)

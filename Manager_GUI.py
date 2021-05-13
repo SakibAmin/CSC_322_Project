@@ -113,7 +113,7 @@ def viewComplaints():
 
             reporter_label = Label(leftFrame, text="Reporter Name: " + reporter_data[0][1], font=("Hevetica", 20)).grid(row=0, column=1)
             reporter_id_label = Label(leftFrame, text="Reporter ID: " + str(reporter_data[0][0]), font=("Hevetica", 20)).grid(row=0, column=0)
-            reported_name_label = Label(leftFrame, text="Receiver Name: " + data[1], font=("Hevetica", 20)).grid(row=1, column=1)
+            reported_name_label = Label(leftFrame, text="Receiver Email: " + data[1], font=("Hevetica", 20)).grid(row=1, column=1)
             # reported_id_name = Label(leftFrame, text="Receiver ID: " + str(appeal_data[0][2]), font=("Hevetica", 20)).grid(row=1, column=0)
             reason_label = Label(leftFrame, text="Reason: ", font=("Hevetica", 20)).grid(row=2, column=0)
             reason_description_label = Label(leftFrame, text=data[3], font=("Hevetica", 20)).grid(row=2, column=1)
@@ -146,8 +146,8 @@ def viewComplaints():
 
             reporter_label = Label(leftFrame, text="Reporter Name: " + reporter_data[0][1], font=("Hevetica", 20)).grid(row=0, column=1)
             reporter_id_label = Label(leftFrame, text="Reporter ID: " + str(reporter_data[0][0]), font=("Hevetica", 20)).grid(row=0, column=0)
-            reported_name_label = Label(leftFrame, text="Receiver Name: " + data[1], font=("Hevetica", 20)).grid(row=1, column=1)
-            reported_id_name = Label(leftFrame, text="Receiver ID: " + str(appeal_data[0][2]), font=("Hevetica", 20)).grid(row=1, column=0)
+            reported_name_label = Label(leftFrame, text="Receiver Email: " + data[1], font=("Hevetica", 20)).grid(row=1, column=1)
+            # reported_id_name = Label(leftFrame, text="Receiver ID: " + str(appeal_data[0][2]), font=("Hevetica", 20)).grid(row=1, column=0)
             reason_label = Label(leftFrame, text="Reason: ", font=("Hevetica", 20)).grid(row=2, column=0)
             reason_description_label = Label(leftFrame, text=data[3], font=("Hevetica", 20)).grid(row=2, column=1)
 
@@ -156,7 +156,7 @@ def viewComplaints():
 
             # random_label = Label(rightFrame, text="        ", font=("Hevetica", 20)).grid(row=2, column=0)
 
-            appeal_reason = Label(leftFrame, text=appeal_data[0][3], font=("Hevetica", 20)).grid(row=3, column=1)
+            appeal_reason = Label(leftFrame, text=appeal_data[0][2], font=("Hevetica", 20)).grid(row=3, column=1)
             appeal_label = Label(leftFrame, text="Appeal: ", font=("Hevetica", 20)).grid(row=3, column=0)
 
             reject_button = Button(detail, text = "Reject Complain", width = 20, height = 3, command = rejectComplain)
@@ -217,7 +217,7 @@ def viewComplaints():
     my_tree.tag_configure('oddrow', background = "white")
     my_tree.tag_configure('evenrow', background = "lightblue")
 
-    cursor.execute("Select complain_id, complainee_name, complainant_id, reason FROM computer_store.complain")
+    cursor.execute("Select complain_id, complainee_email, complainant_id, reason FROM computer_store.complain")
     records = cursor.fetchall()
     count = 0
     for record in records:
@@ -241,71 +241,6 @@ def viewComplaints():
     # CPU_Button = Button(complain_frame, text = "CPU", width = 20, height = 3, command = viewCPU)
     # CPU_Button.config(font = ("Hevetica", 15,))
     # CPU_Button.grid(row=0, column=0, padx=0, pady=0)
-
-def viewAppeals():
-    def view_appeal():
-        print("Stuff")
-        
-
-    def select_appeal():
-        selected = my_tree.focus()
-        values = my_tree.item(selected, 'values')
-        temp_label.config(text=values)
-        view_appeal()
-
-    appeal = Tk()
-    appeal.title('Appeal Page')
-    appeal.geometry('1200x500')
-
-    label = Label(appeal, text = 'Review Appeals')
-    label.config(font = ("Hevetica", 15, "underline"))
-    label.pack()
-
-    style = ttk.Style()
-    style.theme_use('default')
-    style.configure("Treeview", background = "#D3D3D3", foreground = "black", rowheight = 25, fieldbackground = "#D3D3D3")
-    style.map("Treeview", background = [("selected", "#347083")])
-    
-    table = Frame(appeal)
-    table.pack(pady=10)
-
-    table_scroll = Scrollbar(table)
-    table_scroll.pack(side = RIGHT, fill = Y)
-    my_tree = ttk.Treeview(table, yscrollcommand = table_scroll.set, selectmode = "extended")
-    my_tree.pack()
-    table_scroll.config(command = my_tree.yview)
-
-    my_tree['columns'] = ("Appeal ID", "Complain ID", "Complainee's ID", "Reason")
-    my_tree.column("#0", width = 0, stretch = NO)
-    my_tree.column("Appeal ID", anchor = CENTER, width = 140)
-    my_tree.column("Complain ID", anchor = CENTER, width = 140)
-    my_tree.column("Complainee's ID", anchor = CENTER, width = 140)
-    my_tree.column("Reason", anchor = CENTER, width = 140)
-
-    my_tree.heading("#0", text = "", anchor = CENTER)
-    my_tree.heading("Appeal ID", text = "Appeal ID", anchor = CENTER)
-    my_tree.heading("Complain ID", text = "Complain ID", anchor = CENTER)
-    my_tree.heading("Complainee's ID", text = "Complainee's ID", anchor = CENTER)
-    my_tree.heading("Reason", text = "Reason", anchor = CENTER)
-
-    my_tree.tag_configure('oddrow', background = "white")
-    my_tree.tag_configure('evenrow', background = "lightblue")
-
-    cursor.execute("Select appeal_id, complain_id, registered_id, reason FROM computer_store.appeal")
-    records = cursor.fetchall()
-    count = 0
-    for record in records:
-        if count % 2 == 0:
-            my_tree.insert(parent='', index='end', iid=count, text='', values=(record[0], record[1], record[2], record[3]), tags=('evenrow',))
-        else:
-             my_tree.insert(parent='', index='end', iid=count, text='', values=(record[0], record[1], record[2], record[3]), tags=('evenrow',))
-        count += 1
-
-    select_button = Button(appeal, text="Select Appeal", command=select_appeal)
-    select_button.pack(pady=20)
-
-    temp_label = Label(appeal, text="")
-    temp_label.pack(pady=20)
 
 def viewBids():
     def view_bid():
