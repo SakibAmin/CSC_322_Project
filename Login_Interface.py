@@ -67,15 +67,11 @@ def Login_Page(): #Login Screen
         Login.destroy()
         Registration_Page()
         
-       
-    
     def browse():
 
         Login.destroy()
         browsing_GUI()
         
-        
-
     Button(Button_Frame, text = "Register", width = 10, height = 1, command = register).grid(row=0, column=0, padx=0, pady=0)
     Button(Button_Frame, text = "Browse", width = 10, height = 1, command = browse).grid(row=0, column=1, padx=0, pady=0)
 

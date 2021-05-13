@@ -35,6 +35,11 @@ cursor.execute("CREATE TABLE Delivery_Companies" +
 "(delivery_id int NOT NULL AUTO_INCREMENT, Company_Name VARCHAR(255), email VARCHAR(255)," +
 "password VARCHAR(255), PRIMARY KEY (delivery_id))")
 
+cursor.execute("CREATE TABLE customer_purchases" +
+"(purchase_id int NOT NULL AUTO_INCREMENT, order_id int, registered_id int, name VARCHAR(255)," +
+"quantity int, price int, " +
+"PRIMARY KEY(purchase_id), FOREIGN KEY (order_id) REFERENCES customer_orders(order_id), FOREIGN KEY (registered_id) REFERENCES registered_customers(registered_id))")
+
 #Check to see if Tables Exist
 cursor.execute("Show Tables")
 for x in cursor:

@@ -188,7 +188,32 @@ def viewCart():
     Button_Frame.pack(expand="yes", padx=0, pady = 0)
 
     def buy():
-        print("Work in Progress")
+
+        '''
+        cursor.execute("CREATE TABLE customer_purchases" +
+        "(purchase_id int NOT NULL AUTO_INCREMENT, order_id int, registered_id int, name VARCHAR(255)," +
+        "quantity int, price int, " +
+        "PRIMARY KEY(purchase_id), FOREIGN KEY (order_id) REFERENCES customer_orders(order_id), FOREIGN KEY (registered_id) REFERENCES registered_customers(registered_id))")
+        '''
+
+        order_status = 'Processing'
+        cursor.execute("INSERT INTO customer_orders (customer_id, total_price, order_status)" +
+        "VALUES ('{}','{}','{}')".format(id, totalsum, order_status))
+        con.commit()
+
+        cursor.execute("Select order_id FROM customer_orders WHERE customer_id = %s and total_price = %s", (id, totalsum))
+        records = cursor.fetchall()
+        for record in records:
+            order_id = record[0]
+
+        cursor.execute("INSERT INTO customer_purchases (registered_id, name, quantity, price) SELECT registered_id, product_name, quantity, price FROM cart WHERE registered_id = %s", (id,))
+        con.commit()
+
+        cursor.execute("Update customer_purchases SET order_id = %s WHERE registered_id = %s",(order_id, id))
+        con.commit()
+
+        cursor.execute("Delete FROM cart WHERE registered_id = %s",(id,))
+        con.commit()
 
     def delete():
 
@@ -256,4 +281,4 @@ def viewCart():
 id = 1
 item = 'Seagate Barracuda Compute '
 #addtoCart(item)
-#viewCart()
+viewCart()
