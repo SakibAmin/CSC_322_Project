@@ -28,6 +28,7 @@ def add_credit_card(cc: Credit_Card):
                     VALUES ({}, {}, {}, {}, {}, 0)".format(customer_id, cc.number, cc.cvv, cc.exp_month, cc.exp_year)
         with conn.cursor() as cursor:
             cursor.execute(q_add_cc)
+            cursor.info()
 
 def num_digits(n):
     count = 0
@@ -52,9 +53,41 @@ def is_valid_cc(cc: Credit_Card): # Assumes credit cards must have a 16-digit nu
             and num_digits(cc.cvv) == 3 \
             and not (is_expired(cc.exp_month, cc.exp_year))
 
-def add_funds():
-    pass
+def get_funds():
+    with get_db_connection() as conn:
+        q_get_funds = "SELECT funds FROM customer_funds \
+                       WHERE customer_id={}".format(customer_id)
+        with conn.cursor() as cursor:
+            cursor.execute(q_get_funds)
+            return cursor.fetchone()[0]
 
+def add_funds(amount):
+    with get_db_connection() as conn:
+        q_add_funds = "UPDATE customer_funds SET funds = {} WHERE customer_id = {}".format(amount, customer_id)
+        with conn.cursor() as cursor:
+            cursor.execute(q_add_funds)
+
+def add_funds_gui():
+    window1 = tk.Tk()
+
+    window1.title("Add Credit Card")
+
+    window1.geometry("300x300")
+
+    # if not get_customer_cards()[0]:
+    #     error = tk.Label(window1, text="Please add a Credit Card first")
+    #     error.pack()
+    #     back = tk.Button(window1, text="Back")
+    #     back.pack()
+    
+    add = tk.Label(window1, text="Enter an amount")
+    add.pack()
+
+    enter = tk.Entry(window1, width=20, borderwidth=5)
+    enter.pack()
+
+    funds = enter.get()
+    add_funds(funds)
 
 def add_card_gui():
     window = tk.Tk()
@@ -74,7 +107,6 @@ def add_card_gui():
 
     enter_cvv = tk.Entry(window, width=30, borderwidth=5)
     enter_cvv.grid(column=1, row=1)
-
 
     exp_month = tk.Label(window, text="Expiration Month")
     exp_month.grid(column=0, row=2) 
@@ -116,18 +148,27 @@ def wallet_gui():
 
     root.geometry("300x300")
 
+    current_funds = tk.Label(text="Account Funds")
+    current_funds.pack()
+
+    amount = tk.Label(text=get_funds())
+    amount.pack()
+
+    add_money = tk.Button(text="Add Funds", command=add_funds_gui)
+    add_money.pack()
+
     added_cards = tk.Label(text="Credit Cards on Account")
-    added_cards.grid(column=0, row=0)
+    added_cards.pack()
 
     row_num = 1
     for card in get_customer_cards():
         cc_number = card[0]
         last_four_digits = str(cc_number)[-4:]
         cc = tk.Label(text="Credit Card ending in {}".format(last_four_digits))
-        cc.grid(column=0, row=1)
-    
+        cc.pack()
+
     add_cc = tk.Button(text="Add Card", command=add_card_gui)
-    add_cc.grid(column=1, row=0)
+    add_cc.pack()
 
     root.mainloop()
 
