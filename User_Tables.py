@@ -44,6 +44,13 @@ cursor.execute("CREATE TABLE delivery_bid" +
 "(order_id int, delivery_id int, bid int," +
 "PRIMARY KEY(order_id, delivery_id), FOREIGN KEY (order_id) REFERENCES customer_orders(order_id))")
 
+
+cursor.execute("CREATE TABLE PreBuild" +
+"(prebuild_id int NOT NULL AUTO_INCREMENT, company_id int, name VARCHAR(255)," +
+"cpu VARCHAR(255), ram VARCHAR(255), gpu VARCHAR(255), storage VARCHAR(255), powersupply VARCHAR(255), OS VARCHAR(255)," +
+"price int, in_stock int, sold int, total_profit int," +
+"PRIMARY KEY(prebuild_id), FOREIGN KEY (company_id) REFERENCES  computer_parts_companies (company_id))")
+
 #Check to see if Tables Exist
 cursor.execute("Show Tables")
 for x in cursor:

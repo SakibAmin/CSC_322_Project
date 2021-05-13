@@ -90,7 +90,7 @@ def create_logged_home(id):
 
         #3 suggested Systems by Store Manager
 
-        sug1_img = tk.PhotoImage(file = 'images/suggested-system-1.png')
+        sug1_img = tk.PhotoImage(file = 'images/suggested-system-4.png')
         sug_pc1_canvas = tk.Canvas(frame, height=400, borderwidth=0)
         sug_pc1_canvas.image = sug1_img
         sug_pc1_canvas.create_image(0,10, image=sug1_img, anchor='nw')
@@ -98,7 +98,7 @@ def create_logged_home(id):
 
         tk.Button(frame, command=Suggested_PC1, text="Suggested System 1", borderwidth=0, font=('Helvetica', 12)).grid(row=4, column=0)
 
-        sug2_img = tk.PhotoImage(file = 'images/suggested-system-2.png')
+        sug2_img = tk.PhotoImage(file = 'images/suggested-system-5.png')
         sug_pc2_canvas = tk.Canvas(frame, height=400, borderwidth=0)
         sug_pc2_canvas.image = sug2_img
         sug_pc2_canvas.create_image(0,10, image=sug2_img, anchor='nw')
@@ -106,7 +106,7 @@ def create_logged_home(id):
 
         tk.Button(frame, command=Suggested_PC2, text="Suggested System 2", borderwidth=0, font=('Helvetica', 12)).grid(row=6, column=0)
 
-        sug3_img = tk.PhotoImage(file = 'images/suggested-system-3.png')
+        sug3_img = tk.PhotoImage(file = 'images/suggested-system-6.png')
         sug_pc1_canvas = tk.Canvas(frame, height=400, borderwidth=0)
         sug_pc1_canvas.image = sug3_img
         sug_pc1_canvas.create_image(0,10, image=sug3_img, anchor='nw')

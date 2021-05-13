@@ -139,6 +139,6 @@ def Suggested_PC3(): #This function will show more details on the PC and then ou
 
 
 
-# browsing_GUI()
+#browsing_GUI()
 
 con.close()

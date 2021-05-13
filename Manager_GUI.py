@@ -2,12 +2,13 @@ from Connect_DB import *
 from tkinter import *
 from tkinter import ttk
 from Warnings import *
+from Logged_Home import *
 
 def manager_view(id):
 
     manager = Tk()
     manager.title('Manager Page')
-    manager.geometry('500x450')
+    manager.geometry('500x500')
 
     cursor.execute("Select name FROM store_manager WHERE manager_id = %s", (id,))
     data = cursor.fetchall()
@@ -398,9 +399,24 @@ def viewTaboo():
     add_taboo_button = Button(taboo, text="Add Taboo Word", command=add_taboo, borderwidth=0, font=('Helvetica', 12)).pack()
 
 def viewUsers():
-    def view_user(values):
-        def suspend_user(values):
-            print("suspended user")
+    def view_user(values, id):
+        def suspend_user(id):
+            
+            cursor.execute("Select email FROM registered_customers WHERE registered_id = %s", (id,))
+            records = cursor.fetchall()
+            for record in records:
+                email = record[0]
+
+            cursor.execute("INSERT INTO avoid_list (email)" + 
+            "VALUES ('{}')".format(email,))
+            con.commit()
+
+            cursor.execute("Delete FROM registered_customers WHERE registered_id = %s",(id,))
+            con.commit()
+
+
+
+
         #     sql_query = "DELETE FROM computer_store.taboo WHERE taboo_id=" + str(values[0])
         #     cursor.execute(sql_query)
         #     con.commit()
@@ -413,7 +429,7 @@ def viewUsers():
         detail.title('User #' + str(values[0]))
         detail.geometry('250x100')
 
-        select_button = Button(detail, text="Suspend", command=lambda values=values: suspend_user(values))
+        select_button = Button(detail, text="Suspend", command=lambda values=values: suspend_user(id))
         select_button.pack(pady=20)
 
         label = Label(detail, text = 'ARE YOU SURE?')
@@ -425,7 +441,8 @@ def viewUsers():
         selected = my_tree.focus()
         values = my_tree.item(selected, 'values')
         # temp_label.config(text=values)
-        view_user(values)
+        id = values[0]
+        view_user(values, id)
 
 
     user = Tk()
@@ -480,9 +497,26 @@ def viewUsers():
     select_button.pack(pady=20)
 
 def viewClerks():
-    def view_clerk(values):
-        def suspend_clerk(values):
-            print("suspended clerk")
+    def view_clerk(values, id):
+        def suspend_clerk(id):
+            
+            cursor.execute("Select email FROM store_clerk WHERE clerk_id = %s", (id,))
+            records = cursor.fetchall()
+            for record in records:
+                email = record[0]
+
+            cursor.execute("INSERT INTO avoid_list (email)" + 
+            "VALUES ('{}')".format(email,))
+            con.commit()
+
+            cursor.execute("Delete FROM store_clerk WHERE clerk_id = %s",(id,))
+            con.commit()
+
+
+
+
+
+
         #     sql_query = "DELETE FROM computer_store.taboo WHERE taboo_id=" + str(values[0])
         #     cursor.execute(sql_query)
         #     con.commit()
@@ -495,7 +529,7 @@ def viewClerks():
         detail.title('Clerk #' + str(values[0]))
         detail.geometry('250x100')
 
-        select_button = Button(detail, text="Suspend", command=lambda values=values: suspend_clerk(values))
+        select_button = Button(detail, text="Suspend", command=lambda values=values: suspend_clerk(id))
         select_button.pack(pady=20)
 
         label = Label(detail, text = 'ARE YOU SURE?')
@@ -507,7 +541,8 @@ def viewClerks():
         selected = my_tree.focus()
         values = my_tree.item(selected, 'values')
         # temp_label.config(text=values)
-        view_clerk(values)
+        id = values[0]
+        view_clerk(values, id)
 
 
     clerk = Tk()

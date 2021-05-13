@@ -354,7 +354,7 @@ def browsing_catalog_choice(user_id):
         price = "Price: $" + str(data[0][7])
         price_label = Label(detail_frame, text=price, borderwidth=0, font=('Helvetica', 25)).pack()
 
-        category = "storage"
+        category = "Prebuild"
         return_to_list_button = Button(detail_frame, text="Return", command=browse_storage).pack()
         go_to_discussion_button = Button(detail_frame, text="Discuss", command=lambda category=category, id=data[0][0]: go_to_discussion(category, id)).pack()
         add_to_cart_button = Button(detail_frame, text="Add to cart", command=lambda category=category, id=data[0][2]: add_to_cart(category, id)).pack()
@@ -394,6 +394,51 @@ def browsing_catalog_choice(user_id):
 
         category = "powersupply"
         return_to_list_button = Button(detail_frame, text="Return", command=browse_power_supply).pack()
+        go_to_discussion_button = Button(detail_frame, text="Discuss", command=lambda category=category, id=data[0][0]: go_to_discussion(category, id)).pack()
+        add_to_cart_button = Button(detail_frame, text="Add to cart", command=lambda category=category, id=data[0][2]: add_to_cart(category, id)).pack()
+
+    def browse_prebuild_detail(prebuild_name):
+
+        print("WE BROWSIN!!")
+        print(prebuild_name)
+        for child in mainFrame.winfo_children():
+            child.destroy()
+        sql_query = "SELECT * FROM computer_store.prebuild WHERE name = '" + prebuild_name + "'"
+        cursor.execute(sql_query)
+        data = cursor.fetchall()
+        print(data)
+        print(data[0][0])
+        detail_frame = Frame(mainFrame, width=728, height=550)
+        detail_frame.pack(pady=20, padx=20)
+
+        ps_label = Label(detail_frame, text=prebuild_name, borderwidth=1, font=('Helvetica', 60)).pack()
+
+        company = "Company ID: " + str(data[0][1])
+        company_label = Label(detail_frame, text=company, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        cpu = "CPU: " + data[0][3]
+        cpu_label = Label(detail_frame, text=cpu, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        ram = "RAM: " + data[0][4]
+        ram_label = Label(detail_frame, text=ram, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        gpu = "GPU: " + str(data[0][5])
+        gpu = Label(detail_frame, text=gpu, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        storage = "Storage: " + data[0][6]
+        storage_label = Label(detail_frame, text=storage, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        power = "Power Supply: " + data[0][7]
+        power_label = Label(detail_frame, text=power, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        os = "Operating System: " + data[0][8]
+        os_label = Label(detail_frame, text=os, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        price = "Price: $" + str(data[0][9])
+        price_label = Label(detail_frame, text=price, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        category = "Prebuild"
+        return_to_list_button = Button(detail_frame, text="Return", command=browse_prebuilt).pack()
         go_to_discussion_button = Button(detail_frame, text="Discuss", command=lambda category=category, id=data[0][0]: go_to_discussion(category, id)).pack()
         add_to_cart_button = Button(detail_frame, text="Add to cart", command=lambda category=category, id=data[0][2]: add_to_cart(category, id)).pack()
 
@@ -525,6 +570,22 @@ def browsing_catalog_choice(user_id):
             powersupply_button = Button(powersupply_frame, text=name, command=lambda name=name: browse_powersupply_detail(name)).pack()
         del data
 
+    def browse_prebuilt():
+        for child in mainFrame.winfo_children():
+            child.destroy()
+        cursor.execute("SELECT name FROM prebuild")
+        data = cursor.fetchall()
+        print(data)
+        prebuild_frame = Frame(mainFrame, width= 720, height=550)
+        prebuild_frame.pack(pady=20, padx=20)
+        for item in data:
+            print(item)
+            print(type(item))
+            print(item[0])
+            name = item[0]
+            powersupply_button = Button(prebuild_frame, text=name, command=lambda name=name: browse_prebuild_detail(name)).pack()
+        del data
+
     def browse_reset():
         for child in mainFrame.winfo_children():
             child.destroy()
@@ -547,6 +608,8 @@ def browsing_catalog_choice(user_id):
             browse_storage()
         elif choice == "Power Supply":
             browse_power_supply()
+        elif choice == "PreBuilt":
+            browse_prebuilt()
         else:
             browse_reset()
 
@@ -561,6 +624,7 @@ def browsing_catalog_choice(user_id):
         "Case", 
         "Storage", 
         "Power Supply",
+        "PreBuilt",
     ]
 
     # clickedOption = StringVar()
