@@ -13,14 +13,12 @@ con = mysql.connector.connect(
 #print ("Connnected To Database")
 cursor = con.cursor()
 
-def Clerk_GUI():
+def Clerk_GUI(id):
 
     clerk = Tk()
     clerk.geometry('500x450')
 
     #Title Label
-
-    global id
     cursor.execute("Select name FROM store_clerk WHERE clerk_id = %s", (id,))
     records = cursor.fetchall()
     for record in records:
@@ -35,13 +33,17 @@ def Clerk_GUI():
     Label(clerk, text="").pack()
     Label(clerk, text="").pack()
 
-    pendOrders_Button = Button(clerk, text = "Bidding Orders", width = 20, height = 3, command = viewpendOrders)
+    def vpendOrders():
+
+        viewpendOrders(id)
+
+    pendOrders_Button = Button(clerk, text = "Bidding Orders", width = 20, height = 3, command = vpendOrders)
     pendOrders_Button.config(font = ("Hevetica", 15,))
     pendOrders_Button.pack()
 
     clerk.mainloop()
 
-def viewpendOrders():
+def viewpendOrders(id):
     order = Tk()
     order.geometry('500x500')
 
@@ -206,5 +208,5 @@ def viewpendOrders():
     Sort_Button.config(font = ("Hevetica", 15,))
     Sort_Button.grid(row = 0, column = 0, padx = 0, pady = 0)
 
-id = 1
-Clerk_GUI()
+#id = 1
+#Clerk_GUI()

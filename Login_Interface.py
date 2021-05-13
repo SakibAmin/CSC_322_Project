@@ -9,6 +9,7 @@ from Registration_Interface import *
 from Browsing_GUI import *
 from Computer_Part_Company_GUI import *
 from Delivery_Company_GUI import *
+from Store_Clerk_GUI import *
 
 con = mysql.connector.connect(
         host = "127.0.0.1",
@@ -135,7 +136,7 @@ def Login_Verfication(): #Logs users into the database
                         if warning == 3:
                             clerkBanned()
                         else:
-                            print(" ")
+                            Clerk_GUI(id)
                     #Add the store clerk GUI 
                     '''
                     Things a store clerk GUI needs:
