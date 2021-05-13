@@ -116,6 +116,14 @@ def Register_Verfication():
                             Register_Success()
                         else:
                             passwordFailed()
+                    else:
+                        emailFailed()
+                else:
+                    emailFailed()
+            else:
+                emailFailed()
+        else:
+            emailFailed()
     else:
         emailFailed()
 
