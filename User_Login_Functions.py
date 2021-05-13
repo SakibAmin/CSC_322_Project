@@ -6,10 +6,9 @@ import sqlite3
 con = mysql.connector.connect(
         host = "127.0.0.1",
         user = "root",
-        password = "dbvb72^^DATAf2fa1#$", #change for your own pw
+        password = "dbvb72^^DATAf2fa1#$",
         database = "computer_store",
-        port = 3306,
-        auth_plugin="mysql_native_password"
+        port = 3306
 )
 print ("Connnected To Database")
 

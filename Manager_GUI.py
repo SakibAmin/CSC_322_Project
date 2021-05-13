@@ -9,7 +9,7 @@ def manager_view(id):
     manager.title('Manager Page')
     manager.geometry('500x450')
 
-    cursor.execute("Select name FROM registered_customers WHERE registered_id = %s", (id,))
+    cursor.execute("Select name FROM store_manager WHERE manager_id = %s", (id,))
     data = cursor.fetchall()
     name = data[0][0]
 
@@ -250,7 +250,7 @@ def viewBids():
     def select_bid():
         selected = my_tree.focus()
         values = my_tree.item(selected, 'values')
-        temp_label.config(text=values)
+        # temp_label.config(text=values)
         view_bid()
 
     bids = Tk()
@@ -301,7 +301,7 @@ def viewBids():
              my_tree.insert(parent='', index='end', iid=count, text='', values=(record[0], record[1], record[2], record[3]), tags=('evenrow',))
         count += 1
 
-    select_button = Button(appeal, text="Select Bid", command=select_bid)
+    select_button = Button(bids, text="Select Bid", command=select_bid)
     select_button.pack(pady=20)
 
 def viewTaboo():

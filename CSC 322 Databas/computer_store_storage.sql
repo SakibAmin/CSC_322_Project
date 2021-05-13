@@ -16,28 +16,38 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `store_clerk`
+-- Table structure for table `storage`
 --
 
-DROP TABLE IF EXISTS `store_clerk`;
+DROP TABLE IF EXISTS `storage`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `store_clerk` (
-  `clerk_id` int NOT NULL AUTO_INCREMENT,
-  `registered_id` int DEFAULT NULL,
-  PRIMARY KEY (`clerk_id`),
-  KEY `registered_id` (`registered_id`),
-  CONSTRAINT `store_clerk_ibfk_1` FOREIGN KEY (`registered_id`) REFERENCES `registered_customers` (`registered_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `storage` (
+  `storage_id` int NOT NULL AUTO_INCREMENT,
+  `company_id` int DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `capacity` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `form_factor` varchar(255) DEFAULT NULL,
+  `Interface` varchar(255) DEFAULT NULL,
+  `price` int DEFAULT NULL,
+  `in_stock` int DEFAULT NULL,
+  `sold` int DEFAULT NULL,
+  `total_profit` int DEFAULT NULL,
+  PRIMARY KEY (`storage_id`),
+  KEY `company_id` (`company_id`),
+  CONSTRAINT `storage_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `store_clerk`
+-- Dumping data for table `storage`
 --
 
-LOCK TABLES `store_clerk` WRITE;
-/*!40000 ALTER TABLE `store_clerk` DISABLE KEYS */;
-/*!40000 ALTER TABLE `store_clerk` ENABLE KEYS */;
+LOCK TABLES `storage` WRITE;
+/*!40000 ALTER TABLE `storage` DISABLE KEYS */;
+INSERT INTO `storage` VALUES (1,12,'Seagate Barracuda Compute ','2TB','7200RPM','3.5','SATA 6 Gbb/s',53,33,34,1802),(2,13,'Samsung 860 Evo ','1 TB','SSD','2.5','SATA 6 Gbb/s',110,32,22,2420),(3,13,'Samsung 980 Pro','1 TB','SSD','M.2','M.2',200,12,8,1600),(4,14,'Kingston A400 240','240 GB','SSD','2.5','SATA 6 Gbb/s',40,13,12,480);
+/*!40000 ALTER TABLE `storage` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-03 16:19:20
+-- Dump completed on 2021-05-13  5:56:37

@@ -2,25 +2,27 @@ from tkinter import *
 from tkinter import ttk
 from Connect_DB import *
 from Discussion_Detail import *
+from Buy_GUI import *
 # from Visitor_Home import create_visitor_home
 
-def browsing_catalog_choice():
-    root = Tk()
-    root.title('Browsing Catalog')
-    root.geometry('1280x720')
+def browsing_catalog_choice(user_id):
+    browse = Tk()
+    browse.title('Browsing Catalog')
+    browse.geometry('1280x720')
 
     def return_home():
         print("WIP")
-        # root.destroy()
-        # create_visitor_home()
-    
-    def go_to_discussion(category, id):
-        root.destroy()
-        browse_discussion_detail(id, category)
+        browse.destroy()
+        # go_back_to_logged_home(user_id)
 
-    def add_to_cart(category, id):
+    def go_to_discussion(category, id):
+        browse.destroy()
+        browse_discussion_detail(id, category, user_id)
+
+    def add_to_cart(category, name):
         # do something with id
         print("buying")
+        addtoCart(name, user_id)
 
     def browse_cpu_detail(cpu_name):
         print("WE BROWSIN!!")
@@ -64,7 +66,7 @@ def browsing_catalog_choice():
         category = "cpu"
         return_to_list_button = Button(detail_frame, text="Return", command=browse_cpu).pack()
         go_to_discussion_button = Button(detail_frame, text="Discuss", command=lambda category=category, id=data[0][0]: go_to_discussion(category, id)).pack()
-        add_to_cart_button = Button(detail_frame, text="Add to cart", command=lambda category=category, id=data[0][0]: add_to_cart(category, id)).pack()
+        add_to_cart_button = Button(detail_frame, text="Add to cart", command=lambda category=category, id=data[0][2]: add_to_cart(category, id)).pack()
     
     def browse_ram_detail(ram_name):
         print("WE BROWSIN!!")
@@ -105,7 +107,7 @@ def browsing_catalog_choice():
         category = "ram"
         return_to_list_button = Button(detail_frame, text="Return", command=browse_ram).pack()
         go_to_discussion_button = Button(detail_frame, text="Discuss", command=lambda category=category, id=data[0][0]: go_to_discussion(category, id)).pack()
-        add_to_cart_button = Button(detail_frame, text="Add to cart", command=lambda category=category, id=data[0][0]: add_to_cart(category, id)).pack()
+        add_to_cart_button = Button(detail_frame, text="Add to cart", command=lambda category=category, id=data[0][2]: add_to_cart(category, id)).pack()
 
     def browse_motherboard_detail(motherboard_name):
         print("WE BROWSIN!!")
@@ -164,7 +166,7 @@ def browsing_catalog_choice():
         category = "motherboard"
         return_to_list_button = Button(detail_frame, text="Return", command=browse_motherboard).pack()
         go_to_discussion_button = Button(detail_frame, text="Discuss", command=lambda category=category, id=data[0][0]: go_to_discussion(category, id)).pack()
-        add_to_cart_button = Button(detail_frame, text="Add to cart", command=lambda category=category, id=data[0][0]: add_to_cart(category, id)).pack()
+        add_to_cart_button = Button(detail_frame, text="Add to cart", command=lambda category=category, id=data[0][2]: add_to_cart(category, id)).pack()
 
     def browse_gpu_detail(gpu_name):
         print("WE BROWSIN!!")
@@ -211,7 +213,7 @@ def browsing_catalog_choice():
         category = "gpu"
         return_to_list_button = Button(detail_frame, text="Return", command=browse_GPU).pack()
         go_to_discussion_button = Button(detail_frame, text="Discuss", command=lambda category=category, id=data[0][0]: go_to_discussion(category, id)).pack()
-        add_to_cart_button = Button(detail_frame, text="Add to cart", command=lambda category=category, id=data[0][0]: add_to_cart(category, id)).pack()
+        add_to_cart_button = Button(detail_frame, text="Add to cart", command=lambda category=category, id=data[0][2]: add_to_cart(category, id)).pack()
 
     def browse_case_detail(case_name):
         print("WE BROWSIN!!")
@@ -273,7 +275,7 @@ def browsing_catalog_choice():
         category = "case"
         return_to_list_button = Button(detail_frame, text="Return", command=browse_case).pack()
         go_to_discussion_button = Button(detail_frame, text="Discuss", command=lambda category=category, id=data[0][0]: go_to_discussion(category, id)).pack()
-        add_to_cart_button = Button(detail_frame, text="Add to cart", command=lambda category=category, id=data[0][0]: add_to_cart(category, id)).pack()
+        add_to_cart_button = Button(detail_frame, text="Add to cart", command=lambda category=category, id=data[0][2]: add_to_cart(category, id)).pack()
 
     def browse_cooler_detail(cooler_name):
         print("WE BROWSIN!!")
@@ -314,7 +316,7 @@ def browsing_catalog_choice():
         category = "cooler"
         return_to_list_button = Button(detail_frame, text="Return", command=browse_cpu_cooler).pack()
         go_to_discussion_button = Button(detail_frame, text="Discuss", command=lambda category=category, id=data[0][0]: go_to_discussion(category, id)).pack()
-        add_to_cart_button = Button(detail_frame, text="Add to cart", command=lambda category=category, id=data[0][0]: add_to_cart(category, id)).pack()
+        add_to_cart_button = Button(detail_frame, text="Add to cart", command=lambda category=category, id=data[0][2]: add_to_cart(category, id)).pack()
 
     def browse_storage_detail(storage_name):
         print("WE BROWSIN!!")
@@ -352,7 +354,7 @@ def browsing_catalog_choice():
         category = "storage"
         return_to_list_button = Button(detail_frame, text="Return", command=browse_storage).pack()
         go_to_discussion_button = Button(detail_frame, text="Discuss", command=lambda category=category, id=data[0][0]: go_to_discussion(category, id)).pack()
-        add_to_cart_button = Button(detail_frame, text="Add to cart", command=lambda category=category, id=data[0][0]: add_to_cart(category, id)).pack()
+        add_to_cart_button = Button(detail_frame, text="Add to cart", command=lambda category=category, id=data[0][2]: add_to_cart(category, id)).pack()
 
     def browse_powersupply_detail(ps_name):
         print("WE BROWSIN!!")
@@ -390,7 +392,7 @@ def browsing_catalog_choice():
         category = "powersupply"
         return_to_list_button = Button(detail_frame, text="Return", command=browse_power_supply).pack()
         go_to_discussion_button = Button(detail_frame, text="Discuss", command=lambda category=category, id=data[0][0]: go_to_discussion(category, id)).pack()
-        add_to_cart_button = Button(detail_frame, text="Add to cart", command=lambda category=category, id=data[0][0]: add_to_cart(category, id)).pack()
+        add_to_cart_button = Button(detail_frame, text="Add to cart", command=lambda category=category, id=data[0][2]: add_to_cart(category, id)).pack()
 
     def browse_GPU():
         for child in mainFrame.winfo_children():
@@ -561,21 +563,21 @@ def browsing_catalog_choice():
     # clickedOption = StringVar()
     # clickedOption.set(browsingOptions[0])
 
-    # drop_menu = OptionMenu(root, clickedOption, *browsingOptions, command=selected)
+    # drop_menu = OptionMenu(browse, clickedOption, *browsingOptions, command=selected)
     # drop_menu.pack(pady=20)
 
  
     logo_image = PhotoImage(file = 'images/Logo.png')
     logo_label = Label(image = logo_image)
     
-    logo_button = Button(root, image = logo_image, command=return_home, borderwidth = 0)
+    logo_button = Button(browse, image = logo_image, command=return_home, borderwidth = 0)
     logo_button.place(x = 640, y = 0)
     logo_button.pack(pady=20, padx=20)
 
-    myCombo = ttk.Combobox(root, value=browsingOptions)
+    myCombo = ttk.Combobox(browse, value=browsingOptions)
     myCombo.current(0)
     myCombo.bind("<<ComboboxSelected>>", comboClick)
     myCombo.pack()
-    mainFrame = Frame(root, width= 1280, height=720)
+    mainFrame = Frame(browse, width= 1280, height=720)
     mainFrame.pack()
-    root.mainloop()
+    browse.mainloop()

@@ -16,42 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `cases`
+-- Table structure for table `registered_customers`
 --
 
-DROP TABLE IF EXISTS `cases`;
+DROP TABLE IF EXISTS `registered_customers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `cases` (
-  `case_id` int NOT NULL AUTO_INCREMENT,
-  `company_id` int DEFAULT NULL,
+CREATE TABLE `registered_customers` (
+  `registered_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
-  `case_type` varchar(255) DEFAULT NULL,
-  `side_panel` varchar(255) DEFAULT NULL,
-  `external_bay` int DEFAULT NULL,
-  `internal_bay` int DEFAULT NULL,
-  `max_gpu_size` int DEFAULT NULL,
-  `max_fan_size` int DEFAULT NULL,
-  `num_front_fan` int DEFAULT NULL,
-  `num_top_fan` int DEFAULT NULL,
-  `num_exhaust_fan` int DEFAULT NULL,
-  `num_fan_included` int DEFAULT NULL,
-  `max_radiator` int DEFAULT NULL,
-  `rgb` varchar(255) DEFAULT NULL,
-  `price` int DEFAULT NULL,
-  PRIMARY KEY (`case_id`),
-  KEY `company_id` (`company_id`),
-  CONSTRAINT `cases_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `email` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `pending_warning` int DEFAULT NULL,
+  `standing_warning` int DEFAULT NULL,
+  PRIMARY KEY (`registered_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `cases`
+-- Dumping data for table `registered_customers`
 --
 
-LOCK TABLES `cases` WRITE;
-/*!40000 ALTER TABLE `cases` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cases` ENABLE KEYS */;
+LOCK TABLES `registered_customers` WRITE;
+/*!40000 ALTER TABLE `registered_customers` DISABLE KEYS */;
+INSERT INTO `registered_customers` VALUES (1,'Bob Jones','bobjones@gmail.com','password','114-11 134st',2,3),(2,'John Doe','johndoe@gmail.com','password','123 5th street',1,2);
+/*!40000 ALTER TABLE `registered_customers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -63,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-03 16:19:20
+-- Dump completed on 2021-05-13  5:56:36

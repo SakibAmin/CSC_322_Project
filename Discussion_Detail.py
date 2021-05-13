@@ -2,8 +2,13 @@ from tkinter import *
 from tkinter import ttk
 from Connect_DB import *
 import tkinter as tk
+# from Logged_Home import create_logged_home, go_back_to_logged_home
+# from Return_Logged import go_back_to_logged_home
 
-def browse_discussion_detail(item_id, item_type):
+def browse_discussion_detail(item_id, item_type, user_id):
+    def quit_discussion_detail(user_id):
+        detail.destroy()
+        # go_back_to_logged_home(user_id)
     def complain_user(author_name, author_id):
         def delete_warning():
             complain.destroy()
@@ -70,8 +75,8 @@ def browse_discussion_detail(item_id, item_type):
         canvas.configure(scrollregion=canvas.bbox("all"))
 
     def restart(item_id, item_type):
-        root.destroy()
-        browse_discussion_detail(item_id, item_type)
+        detail.destroy()
+        browse_discussion_detail(item_id, item_type, user_id)
 
     def comment_to_database(text):
         sql_query = "INSERT INTO computer_store.comment (discussion_id, registered_id, description) VALUES ("+ str(DETAIL_ID) + "," +  str(CUSTOMER_ID) + ","    +"'" + text + "')"
@@ -227,7 +232,7 @@ def browse_discussion_detail(item_id, item_type):
 
         # break_label = Label(frame, text=" " * 3000, borderwidth=1, font=('Helvetica', 15), wraplength=500).grid(row=10, column=1)
 
-        # comment_box = tk.Entry(root)
+        # comment_box = tk.Entry(detail)
         # comment_box = Text(frame, height=10, width=60).grid(row=11, column=1)
         # comment_canvas = tk.Canvas(frame, height=480, width=500, borderwidth=0)
         # comment_canvas.create_window(0,0, window=comment_box)
@@ -250,13 +255,13 @@ def browse_discussion_detail(item_id, item_type):
     # cursor.execute(sql_query)
     # discussion_data = cursor.fetchall()
     DETAIL_ID = None
-    CUSTOMER_ID = 2
+    CUSTOMER_ID = user_id
 
-    root = Tk()
-    root.title('Discussion Detail')
-    canvas = tk.Canvas(root, height=720, width=800)
+    detail = Tk()
+    detail.title('Discussion Detail')
+    canvas = tk.Canvas(detail, height=720, width=800)
     frame = tk.Frame(canvas)
-    vsb = tk.Scrollbar(root, orient="vertical", command=canvas.yview)
+    vsb = tk.Scrollbar(detail, orient="vertical", command=canvas.yview)
     canvas.configure(yscrollcommand=vsb.set)
 
     vsb.pack(side="right", fill="y")
@@ -290,11 +295,11 @@ def browse_discussion_detail(item_id, item_type):
     entry.grid(row=row_num, column=1, padx=10)
     row_num += 1
     tk.Button(frame, text="Post Comment", command=return_entry, borderwidth=0, font=('Helvetica', 12)).grid(row=row_num, column=1, padx=10)
-
+    tk.Button(frame, text="Return to HOME", command=lambda id=user_id: quit_discussion_detail(user_id), borderwidth=0, font=('Helvetica', 12)).grid(row=row_num+1, column=1, padx=10)
     # entry.bind('<Return>', return_entry) 
 
     # comment_box = Text(frame, height=10, width=60).grid(row=11, column=1)
     # tk.Button(frame, text="Post Comment", command=lambda comment_box=comment_box: get_text(comment_box), borderwidth=0, font=('Helvetica', 12)).grid(row=12, column=1, padx=10)
 
 
-    root.mainloop()
+    detail.mainloop()

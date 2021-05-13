@@ -6,10 +6,9 @@ import mysql.connector
 con = mysql.connector.connect(
         host = "127.0.0.1",
         user = "root",
-        password = "dbvb72^^DATAf2fa1#$", #change for your own pw
+        password = "dbvb72^^DATAf2fa1#$",
         database = "computer_store",
-        port = 3306,
-        auth_plugin="mysql_native_password"
+        port = 3306
 )
 print ("Connnected")
 
@@ -17,24 +16,33 @@ print ("Connnected")
 cursor = con.cursor()
 
 cursor.execute("CREATE TABLE Registered_Customers" + 
-"(name VARCHAR(255), email VARCHAR(255) PRIMARY KEY," +
-"password VARCHAR(255), address VARCHAR(255))")
+"(registered_id int NOT NULL AUTO_INCREMENT, name VARCHAR(255), email VARCHAR(255)," +
+"password VARCHAR(255), address VARCHAR(255), PRIMARY KEY (registered_id))")
 
-cursor.execute("CREATE TABLE Store_Clerk" +
-"(name VARCHAR(255), email VARCHAR(255) PRIMARY KEY," +
-"password VARCHAR(255))")
+cursor.execute("CREATE TABLE Store_Clerk" + 
+"(clerk_id int NOT NULL AUTO_INCREMENT, name VARCHAR(255), email VARCHAR(255)," +
+"password VARCHAR(255), PRIMARY KEY (clerk_id))")
 
-cursor.execute("CREATE TABLE Store_Managers" +
-"(name VARCHAR(255), email VARCHAR(255) PRIMARY KEY," +
-"password VARCHAR(255))")
+cursor.execute("CREATE TABLE Store_Manager" + 
+"(manager_id int NOT NULL AUTO_INCREMENT, name VARCHAR(255), email VARCHAR(255)," +
+"password VARCHAR(255), PRIMARY KEY (manager_id))")
 
 cursor.execute("CREATE TABLE Computer_Parts_Companies" +
-"(Company_Name VARCHAR(255), email VARCHAR(255) PRIMARY KEY," +
-"password VARCHAR(255))")
+"(company_id into NOT NULL AUTO_INCREMENT, Company_Name VARCHAR(255), email VARCHAR(255)," +
+"password VARCHAR(255), PRIMARY KEY (company_id))")
 
 cursor.execute("CREATE TABLE Delivery_Companies" +
-"(Company_Name VARCHAR(255), email VARCHAR(255) PRIMARY KEY," +
-"password VARCHAR(255))")
+"(delivery_id int NOT NULL AUTO_INCREMENT, Company_Name VARCHAR(255), email VARCHAR(255)," +
+"password VARCHAR(255), PRIMARY KEY (delivery_id))")
+
+cursor.execute("CREATE TABLE customer_purchases" +
+"(purchase_id int NOT NULL AUTO_INCREMENT, order_id int, registered_id int, name VARCHAR(255)," +
+"quantity int, price int, " +
+"PRIMARY KEY(purchase_id), FOREIGN KEY (order_id) REFERENCES customer_orders(order_id), FOREIGN KEY (registered_id) REFERENCES registered_customers(registered_id))")
+
+cursor.execute("CREATE TABLE delivery_bid" +
+"(order_id int, delivery_id int, bid int," +
+"PRIMARY KEY(order_id, delivery_id), FOREIGN KEY (order_id) REFERENCES customer_orders(order_id))")
 
 #Check to see if Tables Exist
 cursor.execute("Show Tables")

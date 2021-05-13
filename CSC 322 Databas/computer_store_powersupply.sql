@@ -16,28 +16,38 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `store_managers`
+-- Table structure for table `powersupply`
 --
 
-DROP TABLE IF EXISTS `store_managers`;
+DROP TABLE IF EXISTS `powersupply`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `store_managers` (
-  `manager_id` int NOT NULL AUTO_INCREMENT,
-  `registered_id` int DEFAULT NULL,
-  PRIMARY KEY (`manager_id`),
-  KEY `registered_id` (`registered_id`),
-  CONSTRAINT `store_managers_ibfk_1` FOREIGN KEY (`registered_id`) REFERENCES `registered_customers` (`registered_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `powersupply` (
+  `power_id` int NOT NULL AUTO_INCREMENT,
+  `company_id` int DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `form_factor` varchar(255) DEFAULT NULL,
+  `efficency` varchar(255) DEFAULT NULL,
+  `wattage` int DEFAULT NULL,
+  `modular` varchar(255) DEFAULT NULL,
+  `price` int DEFAULT NULL,
+  `in_stock` int DEFAULT NULL,
+  `sold` int DEFAULT NULL,
+  `total_profit` int DEFAULT NULL,
+  PRIMARY KEY (`power_id`),
+  KEY `company_id` (`company_id`),
+  CONSTRAINT `powersupply_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `store_managers`
+-- Dumping data for table `powersupply`
 --
 
-LOCK TABLES `store_managers` WRITE;
-/*!40000 ALTER TABLE `store_managers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `store_managers` ENABLE KEYS */;
+LOCK TABLES `powersupply` WRITE;
+/*!40000 ALTER TABLE `powersupply` DISABLE KEYS */;
+INSERT INTO `powersupply` VALUES (1,3,'Corsair RM','ATX','80+ Gold',750,'Full',80,33,35,2800),(2,7,'EVGA SuperNova GA','ATX','80+ Gold',650,'Full',80,37,44,3520),(3,3,'Corsair Axi','ATX','80+ Plat',1600,'Full',120,32,63,7560),(4,3,'Corsair CXM','ATX','80+ Bronze',550,'Semi',55,41,13,715);
+/*!40000 ALTER TABLE `powersupply` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-03 16:19:20
+-- Dump completed on 2021-05-13  5:56:36

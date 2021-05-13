@@ -5,15 +5,16 @@ import os
 con = mysql.connector.connect(
         host = "127.0.0.1",
         user = "root",
-        password = "dbvb72^^DATAf2fa1#$", #change for your own pw
+        password = "dbvb72^^DATAf2fa1#$",
         database = "computer_store",
-        port = 3306,
-        auth_plugin="mysql_native_password"
+        port = 3306
 )
 #print ("Connnected To Database")
 cursor = con.cursor()
 
 def Registration_Page():
+
+    global Register
 
     Register = Tk()
     Register.geometry('400x350')
@@ -97,12 +98,32 @@ def Register_Verfication():
     cursor.execute("SELECT * FROM Registered_Customers WHERE email = %s", (email1,))
     data = cursor.fetchall()
     if len(data) == 0:
-        if password1 == password2:
-            cursor.execute("INSERT INTO registered_customers (name, email, password, address) VALUES ('{}', '{}', '{}', '{}')".format(name1, email1, password1, address1))
-            con.commit()
-            Register_Success()
+        cursor.execute("SELECT * FROM computer_parts_companies WHERE email = %s", (email1,))
+        data = cursor.fetchall()
+        if len(data) == 0:
+            cursor.execute("SELECT * FROM delivery_companies WHERE email = %s", (email1,))
+            data = cursor.fetchall()
+            if len(data) == 0:
+                cursor.execute("SELECT * FROM store_clerk WHERE email = %s", (email1,))
+                data = cursor.fetchall()
+                if len(data) == 0:
+                    cursor.execute("SELECT * FROM store_manager WHERE email = %s", (email1,))
+                    data = cursor.fetchall()
+                    if len(data) == 0:
+                        if password1 == password2:
+                            cursor.execute("INSERT INTO registered_customers (name, email, password, address) VALUES ('{}', '{}', '{}', '{}')".format(name1, email1, password1, address1))
+                            con.commit()
+                            Register_Success()
+                        else:
+                            passwordFailed()
+                    else:
+                        emailFailed()
+                else:
+                    emailFailed()
+            else:
+                emailFailed()
         else:
-            passwordFailed()
+            emailFailed()
     else:
         emailFailed()
 
@@ -117,7 +138,7 @@ def emailFailed():
     emailFail.title("Email Already in Use")
     emailFail.geometry("150x100")
     Label(emailFail, text = "Email Already in Use").pack()
-    Button(emailFail, text = "OK", width = 10, height = 1, command = delete_emailFailed).pack()
+    Button(emailFail, text = "OK", width = 10, height = 1, command = delete_emailedFailed).pack()
 
     emailFail.mainloop()
 
@@ -160,6 +181,4 @@ def delete_emailedFailed():
 def delete_passwordFail():
     passwordFail.destroy()
 
-Registration_Page()
-
-con.close()
+#Registration_Page()

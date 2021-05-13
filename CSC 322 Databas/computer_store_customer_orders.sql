@@ -16,30 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `registered_customers`
+-- Table structure for table `customer_orders`
 --
 
-DROP TABLE IF EXISTS `registered_customers`;
+DROP TABLE IF EXISTS `customer_orders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `registered_customers` (
-  `registered_id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`registered_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `customer_orders` (
+  `order_id` int NOT NULL AUTO_INCREMENT,
+  `customer_id` int NOT NULL,
+  `total_price` int NOT NULL,
+  `order_status` varchar(64) NOT NULL,
+  `winning_delivery_company_id` int DEFAULT NULL,
+  `reasoning` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`order_id`),
+  KEY `customer_id` (`customer_id`),
+  CONSTRAINT `customer_orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `registered_customers` (`registered_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `registered_customers`
+-- Dumping data for table `customer_orders`
 --
 
-LOCK TABLES `registered_customers` WRITE;
-/*!40000 ALTER TABLE `registered_customers` DISABLE KEYS */;
-INSERT INTO `registered_customers` VALUES (1,'Bob Jones','bobjones@gmail.com','password','114-11 134st');
-/*!40000 ALTER TABLE `registered_customers` ENABLE KEYS */;
+LOCK TABLES `customer_orders` WRITE;
+/*!40000 ALTER TABLE `customer_orders` DISABLE KEYS */;
+INSERT INTO `customer_orders` VALUES (5,1,2187,'Delivered',2,'higher bid');
+/*!40000 ALTER TABLE `customer_orders` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-03 16:19:20
+-- Dump completed on 2021-05-13  5:56:37

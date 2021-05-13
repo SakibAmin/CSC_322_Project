@@ -161,5 +161,5 @@ def browse_all_complains(USER_ID):
 
     complain.mainloop()
 
-id = 1
-browse_all_complains(id)
+# id = 1
+# browse_all_complains(id)

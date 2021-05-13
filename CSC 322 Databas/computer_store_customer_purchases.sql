@@ -16,35 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `ram`
+-- Table structure for table `customer_purchases`
 --
 
-DROP TABLE IF EXISTS `ram`;
+DROP TABLE IF EXISTS `customer_purchases`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ram` (
-  `ram_id` int NOT NULL AUTO_INCREMENT,
-  `company_id` int DEFAULT NULL,
+CREATE TABLE `customer_purchases` (
+  `purchase_id` int NOT NULL AUTO_INCREMENT,
+  `order_id` int DEFAULT NULL,
+  `registered_id` int DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `type` varchar(255) DEFAULT NULL,
-  `speed` int DEFAULT NULL,
-  `modules` varchar(255) DEFAULT NULL,
-  `rgb` varchar(255) DEFAULT NULL,
+  `quantity` int DEFAULT NULL,
   `price` int DEFAULT NULL,
-  PRIMARY KEY (`ram_id`),
-  KEY `company_id` (`company_id`),
-  CONSTRAINT `ram_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`purchase_id`),
+  KEY `order_id` (`order_id`),
+  KEY `registered_id` (`registered_id`),
+  CONSTRAINT `customer_purchases_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `customer_orders` (`order_id`),
+  CONSTRAINT `customer_purchases_ibfk_2` FOREIGN KEY (`registered_id`) REFERENCES `registered_customers` (`registered_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ram`
+-- Dumping data for table `customer_purchases`
 --
 
-LOCK TABLES `ram` WRITE;
-/*!40000 ALTER TABLE `ram` DISABLE KEYS */;
-INSERT INTO `ram` VALUES (1,3,'Corsair Vengeance RGB Pro 16GB','DDR4',3200,'2x8','Yes',110),(2,3,'Corsair Vengeance RGB Pro 32GB','DDR4',3200,'2x16','Yes',300),(3,4,'G.Skill Aegis 16GB','DDR4',3000,'2x8','No',80),(4,4,'G.Skill Tridant Z RGB 16GB','DDR4',3200,'2x8','Yes',115),(5,4,'G.Skill Tridant Z RGB 128GB','DDR4',4000,'4x32','Yes',880),(6,5,'Crucial Ballistix 32GB','DDR4',3200,'2x16','No',176);
-/*!40000 ALTER TABLE `ram` ENABLE KEYS */;
+LOCK TABLES `customer_purchases` WRITE;
+/*!40000 ALTER TABLE `customer_purchases` DISABLE KEYS */;
+INSERT INTO `customer_purchases` VALUES (7,5,1,'Seagate Barracuda Compute ',1,53),(8,5,1,'124',1,2134);
+/*!40000 ALTER TABLE `customer_purchases` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-03 16:19:20
+-- Dump completed on 2021-05-13  5:56:37

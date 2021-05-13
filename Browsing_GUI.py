@@ -1,16 +1,27 @@
 from tkinter import *
 from tkinter import ttk
 import os
-import PIL
-from PIL import ImageTk
-from PIL import Image
+import PIL.Image
+import PIL.ImageTk
 from Login_Interface import *
+from Build_Your_Own_Interface import *
+import mysql.connector
 
+con = mysql.connector.connect(
+        host = "127.0.0.1",
+        user = "root",
+        password = "dbvb72^^DATAf2fa1#$",
+        database = "computer_store",
+        port = 3306
+)
 
-def Browsing_GUI():
+print ("Connnected To Database")
+cursor = con.cursor()
+
+def browsing_GUI():
 
     Home = Tk()
-    Home.geometry('1280x720')
+    Home.geometry('1000x1000')
 
     #ScrollBar
     '''main_frame = Frame(Home)
@@ -29,10 +40,8 @@ def Browsing_GUI():
 
     my_Canvas.create_window((0,0), window = second_frame, anchor = "nw")'''
 
-    
-    
     #Home Button
-    logo_image = PhotoImage(file = 'images/Logo.png')
+    logo_image = PhotoImage(file = 'Logo.png')
     logo_label = Label(image = logo_image)
     
     logo_button = Button(Home, image = logo_image, command = homepage, borderwidth = 0)
@@ -51,18 +60,23 @@ def Browsing_GUI():
 
     #Build Your Own
     
-    buildPC_button = Button(Home, text = "Build Your Own", command = Build_Your_Own)
+    buildPC_button = Button(Home, text = "Build Your Own", command = buildPC)
     buildPC_button.config(width = 40, font=('Helvetica', 12))
     buildPC_button.place(x = 355, y = 80)
 
     #Login Button
-    login_button = Button(Home, text = "Log_In", command = Login_Page) #Function Login Page is complete but needs to be edited a bit 
+
+    def login():
+        Home.destroy()
+        Login_Page()
+        
+    login_button = Button(Home, text = "Log_In", command = login) #Function Login Page is complete but needs to be edited a bit 
     login_button.config(width = 40, font=('Helvetica', 12))
     login_button.place(x = 680, y = 80)
 
     #3 suggested Systems by Store Manager
 
-    sug1_image = PIL.Image.open('images/suggested-system-1.png')
+    sug1_image = PIL.Image.open('Suggested System 1.png')
     resize_sug1 = sug1_image.resize((300,200), PIL.Image.ANTIALIAS)
 
     sug1_image_resized = PIL.ImageTk.PhotoImage(resize_sug1)
@@ -72,7 +86,7 @@ def Browsing_GUI():
     sug1_button.place(x = 40, y = 200)
     
 
-    sug2_image = PIL.Image.open('images/suggested-system-2.png')
+    sug2_image = PIL.Image.open('Suggested System 2.png')
     resize_sug2 = sug2_image.resize((300,200), PIL.Image.ANTIALIAS)
 
     sug2_image_resized = PIL.ImageTk.PhotoImage(resize_sug2)
@@ -82,7 +96,7 @@ def Browsing_GUI():
     sug2_button.place(x = 40, y = 450)
    
     
-    sug3_image = PIL.Image.open('images/suggested-system-3.png')
+    sug3_image = PIL.Image.open('Suggested System 3.png')
     resize_sug3 = sug3_image.resize((300,200), PIL.Image.ANTIALIAS)
 
     sug3_image_resized = PIL.ImageTk.PhotoImage(resize_sug3)
@@ -93,30 +107,6 @@ def Browsing_GUI():
 
 
     #3 most Popular Computers per number of Sales
-
-
-    # Scrollbar 
-
-    # scrollbar = Scrollbar(Home)
-    # scrollbar.pack(side=RIGHT, fill=Y)
-    # myList = Listbox(Home, yscrollcommand=scrollbar.set)
-    # for line in range(100):
-    #     myList.insert(END, "this is line number" + str(line))
-    # myList.insert(END, logo_image)
-    # myList.insert(END, browsing_menu)
-    # myList.insert(END, buildPC_button)
-    # myList.insert(END, login_button)
-    # myList.insert(END, sug1_button)
-    # myList.insert(END, sug2_button)
-    # myList.insert(END, sug3_button)
-
-
-
-
-
-    # myList.pack(side=LEFT, fill=BOTH)
-    # scrollbar.config(command=myList.yview)
-
     Home.mainloop()
 
 
@@ -128,10 +118,9 @@ def Browse_Selection(): #This function will send user to the page of the selecte
 
     print("Work in Progress")
 
-def Build_Your_Own(): #This function will launch the build your own PC function
-
-    print("Work in Progress")
-
+def buildPC():
+    
+    Build_Your_Own(cpu_name, ram_name, gpu_name, mother_name, case_name, storage_name, cooler_name, power_name)
 
 def Suggested_PC1(): #This function will show more details on the PC and then output a buy button
 
@@ -148,4 +137,8 @@ def Suggested_PC3(): #This function will show more details on the PC and then ou
     #https://www.newegg.com/skytech-st-shiva-0210-ne/p/N82E16883289096?item=N82E16883289096&source=region&nm_mc=knc-googleadwords-pc&cm_mmc=knc-googleadwords-pc-_-pla-_-gaming+desktop-_-N82E16883289096&gclid=CjwKCAjwm7mEBhBsEiwA_of-TBJZHNAK9s9QARwK6WY-TY3k7cumHqOLZYhI7NmC4TY6_Z_4kxYabBoCX9UQAvD_BwE&gclsrc=aw.ds    print("Work in Progress")
     print("Work in Progress")
 
-Browsing_GUI()
+
+
+# browsing_GUI()
+
+con.close()
