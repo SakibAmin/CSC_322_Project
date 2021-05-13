@@ -128,7 +128,12 @@ def Login_Verfication(): #Logs users into the database
                     print("You are good")
                     for record in records:
                         id = record[0]
+                        warning = record[5]
                         #print(id)
+                        if warning == 3:
+                            clerkBanned()
+                        else:
+                            print(" ")
                     #Add the store clerk GUI 
                     '''
                     Things a store clerk GUI needs:
@@ -140,7 +145,12 @@ def Login_Verfication(): #Logs users into the database
                 print("You are good")
                 for record in records:
                     id = record[0]
+                    warning = record[5]
                     #print(id)
+                if warning == 3:
+                    deliveryBanned()
+                else:
+                    print(" ")
                 #Add the delivery company GUI
                 '''
                 Things a delivery company GUI needs:
@@ -152,11 +162,14 @@ def Login_Verfication(): #Logs users into the database
             print("You are good")
             for record in records:
                 id = record[0]
-                #CPC_GUI(id)
-                print(id)
+                warning = record[5]
+                #print(id)
+            if warning == 3:
+                cpcBanned()
+            else:
+                CPC_GUI(id)
+                #Login.destroy()
             #Add the computer part company GUI
-            CPC_GUI(id)
-            Login.destroy()
             '''
             Things Computer Part Company GUI needs:
 
@@ -169,8 +182,13 @@ def Login_Verfication(): #Logs users into the database
         #print("Login Successful")
         for record in records:
             id = record[0]
+            warning = record[6]
             #print(id)
-        Login_Successful()
+            #print(warning)
+        if warning == 3:
+            registeredBanned()
+        else:
+            Login_Successful()
 
 def Login_Successful(): #Tells user the login was successful
     
@@ -207,6 +225,84 @@ def Login_Failed(): #Tells user wrong password or username was entered
 
 def delete_Login_Failed(): #deletes fail screen and sends back to user Login Page
     loginFail.destroy()
+
+def registeredBanned():
+
+    ban = Tk()
+    ban.geometry('200x200')
+
+    Ban_Label = Label(ban, text = "Your account has been BANNNED!!!! ")
+    Ban_Label.config(font = ("Hevetica", 10, ))
+    Ban_Label.pack()
+
+
+    def removeFunds():
+        zero = 0
+        cursor.execute("Update customer_funds SET funds = %s WHERE customer_id = %s",(zero, id))
+        con.commit()
+        zero_Label = Label(ban, text = "Funds have been removed")
+        zero_Label.config(font = ("Hevetica", 10, ))
+        zero_Label.pack()
+        ban.destroy()
+
+    oMoney_Button = Button(ban, text = "Remove Funds", width = 5, command = removeFunds)
+    oMoney_Button.config(font = ("Hevetica", 15,))
+    oMoney_Button.pack()
+
+def cpcBanned():
+
+    ban = Tk()
+    ban.geometry('200x200')
+
+    Ban_Label = Label(ban, text = "Your account has been BANNNED!!!! ")
+    Ban_Label.config(font = ("Hevetica", 10, ))
+    Ban_Label.pack()
+
+
+    def removeFunds():
+        zero = 0
+        cursor.execute("Update computer_parts_companies SET funds = %s WHERE company_id = %s",(zero, id))
+        con.commit()
+        zero_Label = Label(ban, text = "Funds have been removed")
+        zero_Label.config(font = ("Hevetica", 10, ))
+        zero_Label.pack()
+        ban.destroy()
+
+    oMoney_Button = Button(ban, text = "Remove Funds", width = 5, command = removeFunds)
+    oMoney_Button.config(font = ("Hevetica", 15,))
+    oMoney_Button.pack()
+
+def deliveryBanned():
+
+    ban = Tk()
+    ban.geometry('200x200')
+
+    Ban_Label = Label(ban, text = "Your account has been BANNNED!!!! ")
+    Ban_Label.config(font = ("Hevetica", 10, ))
+    Ban_Label.pack()
+
+    def close():
+        ban.destroy()
+
+    oMoney_Button = Button(ban, text = "Ok", width = 5, command = close)
+    oMoney_Button.config(font = ("Hevetica", 15,))
+    oMoney_Button.pack()
+
+def clerkBanned():
+    
+    ban = Tk()
+    ban.geometry('200x200')
+
+    Ban_Label = Label(ban, text = "Your account has been BANNNED!!!! ")
+    Ban_Label.config(font = ("Hevetica", 10, ))
+    Ban_Label.pack()
+
+    def close():
+        ban.destroy()
+
+    oMoney_Button = Button(ban, text = "Ok", width = 5, command = close)
+    oMoney_Button.config(font = ("Hevetica", 15,))
+    oMoney_Button.pack()
 
 id = 0
 Login_Page()

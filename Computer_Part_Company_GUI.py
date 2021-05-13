@@ -1490,7 +1490,9 @@ def viewWallet(id):
 
     #Total Sum:
     totalSum = cpusum + ramsum + gpusum + mothersum + casesum + storagesum + coolersum + powersum
-    print(totalSum)
+    #print(totalSum)
+    cursor.execute("Update computer_parts_companies SET funds = %s WHERE company_id = %s",(totalSum, id))
+    con.commit()
 
     Title_Label = Label(wallet, text = 'Wallet')
     Title_Label.config(font = ("Hevetica", 20, "underline"))
