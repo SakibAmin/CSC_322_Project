@@ -50,7 +50,8 @@ CREATE TABLE `case` (
   `total_profit` int DEFAULT NULL,
   PRIMARY KEY (`case_id`),
   KEY `company_id` (`company_id`),
-  CONSTRAINT `case_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`) ON DELETE CASCADE
+  CONSTRAINT `case_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`) 
+  ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -171,7 +172,8 @@ CREATE TABLE `cooler` (
   `total_profit` int DEFAULT NULL,
   PRIMARY KEY (`cooler_id`),
   KEY `company_id` (`company_id`),
-  CONSTRAINT `cooler_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`) ON DELETE CASCADE
+  CONSTRAINT `cooler_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
+  ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -236,7 +238,8 @@ CREATE TABLE `cpu` (
   `total_profit` int DEFAULT NULL,
   PRIMARY KEY (`cpu_id`),
   KEY `company_id` (`company_id`),
-  CONSTRAINT `cpu_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`) ON DELETE CASCADE
+  CONSTRAINT `cpu_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
+  ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -358,7 +361,8 @@ CREATE TABLE `gpu` (
   `total_profit` int DEFAULT NULL,
   PRIMARY KEY (`gpu_id`),
   KEY `company_id` (`company_id`),
-  CONSTRAINT `gpu_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`) ON DELETE CASCADE
+  CONSTRAINT `gpu_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
+  ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -428,7 +432,8 @@ CREATE TABLE `motherboard` (
   `total_profit` int DEFAULT NULL,
   PRIMARY KEY (`motherboard_id`),
   KEY `company_id` (`company_id`),
-  CONSTRAINT `motherboard_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`) ON DELETE CASCADE
+  CONSTRAINT `motherboard_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
+  ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -491,7 +496,8 @@ CREATE TABLE `powersupply` (
   `total_profit` int DEFAULT NULL,
   PRIMARY KEY (`powersupply_id`),
   KEY `company_id` (`company_id`),
-  CONSTRAINT `powersupply_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`) ON DELETE CASCADE
+  CONSTRAINT `powersupply_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
+  ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -555,7 +561,8 @@ CREATE TABLE `ram` (
   `total_profit` int DEFAULT NULL,
   PRIMARY KEY (`ram_id`),
   KEY `company_id` (`company_id`),
-  CONSTRAINT `ram_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`) ON DELETE CASCADE
+  CONSTRAINT `ram_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
+  ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -675,7 +682,8 @@ CREATE TABLE `storage` (
   `total_profit` int DEFAULT NULL,
   PRIMARY KEY (`storage_id`),
   KEY `company_id` (`company_id`),
-  CONSTRAINT `storage_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`) ON DELETE CASCADE
+  CONSTRAINT `storage_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
+  ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -852,8 +860,14 @@ CREATE TABLE `comment` (
   KEY `discussion_id` (`discussion_id`), 
   KEY `registered_id` (`registered_id`),
   CONSTRAINT `discussion_ibfk_1` FOREIGN KEY (`discussion_id`) REFERENCES `discussion` (`discussion_id`),
-  CONSTRAINT `registered_customers_ibfk_1` FOREIGN KEY (`registered_id`) REFERENCES `registered_customers` (`registered_id`) ON DELETE CASCADE
+  CONSTRAINT `registered_customers_ibfk_1` FOREIGN KEY (`registered_id`) REFERENCES `registered_customers` (`registered_id`)
+  ON DELETE CASCADE
 );
+
+-- ALTER TABLE `comment`
+-- ADD CONSTRAINT `registered_customers_ibfk_1` FOREIGN KEY (`registered_id`) 
+-- REFERENCES `registered_customers` (`registered_id`)
+-- ON DELETE CASCADE;
 
 LOCK TABLES `comment` WRITE;
 INSERT INTO `comment` VALUES (1, 1, 1, 'hello i like this product, very nice!!1'), (2, 1, 1, 'it is me again!! i love this item'), (3, 1, 2, 'same!');
@@ -878,7 +892,8 @@ CREATE TABLE `complain` (
   `reason` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`complain_id`),
   KEY `complainant_id` (`complainant_id`), 
-  CONSTRAINT complainant_ibfk_1 FOREIGN KEY (complainant_id) REFERENCES registered_customers(registered_id) ON DELETE CASCADE
+  CONSTRAINT complainant_ibfk_1 FOREIGN KEY (complainant_id) REFERENCES registered_customers(registered_id)
+  ON DELETE CASCADE
 );
 
 LOCK TABLES `complain` WRITE;
@@ -895,7 +910,8 @@ CREATE TABLE `appeal` (
 --   KEY `registered_id` (`registered_id`),   
   KEY `complain_id` (`complain_id`), 
 --   CONSTRAINT registered_id_ibfk_1 FOREIGN KEY (registered_id) REFERENCES registered_customers(registered_id),
-  CONSTRAINT complain_id_ibfk_1 FOREIGN KEY (complain_id) REFERENCES complain(complain_id) ON DELETE CASCADE
+  CONSTRAINT complain_id_ibfk_1 FOREIGN KEY (complain_id) REFERENCES complain(complain_id)
+  ON DELETE CASCADE
 );
 
 LOCK TABLES `appeal` WRITE;
@@ -928,7 +944,8 @@ CREATE TABLE `cart` (
   `price` int DEFAULT NULL,
   PRIMARY KEY (`cart_id`),
   KEY `registered_id` (`registered_id`),
-  CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`registered_id`) REFERENCES `registered_customers` (`registered_id`) ON DELETE CASCADE
+  CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`registered_id`) REFERENCES `registered_customers` (`registered_id`)
+  ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -976,7 +993,8 @@ CREATE TABLE `customer_funds` (
   `exp_year` int DEFAULT NULL,
   `funds` int DEFAULT '0',
   KEY `customer_id` (`customer_id`),
-  CONSTRAINT `customer_funds_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `registered_customers` (`registered_id`) ON DELETE CASCADE
+  CONSTRAINT `customer_funds_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `registered_customers` (`registered_id`)
+  ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1022,9 +1040,12 @@ CREATE TABLE `customer_orders` (
   `customer_id` int NOT NULL,
   `total_price` int NOT NULL,
   `order_status` varchar(64) NOT NULL,
+  `winning_delivery_company_id` int DEFAULT NULL,
+  `reasoning` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`order_id`),
   KEY `customer_id` (`customer_id`),
-  CONSTRAINT `customer_orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `registered_customers` (`registered_id`) ON DELETE CASCADE
+  CONSTRAINT `customer_orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `registered_customers` (`registered_id`)
+  ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1034,7 +1055,7 @@ CREATE TABLE `customer_orders` (
 
 LOCK TABLES `customer_orders` WRITE;
 /*!40000 ALTER TABLE `customer_orders` DISABLE KEYS */;
-INSERT INTO `customer_orders` VALUES (5,1,2187,'Processing');
+INSERT INTO `customer_orders` VALUES (5,1,2187,'Delivered',2,'higher bid');
 /*!40000 ALTER TABLE `customer_orders` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1076,7 +1097,8 @@ CREATE TABLE `customer_purchases` (
   KEY `order_id` (`order_id`),
   KEY `registered_id` (`registered_id`),
   CONSTRAINT `customer_purchases_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `customer_orders` (`order_id`),
-  CONSTRAINT `customer_purchases_ibfk_2` FOREIGN KEY (`registered_id`) REFERENCES `registered_customers` (`registered_id`) ON DELETE CASCADE
+  CONSTRAINT `customer_purchases_ibfk_2` FOREIGN KEY (`registered_id`) REFERENCES `registered_customers` (`registered_id`)
+  ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1122,7 +1144,8 @@ CREATE TABLE `delivery_bid` (
   `delivery_id` int NOT NULL,
   `bid` int DEFAULT NULL,
   PRIMARY KEY (`order_id`,`delivery_id`),
-  CONSTRAINT `delivery_bid_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `customer_orders` (`order_id`) ON DELETE CASCADE
+  CONSTRAINT `delivery_bid_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `customer_orders` (`order_id`) 
+  ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
