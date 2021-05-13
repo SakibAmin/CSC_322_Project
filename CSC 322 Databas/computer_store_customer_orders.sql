@@ -27,6 +27,8 @@ CREATE TABLE `customer_orders` (
   `customer_id` int NOT NULL,
   `total_price` int NOT NULL,
   `order_status` varchar(64) NOT NULL,
+  `winning_delivery_company_id` int DEFAULT NULL,
+  `reasoning` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`order_id`),
   KEY `customer_id` (`customer_id`),
   CONSTRAINT `customer_orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `registered_customers` (`registered_id`)
@@ -39,7 +41,7 @@ CREATE TABLE `customer_orders` (
 
 LOCK TABLES `customer_orders` WRITE;
 /*!40000 ALTER TABLE `customer_orders` DISABLE KEYS */;
-INSERT INTO `customer_orders` VALUES (5,1,2187,'Processing');
+INSERT INTO `customer_orders` VALUES (5,1,2187,'Delivered',2,'higher bid');
 /*!40000 ALTER TABLE `customer_orders` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-13  4:24:15
+-- Dump completed on 2021-05-13  5:56:37
