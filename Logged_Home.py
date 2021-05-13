@@ -45,27 +45,251 @@ def create_logged_home(id):
 
     def Suggested_PC1(): #This function will show more details on the PC and then output a buy button
 
-        #https://www.newegg.com/abs-ali516/p/N82E16883360116?item=N82E16883360116&source=region&nm_mc=knc-googleadwords-pc&cm_mmc=knc-googleadwords-pc-_-pla-_-gaming+desktop-_-N82E16883360116&gclid=CjwKCAjwm7mEBhBsEiwA_of-THgPH1H0E0dHsiWfBZIeocyQD9S8v1TzcL0BOgJhMCPvuGyQxy3afhoCM2oQAvD_BwE&gclsrc=aw.ds
-        print("Work in Progress")
+
+        pc1 = Tk()
+        pc1.title('Suggested PC1')
+        pc1.geometry('500x500')
+        
+        prebuild_name = 'ABS Challenger Gaming PC - Ryzen 5 3600 - GeForce GTX 1650 - 16GB DDR4 3000MHz - 512GB SSD'
+        sql_query = "SELECT * FROM computer_store.prebuild WHERE name = '" + prebuild_name + "'"
+        cursor.execute(sql_query)
+        data = cursor.fetchall()
+        print(data)
+        print(data[0][0])
+        detail_frame = Frame(pc1, width=728, height=550)
+        detail_frame.pack(pady=20, padx=20)
+
+        ps_label = Label(detail_frame, text=prebuild_name, borderwidth=1, font=('Helvetica', 30)).pack()
+
+        company = "Company ID: " + str(data[0][1])
+        company_label = Label(detail_frame, text=company, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        cpu = "CPU: " + data[0][3]
+        cpu_label = Label(detail_frame, text=cpu, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        ram = "RAM: " + data[0][4]
+        ram_label = Label(detail_frame, text=ram, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        gpu = "GPU: " + str(data[0][5])
+        gpu = Label(detail_frame, text=gpu, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        storage = "Storage: " + data[0][6]
+        storage_label = Label(detail_frame, text=storage, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        power = "Power Supply: " + data[0][7]
+        power_label = Label(detail_frame, text=power, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        os = "Operating System: " + data[0][8]
+        os_label = Label(detail_frame, text=os, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        price = "Price: $" + str(data[0][9])
+        price_label = Label(detail_frame, text=price, borderwidth=0, font=('Helvetica', 25)).pack()
+
         
     def Suggested_PC2(): #This function will show more details on the PC and then output a buy button
 
-        #https://www.newegg.com/ibuypower-arcb-108av2-student-home-office/p/N82E16883227936?item=N82E16883227936&source=region&nm_mc=knc-googleadwords-pc&cm_mmc=knc-googleadwords-pc-_-pla-_-desktop+pc-_-N82E16883227936&gclid=CjwKCAjwm7mEBhBsEiwA_of-THVBPlmjT35oY7IQ1VfhqUXZKBkLmx3NZYpHIo3tlu4tMC_yxRY3gRoCqeYQAvD_BwE&gclsrc=aw.ds
-        print("Work in Progress")
+        pc1 = Tk()
+        pc1.title('Suggested PC1')
+        pc1.geometry('500x500')
+        
+        prebuild_name = 'ABS Challenger Gaming PC - Intel i5 10400F - GeForce GTX 1660 Super - 16GB DDR4 - 512GB Intel M.2 NVMe SSD'
+        sql_query = "SELECT * FROM computer_store.prebuild WHERE name = '" + prebuild_name + "'"
+        cursor.execute(sql_query)
+        data = cursor.fetchall()
+        print(data)
+        print(data[0][0])
+        detail_frame = Frame(pc1, width=728, height=550)
+        detail_frame.pack(pady=20, padx=20)
+
+        ps_label = Label(detail_frame, text=prebuild_name, borderwidth=1, font=('Helvetica', 30)).pack()
+
+        company = "Company ID: " + str(data[0][1])
+        company_label = Label(detail_frame, text=company, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        cpu = "CPU: " + data[0][3]
+        cpu_label = Label(detail_frame, text=cpu, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        ram = "RAM: " + data[0][4]
+        ram_label = Label(detail_frame, text=ram, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        gpu = "GPU: " + str(data[0][5])
+        gpu = Label(detail_frame, text=gpu, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        storage = "Storage: " + data[0][6]
+        storage_label = Label(detail_frame, text=storage, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        power = "Power Supply: " + data[0][7]
+        power_label = Label(detail_frame, text=power, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        os = "Operating System: " + data[0][8]
+        os_label = Label(detail_frame, text=os, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        price = "Price: $" + str(data[0][9])
+        price_label = Label(detail_frame, text=price, borderwidth=0, font=('Helvetica', 25)).pack()
 
     def Suggested_PC3(): #This function will show more details on the PC and then output a buy button
 
-        #https://www.newegg.com/skytech-st-shiva-0210-ne/p/N82E16883289096?item=N82E16883289096&source=region&nm_mc=knc-googleadwords-pc&cm_mmc=knc-googleadwords-pc-_-pla-_-gaming+desktop-_-N82E16883289096&gclid=CjwKCAjwm7mEBhBsEiwA_of-TBJZHNAK9s9QARwK6WY-TY3k7cumHqOLZYhI7NmC4TY6_Z_4kxYabBoCX9UQAvD_BwE&gclsrc=aw.ds    print("Work in Progress")
-        print("Work in Progress")
+        pc1 = Tk()
+        pc1.title('Suggested PC1')
+        pc1.geometry('500x500')
+        
+        prebuild_name = 'Skytech Shiva - AMD Ryzen 5 5600X - RTX 3080 - 16 GB DDR4 3200 - 1 TB SSD - B550M - 750W Gold PSU - AC WiFi - Windows 10 Home - Gaming Desktop'
+        sql_query = "SELECT * FROM computer_store.prebuild WHERE name = '" + prebuild_name + "'"
+        cursor.execute(sql_query)
+        data = cursor.fetchall()
+        print(data)
+        print(data[0][0])
+        detail_frame = Frame(pc1, width=728, height=550)
+        detail_frame.pack(pady=20, padx=20)
+
+        ps_label = Label(detail_frame, text=prebuild_name, borderwidth=1, font=('Helvetica', 30)).pack()
+
+        company = "Company ID: " + str(data[0][1])
+        company_label = Label(detail_frame, text=company, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        cpu = "CPU: " + data[0][3]
+        cpu_label = Label(detail_frame, text=cpu, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        ram = "RAM: " + data[0][4]
+        ram_label = Label(detail_frame, text=ram, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        gpu = "GPU: " + str(data[0][5])
+        gpu = Label(detail_frame, text=gpu, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        storage = "Storage: " + data[0][6]
+        storage_label = Label(detail_frame, text=storage, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        power = "Power Supply: " + data[0][7]
+        power_label = Label(detail_frame, text=power, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        os = "Operating System: " + data[0][8]
+        os_label = Label(detail_frame, text=os, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        price = "Price: $" + str(data[0][9])
+        price_label = Label(detail_frame, text=price, borderwidth=0, font=('Helvetica', 25)).pack()
 
     def Popular_PC1():
-        print("WIP")
+       
+        pc1 = Tk()
+        pc1.title('Suggested PC1')
+        pc1.geometry('500x500')
+        
+        prebuild_name = 'Dell Inspiron 3880 Desktop, 10th Gen Intel Core i5-10400 6-Core Processor,12GB DDR4,256GB SSD Plus 1TB HDD,Intel UHD Graphics 630, DVD-RW, Wifi-AC, Bluetooth, USB,HDMI,VGA, Windows 10 Home'
+        sql_query = "SELECT * FROM computer_store.prebuild WHERE name = '" + prebuild_name + "'"
+        cursor.execute(sql_query)
+        data = cursor.fetchall()
+        print(data)
+        print(data[0][0])
+        detail_frame = Frame(pc1, width=728, height=550)
+        detail_frame.pack(pady=20, padx=20)
+
+        ps_label = Label(detail_frame, text=prebuild_name, borderwidth=1, font=('Helvetica', 30)).pack()
+
+        company = "Company ID: " + str(data[0][1])
+        company_label = Label(detail_frame, text=company, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        cpu = "CPU: " + data[0][3]
+        cpu_label = Label(detail_frame, text=cpu, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        ram = "RAM: " + data[0][4]
+        ram_label = Label(detail_frame, text=ram, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        gpu = "GPU: " + str(data[0][5])
+        gpu = Label(detail_frame, text=gpu, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        storage = "Storage: " + data[0][6]
+        storage_label = Label(detail_frame, text=storage, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        power = "Power Supply: " + data[0][7]
+        power_label = Label(detail_frame, text=power, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        os = "Operating System: " + data[0][8]
+        os_label = Label(detail_frame, text=os, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        price = "Price: $" + str(data[0][9])
+        price_label = Label(detail_frame, text=price, borderwidth=0, font=('Helvetica', 25)).pack()
 
     def Popular_PC2():
-        print("WIP")
+       
+        pc1 = Tk()
+        pc1.title('Suggested PC1')
+        pc1.geometry('500x500')
+        
+        prebuild_name = 'iBUYPOWER - Ryzen 3 3100 - 8 GB DDR4 - 1 TB HDD - GeForce GT 710 - Windows 10 Home - Desktop PC (ARCB 108AV2)'
+        sql_query = "SELECT * FROM computer_store.prebuild WHERE name = '" + prebuild_name + "'"
+        cursor.execute(sql_query)
+        data = cursor.fetchall()
+        print(data)
+        print(data[0][0])
+        detail_frame = Frame(pc1, width=728, height=550)
+        detail_frame.pack(pady=20, padx=20)
+
+        ps_label = Label(detail_frame, text=prebuild_name, borderwidth=1, font=('Helvetica', 30)).pack()
+
+        company = "Company ID: " + str(data[0][1])
+        company_label = Label(detail_frame, text=company, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        cpu = "CPU: " + data[0][3]
+        cpu_label = Label(detail_frame, text=cpu, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        ram = "RAM: " + data[0][4]
+        ram_label = Label(detail_frame, text=ram, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        gpu = "GPU: " + str(data[0][5])
+        gpu = Label(detail_frame, text=gpu, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        storage = "Storage: " + data[0][6]
+        storage_label = Label(detail_frame, text=storage, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        power = "Power Supply: " + data[0][7]
+        power_label = Label(detail_frame, text=power, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        os = "Operating System: " + data[0][8]
+        os_label = Label(detail_frame, text=os, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        price = "Price: $" + str(data[0][9])
+        price_label = Label(detail_frame, text=price, borderwidth=0, font=('Helvetica', 25)).pack()
 
     def Popular_PC3():
-        print("WIP")
+        
+        pc1 = Tk()
+        pc1.title('Suggested PC1')
+        pc1.geometry('500x500')
+        
+        prebuild_name = 'Lenovo ThinkStation P330 Desktop, Intel Core i5-9500 Upto 4.4GHz, 16GB RAM, 512GB SSD, DVDRW, DisplayPort, Wi-Fi, Bluetooth, Windows 10 Pro'
+        sql_query = "SELECT * FROM computer_store.prebuild WHERE name = '" + prebuild_name + "'"
+        cursor.execute(sql_query)
+        data = cursor.fetchall()
+        print(data)
+        print(data[0][0])
+        detail_frame = Frame(pc1, width=728, height=550)
+        detail_frame.pack(pady=20, padx=20)
+
+        ps_label = Label(detail_frame, text=prebuild_name, borderwidth=1, font=('Helvetica', 30)).pack()
+
+        company = "Company ID: " + str(data[0][1])
+        company_label = Label(detail_frame, text=company, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        cpu = "CPU: " + data[0][3]
+        cpu_label = Label(detail_frame, text=cpu, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        ram = "RAM: " + data[0][4]
+        ram_label = Label(detail_frame, text=ram, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        gpu = "GPU: " + str(data[0][5])
+        gpu = Label(detail_frame, text=gpu, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        storage = "Storage: " + data[0][6]
+        storage_label = Label(detail_frame, text=storage, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        power = "Power Supply: " + data[0][7]
+        power_label = Label(detail_frame, text=power, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        os = "Operating System: " + data[0][8]
+        os_label = Label(detail_frame, text=os, borderwidth=0, font=('Helvetica', 25)).pack()
+
+        price = "Price: $" + str(data[0][9])
+        price_label = Label(detail_frame, text=price, borderwidth=0, font=('Helvetica', 25)).pack()
 
     def Account_Settings(id): #This function will lead user to the appropriate page 
         account_view(id)
