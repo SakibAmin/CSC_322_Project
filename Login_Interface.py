@@ -8,6 +8,7 @@ from Computer_Part_Company_GUI import *
 from Registration_Interface import *
 from Browsing_GUI import *
 from Computer_Part_Company_GUI import *
+from Delivery_Company_GUI import *
 
 con = mysql.connector.connect(
         host = "127.0.0.1",
@@ -151,7 +152,7 @@ def Login_Verfication(): #Logs users into the database
                 if warning == 3:
                     deliveryBanned()
                 else:
-                    print(" ")
+                    Delivery_GUI(id)
                 #Add the delivery company GUI
                 '''
                 Things a delivery company GUI needs:

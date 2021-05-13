@@ -294,4 +294,4 @@ def viewCart():
 id = 1
 item = 'Seagate Barracuda Compute '
 #addtoCart(item)
-viewCart()
+#viewCart()
