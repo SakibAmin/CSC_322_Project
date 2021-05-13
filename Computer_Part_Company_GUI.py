@@ -19,6 +19,7 @@ def CPC_GUI(id):
     cpc.geometry('500x450')
 
     #Title Label
+    #global id
     cursor.execute("Select company_name FROM computer_parts_companies WHERE company_id = %s", (id,))
     records = cursor.fetchall()
     for record in records:
@@ -35,21 +36,30 @@ def CPC_GUI(id):
 
     #Buttons
 
-    Product_Button = Button(cpc, text = "List of Parts on Posted", width = 20, height = 3, command = viewProducts)
+    def vProducts():
+        viewProducts(id)
+
+    Product_Button = Button(cpc, text = "List of Parts on Posted", width = 20, height = 3, command = vProducts)
     Product_Button.config(font = ("Hevetica", 15,))
     Product_Button.pack()
     
-    addProduct_Button = Button(cpc, text = "Add Part to System", width = 20, height = 3, command = addProducts)
+    def aProducts():
+        addProducts(id)
+
+    addProduct_Button = Button(cpc, text = "Add Part to System", width = 20, height = 3, command = aProducts)
     addProduct_Button.config(font = ("Hevetica", 15,))
     addProduct_Button.pack()
 
-    Wallet_Button = Button(cpc, text = "Wallet", width = 20, height = 3, command = viewWallet)
+    def vWallet():
+        viewWallet(id)
+
+    Wallet_Button = Button(cpc, text = "Wallet", width = 20, height = 3, command = vWallet)
     Wallet_Button.config(font = ("Hevetica", 15,))
     Wallet_Button.pack()
 
     cpc.mainloop()
 
-def viewProducts():
+def viewProducts(id):
 
     products = Tk()
     products.geometry('600x600')
@@ -61,39 +71,63 @@ def viewProducts():
     Product_Frame = LabelFrame(products, text="Part Type")
     Product_Frame.pack(expand="yes", padx=0, pady = 0)
 
-    CPU_Button = Button(Product_Frame, text = "CPU", width = 20, height = 3, command = viewCPU)
+    def vCPU():
+        viewCPU(id)
+
+    CPU_Button = Button(Product_Frame, text = "CPU", width = 20, height = 3, command = vCPU)
     CPU_Button.config(font = ("Hevetica", 15,))
     CPU_Button.grid(row=0, column=0, padx=0, pady=0)
 
-    RAM_Button = Button(Product_Frame, text = "RAM", width = 20, height = 3, command = viewRAM)
+    def vRAM():
+        viewRAM(id)
+
+    RAM_Button = Button(Product_Frame, text = "RAM", width = 20, height = 3, command = vRAM)
     RAM_Button.config(font = ("Hevetica", 15,))
     RAM_Button.grid(row=0, column=1, padx=0, pady=0)
 
-    GPU_Button = Button(Product_Frame, text = "GPU", width = 20, height = 3, command = viewGPU)
+    def vGPU():
+        viewGPU(id)
+
+    GPU_Button = Button(Product_Frame, text = "GPU", width = 20, height = 3, command = vGPU)
     GPU_Button.config(font = ("Hevetica", 15,))
     GPU_Button.grid(row=1, column=0, padx=0, pady=0)
 
-    Mother_Button = Button(Product_Frame, text = "Motherboard", width = 20, height = 3, command = viewMother)
+    def vMother():
+        viewMother(id)
+
+    Mother_Button = Button(Product_Frame, text = "Motherboard", width = 20, height = 3, command = vMother)
     Mother_Button.config(font = ("Hevetica", 15,))
     Mother_Button.grid(row=1, column=1, padx=0, pady=0)
 
-    Case_Button = Button(Product_Frame, text = "Case", width = 20, height = 3, command = viewCase)
+    def vCase():
+        viewCase(id)
+
+    Case_Button = Button(Product_Frame, text = "Case", width = 20, height = 3, command = vCase)
     Case_Button.config(font = ("Hevetica", 15,))
     Case_Button.grid(row=2, column=0, padx=0, pady=0)
 
-    Storage_Button = Button(Product_Frame, text = "Storage", width = 20, height = 3, command = viewStorage)
+    def vStorage():
+        viewStorage(id)
+
+    Storage_Button = Button(Product_Frame, text = "Storage", width = 20, height = 3, command = vStorage)
     Storage_Button.config(font = ("Hevetica", 15,))
     Storage_Button.grid(row=2, column=1, padx=0, pady=0)
 
-    Cooler_Button = Button(Product_Frame, text = "CPU Cooler", width = 20, height = 3, command = viewCooler)
+    def vCooler():
+        viewCooler(id)
+
+    Cooler_Button = Button(Product_Frame, text = "CPU Cooler", width = 20, height = 3, command = vCooler)
     Cooler_Button.config(font = ("Hevetica", 15,))
     Cooler_Button.grid(row=3, column=0, padx=0, pady=0)
 
-    Power_Button = Button(Product_Frame, text = "Power Supply", width = 20, height = 3, command = viewPower)
+    def vPower():
+        viewPower(id)
+
+    Power_Button = Button(Product_Frame, text = "Power Supply", width = 20, height = 3, command = vPower)
     Power_Button.config(font = ("Hevetica", 15,))
     Power_Button.grid(row=3, column=1, padx=0, pady=0)
 
-def viewCPU():
+def viewCPU(id):
 
     cpu = Tk()
     cpu.geometry('1200x500')
@@ -128,8 +162,6 @@ def viewCPU():
     my_tree.tag_configure('oddrow', background = "white")
     my_tree.tag_configure('evenrow', background = "lightblue")
 
-    global id 
-
     #CPU
     cursor.execute("Select name, in_stock, sold, total_profit FROM cpu WHERE company_id = %s", (id,))
     records = cursor.fetchall()
@@ -142,7 +174,7 @@ def viewCPU():
         count += 1
     con.commit()
 
-def viewRAM():
+def viewRAM(id):
 
     ram = Tk()
     ram.geometry('1200x500')
@@ -177,8 +209,6 @@ def viewRAM():
     my_tree.tag_configure('oddrow', background = "white")
     my_tree.tag_configure('evenrow', background = "lightblue")
 
-    global id 
-
     cursor.execute("Select name, in_stock, sold, total_profit FROM ram WHERE company_id = %s", (id,))
     records = cursor.fetchall()
     count = 0
@@ -190,7 +220,7 @@ def viewRAM():
         count += 1
     con.commit()
 
-def viewGPU():
+def viewGPU(id):
     gpu = Tk()
     gpu.geometry('1200x500')
 
@@ -224,8 +254,6 @@ def viewGPU():
     my_tree.tag_configure('oddrow', background = "white")
     my_tree.tag_configure('evenrow', background = "lightblue")
 
-    global id 
-
     #GPU
     cursor.execute("Select name, in_stock, sold, total_profit FROM gpu WHERE company_id = %s", (id,))
     records = cursor.fetchall()
@@ -238,7 +266,7 @@ def viewGPU():
         count += 1
     con.commit()
 
-def viewMother():
+def viewMother(id):
     mother = Tk()
     mother.geometry('1200x500')
 
@@ -272,8 +300,6 @@ def viewMother():
     my_tree.tag_configure('oddrow', background = "white")
     my_tree.tag_configure('evenrow', background = "lightblue")
 
-    global id 
-
     #Motherboard
     cursor.execute("Select name, in_stock, sold, total_profit FROM motherboard WHERE company_id = %s", (id,))
     records = cursor.fetchall()
@@ -286,7 +312,7 @@ def viewMother():
         count += 1
     con.commit()
 
-def viewCase():
+def viewCase(id):
     case = Tk()
     case.geometry('1200x500')
 
@@ -320,8 +346,6 @@ def viewCase():
     my_tree.tag_configure('oddrow', background = "white")
     my_tree.tag_configure('evenrow', background = "lightblue")
 
-    global id 
-
      #Case
     cursor.execute("Select name, in_stock, sold, total_profit FROM cases WHERE company_id = %s", (id,))
     records = cursor.fetchall()
@@ -334,7 +358,7 @@ def viewCase():
         count += 1
     con.commit()
 
-def viewStorage():
+def viewStorage(id):
     storage = Tk()
     storage.geometry('1200x500')
 
@@ -368,8 +392,6 @@ def viewStorage():
     my_tree.tag_configure('oddrow', background = "white")
     my_tree.tag_configure('evenrow', background = "lightblue")
 
-    global id 
-
     #Storage
     cursor.execute("Select name, in_stock, sold, total_profit FROM storage WHERE company_id = %s", (id,))
     records = cursor.fetchall()
@@ -382,7 +404,7 @@ def viewStorage():
         count += 1
     con.commit()
 
-def viewCooler():
+def viewCooler(id):
     cooler = Tk()
     cooler.geometry('1200x500')
 
@@ -416,8 +438,6 @@ def viewCooler():
     my_tree.tag_configure('oddrow', background = "white")
     my_tree.tag_configure('evenrow', background = "lightblue")
 
-    global id 
-
     #Cooler
     cursor.execute("Select name, in_stock, sold, total_profit FROM cooler WHERE company_id = %s", (id,))
     records = cursor.fetchall()
@@ -430,7 +450,7 @@ def viewCooler():
         count += 1
     con.commit()
 
-def viewPower():
+def viewPower(id):
     power = Tk()
     power.geometry('1200x500')
 
@@ -464,8 +484,6 @@ def viewPower():
     my_tree.tag_configure('oddrow', background = "white")
     my_tree.tag_configure('evenrow', background = "lightblue")
 
-    global id 
-
     #PowerSupply
     cursor.execute("Select name, in_stock, sold, total_profit FROM powersupply WHERE company_id = %s", (id,))
     records = cursor.fetchall()
@@ -478,7 +496,8 @@ def viewPower():
         count += 1
     con.commit()
 
-def addProducts():
+
+def addProducts(id):
 
     products = Tk()
     products.geometry('600x600')
@@ -492,39 +511,63 @@ def addProducts():
     Product_Frame = LabelFrame(products, text="Part Type")
     Product_Frame.pack(expand="yes", padx=0, pady = 0)
 
-    CPU_Button = Button(Product_Frame, text = "CPU", width = 20, height = 3, command = addCPU)
+    def aCPU():
+        addCPU(id)
+
+    CPU_Button = Button(Product_Frame, text = "CPU", width = 20, height = 3, command = aCPU)
     CPU_Button.config(font = ("Hevetica", 15,))
     CPU_Button.grid(row=0, column=0, padx=0, pady=0)
 
-    RAM_Button = Button(Product_Frame, text = "RAM", width = 20, height = 3, command = addRAM)
+    def aRAM():
+        addRAM(id)
+
+    RAM_Button = Button(Product_Frame, text = "RAM", width = 20, height = 3, command = aRAM)
     RAM_Button.config(font = ("Hevetica", 15,))
     RAM_Button.grid(row=0, column=1, padx=0, pady=0)
 
-    GPU_Button = Button(Product_Frame, text = "GPU", width = 20, height = 3, command = addGPU)
+    def aGPU():
+        addGPU(id)
+
+    GPU_Button = Button(Product_Frame, text = "GPU", width = 20, height = 3, command = aGPU)
     GPU_Button.config(font = ("Hevetica", 15,))
     GPU_Button.grid(row=1, column=0, padx=0, pady=0)
 
-    Mother_Button = Button(Product_Frame, text = "Motherboard", width = 20, height = 3, command = addMother)
+    def aMother():
+        addMother(id)
+
+    Mother_Button = Button(Product_Frame, text = "Motherboard", width = 20, height = 3, command = aMother)
     Mother_Button.config(font = ("Hevetica", 15,))
     Mother_Button.grid(row=1, column=1, padx=0, pady=0)
 
-    Case_Button = Button(Product_Frame, text = "Case", width = 20, height = 3, command = addCase)
+    def aCase():
+        addCase(id)
+
+    Case_Button = Button(Product_Frame, text = "Case", width = 20, height = 3, command = aCase)
     Case_Button.config(font = ("Hevetica", 15,))
     Case_Button.grid(row=2, column=0, padx=0, pady=0)
 
-    Storage_Button = Button(Product_Frame, text = "Storage", width = 20, height = 3, command = addStorage)
+    def aStorage():
+        addStorage(id)
+
+    Storage_Button = Button(Product_Frame, text = "Storage", width = 20, height = 3, command = aStorage)
     Storage_Button.config(font = ("Hevetica", 15,))
     Storage_Button.grid(row=2, column=1, padx=0, pady=0)
 
-    Cooler_Button = Button(Product_Frame, text = "CPU Cooler", width = 20, height = 3, command = addCooler)
+    def aCooler():
+        addCooler(id)
+
+    Cooler_Button = Button(Product_Frame, text = "CPU Cooler", width = 20, height = 3, command = aCooler)
     Cooler_Button.config(font = ("Hevetica", 15,))
     Cooler_Button.grid(row=3, column=0, padx=0, pady=0)
 
-    Power_Button = Button(Product_Frame, text = "Power Supply", width = 20, height = 3, command = addPower)
+    def aPower():
+        addPower(id)
+
+    Power_Button = Button(Product_Frame, text = "Power Supply", width = 20, height = 3, command = aPower)
     Power_Button.config(font = ("Hevetica", 15,))
     Power_Button.grid(row=3, column=1, padx=0, pady=0)
 
-def addCPU():
+def addCPU(id):
     
     cpuadd = Tk()
     cpuadd.geometry('600x400')
@@ -543,7 +586,7 @@ def addCPU():
 
     Info_Frame = LabelFrame(cpuadd)
     Info_Frame.pack(expand="yes", padx=0, pady = 0)
-    global id
+
     name = StringVar()
     number_of_cores = IntVar()
     clock_speed = StringVar()
@@ -595,7 +638,6 @@ def addCPU():
 
     def Add():
 
-        global id
         name = nameEntry.get()
         num_Cores = coreEntry.get()
         clock_speed = cspeedEntry.get()
@@ -628,7 +670,7 @@ def addCPU():
     Close_Button.config(font = ("Hevetica", 10,))
     Close_Button.grid(row=1, column=0, padx=0, pady=0)
 
-def addRAM():
+def addRAM(id):
 
     ramadd = Tk()
     ramadd.geometry('600x400')
@@ -647,7 +689,7 @@ def addRAM():
 
     Info_Frame = LabelFrame(ramadd)
     Info_Frame.pack(expand="yes", padx=0, pady = 0)
-    global id
+
     name = StringVar()
     type = StringVar()
     speed = IntVar()
@@ -694,7 +736,6 @@ def addRAM():
 
     def Add():
 
-        global id
         name = nameEntry.get()
         type = typeEntry.get()
         speed = speedEntry.get()
@@ -727,7 +768,7 @@ def addRAM():
     Close_Button.config(font = ("Hevetica", 10,))
     Close_Button.grid(row=1, column=0, padx=0, pady=0)
 
-def addGPU():
+def addGPU(id):
 
     gpuadd = Tk()
     gpuadd.geometry('600x400')
@@ -747,7 +788,6 @@ def addGPU():
     Info_Frame = LabelFrame(gpuadd)
     Info_Frame.pack(expand="yes", padx=0, pady = 0)
 
-    global id
     name = StringVar()
     memory = IntVar()
     clock_speed = IntVar()
@@ -804,7 +844,6 @@ def addGPU():
 
     def Add():
 
-        global id
         name = nameEntry.get()
         memory = memoryEntry.get()
         clock_speed = cspeedEntry.get()
@@ -839,7 +878,7 @@ def addGPU():
     Close_Button.config(font = ("Hevetica", 10,))
     Close_Button.grid(row=1, column=0, padx=0, pady=0)
     
-def addMother():
+def addMother(id):
    
     motheradd = Tk()
     motheradd.geometry('600x500')
@@ -859,7 +898,6 @@ def addMother():
     Info_Frame = LabelFrame(motheradd)
     Info_Frame.pack(expand="yes", padx=0, pady = 0)
 
-    global id
     name = StringVar()
     form_factor = StringVar()
     socket = StringVar()
@@ -936,7 +974,6 @@ def addMother():
 
     def Add():
 
-        global id
         name = nameEntry.get()
         form_factor = ffEntry.get()
         socket = socketEntry.get()
@@ -975,7 +1012,7 @@ def addMother():
     Close_Button.config(font = ("Hevetica", 10,))
     Close_Button.grid(row=1, column=0, padx=0, pady=0)
 
-def addCase():
+def addCase(id):
 
     caseadd = Tk()
     caseadd.geometry('600x500')
@@ -995,7 +1032,6 @@ def addCase():
     Info_Frame = LabelFrame(caseadd)
     Info_Frame.pack(expand="yes", padx=0, pady = 0)
 
-    global id
     name = StringVar()
     case_type = StringVar()
     side_panel = StringVar()
@@ -1077,7 +1113,6 @@ def addCase():
 
     def Add():
 
-        global id
         name = nameEntry.get()
         case_type = ctypeEntry.get()
         side_panel = spanelEntry.get()
@@ -1117,7 +1152,7 @@ def addCase():
     Close_Button.config(font = ("Hevetica", 10,))
     Close_Button.grid(row=1, column=0, padx=0, pady=0)
 
-def addStorage():
+def addStorage(id):
 
     storageadd = Tk()
     storageadd.geometry('600x500')
@@ -1137,7 +1172,6 @@ def addStorage():
     Info_Frame = LabelFrame(storageadd)
     Info_Frame.pack(expand="yes", padx=0, pady = 0)
 
-    global id
     name = StringVar()
     capacity = StringVar()
     type = StringVar()
@@ -1179,7 +1213,6 @@ def addStorage():
 
     def Add():
 
-        global id
         name = nameEntry.get()
         capacity = capacityEntry.get()
         type = typeEntry.get()
@@ -1211,7 +1244,7 @@ def addStorage():
     Close_Button.config(font = ("Hevetica", 10,))
     Close_Button.grid(row=1, column=0, padx=0, pady=0)
 
-def addCooler():
+def addCooler(id):
 
     cooleradd = Tk()
     cooleradd.geometry('600x500')
@@ -1231,7 +1264,6 @@ def addCooler():
     Info_Frame = LabelFrame(cooleradd)
     Info_Frame.pack(expand="yes", padx=0, pady = 0)
 
-    global id
     name = StringVar()
     fan_rpm = StringVar()
     type_of_cooler = StringVar()
@@ -1278,7 +1310,6 @@ def addCooler():
 
     def Add():
 
-        global id
         name = nameEntry.get()
         fan_rpm = frpmEntry.get()
         type_of_cooler = tocEntry.get()
@@ -1311,7 +1342,7 @@ def addCooler():
     Close_Button.config(font = ("Hevetica", 10,))
     Close_Button.grid(row=1, column=0, padx=0, pady=0)
 
-def addPower():
+def addPower(id):
 
     poweradd = Tk()
     poweradd.geometry('600x500')
@@ -1331,7 +1362,6 @@ def addPower():
     Info_Frame = LabelFrame(poweradd)
     Info_Frame.pack(expand="yes", padx=0, pady = 0)
 
-    global id
     name = StringVar()
     form_factor = StringVar()
     efficency = StringVar()
@@ -1373,7 +1403,6 @@ def addPower():
 
     def Add():
 
-        global id
         name = nameEntry.get()
         form_factor = ffEntry.get()
         efficency = efficencyEntry.get()
@@ -1405,7 +1434,7 @@ def addPower():
     Close_Button.config(font = ("Hevetica", 10,))
     Close_Button.grid(row=1, column=0, padx=0, pady=0)
 
-def viewWallet():
+def viewWallet(id):
 
     wallet = Tk()
     wallet.geometry('500x450')
@@ -1482,5 +1511,5 @@ def viewWallet():
     totalSum_Label.config(font = ("Hevetica", 30))
     totalSum_Label.grid(row=0, column=1, padx=0, pady=0)
 
-id = 1
+#id = 1
 #CPC_GUI(id)

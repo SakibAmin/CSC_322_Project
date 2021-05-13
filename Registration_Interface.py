@@ -161,6 +161,4 @@ def delete_emailedFailed():
 def delete_passwordFail():
     passwordFail.destroy()
 
-Registration_Page()
-
-con.close()
+#Registration_Page()

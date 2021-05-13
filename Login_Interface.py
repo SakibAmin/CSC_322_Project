@@ -5,6 +5,9 @@ import PIL.Image
 import PIL.ImageTk
 from Registered_GUI import *
 from Computer_Part_Company_GUI import *
+from Registration_Interface import *
+from Browsing_GUI import *
+from Computer_Part_Company_GUI import *
 
 con = mysql.connector.connect(
         host = "127.0.0.1",
@@ -15,7 +18,6 @@ con = mysql.connector.connect(
 )
 #print ("Connnected To Database")
 cursor = con.cursor()
-
 
 def Login_Page(): #Login Screen
 
@@ -53,7 +55,24 @@ def Login_Page(): #Login Screen
     passwordEntry.pack()
 
     #Login Button
+
+    Label(Login, text="").pack()
     Button(Login, text = "Login", width = 10, height = 1, command = Login_Verfication).pack()
+
+    Button_Frame = LabelFrame(Login)
+    Button_Frame.pack(expand="yes", padx=0, pady = 0)
+
+    def register():
+        Login.destroy()
+        Registration_Page()
+    
+    def browse():
+
+        Login.destroy()
+        browsing_GUI()
+
+    Button(Button_Frame, text = "Register", width = 10, height = 1, command = register).grid(row=0, column=0, padx=0, pady=0)
+    Button(Button_Frame, text = "Browse", width = 10, height = 1, command = browse).grid(row=0, column=1, padx=0, pady=0)
 
     Login.mainloop()
 
@@ -134,8 +153,10 @@ def Login_Verfication(): #Logs users into the database
             for record in records:
                 id = record[0]
                 #CPC_GUI(id)
-                #print(id)
+                print(id)
             #Add the computer part company GUI
+            CPC_GUI(id)
+            Login.destroy()
             '''
             Things Computer Part Company GUI needs:
 
@@ -150,9 +171,6 @@ def Login_Verfication(): #Logs users into the database
             id = record[0]
             #print(id)
         Login_Successful()
-        
-        
-       
 
 def Login_Successful(): #Tells user the login was successful
     

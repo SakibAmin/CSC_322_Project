@@ -144,4 +144,4 @@ def Account_Settings(): #This function will lead user to the appropriate page
 
     print("Work in Progress")
 
-register_GUI()
+#register_GUI()

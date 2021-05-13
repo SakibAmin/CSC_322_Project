@@ -18,7 +18,7 @@ con = mysql.connector.connect(
 print ("Connnected To Database")
 cursor = con.cursor()
 
-def Browsing_GUI():
+def browsing_GUI():
 
     Home = Tk()
     Home.geometry('1000x1000')
@@ -65,7 +65,12 @@ def Browsing_GUI():
     buildPC_button.place(x = 355, y = 80)
 
     #Login Button
-    login_button = Button(Home, text = "Log_In", command = Login_Page) #Function Login Page is complete but needs to be edited a bit 
+
+    def login():
+        Home.destroy()
+        Login_Page()
+        
+    login_button = Button(Home, text = "Log_In", command = login) #Function Login Page is complete but needs to be edited a bit 
     login_button.config(width = 40, font=('Helvetica', 12))
     login_button.place(x = 680, y = 80)
 
@@ -134,6 +139,6 @@ def Suggested_PC3(): #This function will show more details on the PC and then ou
 
 
 
-Browsing_GUI()
+#Browsing_GUI()
 
 con.close()

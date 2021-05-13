@@ -127,6 +127,133 @@ def addtoCart(item):
         cursor.execute("INSERT INTO cart (registered_id, product_name, quantity, price)" + 
         "VALUES ('{}','{}','{}','{}')".format(id, name, quantity, price))
         con.commit()
+
+
+def viewCart():
+
+    cart = Tk()
+    cart.geometry('500x450')
+
+    Cart_Label = Label(cart, text = "Cart")
+    Cart_Label.config(font = ("Hevetica", 20, "underline"))
+    Cart_Label.pack()
+
+    style = ttk.Style()
+    style.theme_use('default')
+    style.configure("Treeview", background = "#D3D3D3", foreground = "black", rowheight = 25, fieldbackground = "#D3D3D3")
+    style.map("Treeview", background = [("selected", "#347083")])
+    
+    tree_frame = Frame(cart)
+    tree_frame.pack(pady = 10)
+    
+    tree_scroll = Scrollbar(tree_frame)
+    tree_scroll.pack(side = RIGHT, fill = Y)
+    my_tree = ttk.Treeview(tree_frame, yscrollcommand = tree_scroll.set, selectmode = "extended")
+    my_tree.pack()
+    tree_scroll.config(command = my_tree.yview)
+
+    my_tree['columns'] = ("Product Name", "Quantity", "Price")
+    my_tree.column("#0", width = 0, stretch = NO)
+    my_tree.column("Product Name", anchor = CENTER, width = 160)
+    my_tree.column("Quantity", anchor = CENTER, width = 100)
+    my_tree.column("Price", anchor = CENTER, width = 140)
+    
+    my_tree.heading("#0", text = "", anchor = CENTER)
+    my_tree.heading("Product Name", text = "Product Name", anchor = CENTER)
+    my_tree.heading("Quantity", text = "Quantity", anchor = CENTER)
+    my_tree.heading("Price", text = "Price", anchor = CENTER)
+
+    my_tree.tag_configure('oddrow', background = "white")
+    my_tree.tag_configure('evenrow', background = "lightblue")
+
+    global id 
+
+    cursor.execute("Select product_name, quantity, price FROM cart WHERE registered_id = %s", (id,))
+    records = cursor.fetchall()
+    count = 0
+    for record in records:
+        if count % 2 == 0:
+            my_tree.insert(parent='', index='end', iid=count, text='', values=(record[0], record[1], record[2]), tags=('evenrow',))
+        else:
+             my_tree.insert(parent='', index='end', iid=count, text='', values=(record[0], record[1], record[2]), tags=('evenrow',))
+        count += 1
+    con.commit()
+
+    cursor.execute("SELECT SUM(price) FROM cart WHERE registered_id = %s", (id,))
+    totalsum = cursor.fetchall()[0][0]
+    if totalsum is None:
+        cpusum = 0
+
+    Button_Frame = LabelFrame(cart)
+    Button_Frame.pack(expand="yes", padx=0, pady = 0)
+
+    def buy():
+        print("Work in Progress")
+
+    def delete():
+
+        selected = my_tree.focus()
+        values = my_tree.item(selected, 'values')
+        name = values[0]
+        cursor.execute("Delete FROM cart WHERE product_name = %s",(name,))
+        cart.destroy() 
+        viewCart()
+        con.commit()
+    
+    def updateQuantity():
+
+        def update():
+
+            quantity = quantityEntry.get()
+            quantity = float(quantity)
+            new_price = o_price * quantity
+            cursor.execute("Update cart SET quantity = %s, price = %s WHERE product_name = %s",(quantity, new_price, name))
+            quan.destroy()
+            cart.destroy() 
+            viewCart()
+
+        quan = Tk()
+        quan.geometry('200x150')
+        selected = my_tree.focus()
+        values = my_tree.item(selected, 'values')
+        name = values[0]
+        oldQuantity = values[1]
+        price = values[2]
+        price = int(price)
+        oldQuantity = int(oldQuantity)
+        o_price = price/oldQuantity
+
+        Quantity_Label = Label(quan, text = "Quantity")
+        Quantity_Label.config(font = ("Hevetica", 10))
+        Quantity_Label.grid(row=0, column=0, padx=0, pady=0)
+
+        quantity = IntVar()
+        quantityEntry = Entry(quan, textvariable = quantity)
+        quantityEntry.grid(row=0, column=1, padx=0, pady=0)
+
+        Quantity_Button = Button(quan, text = "Update Quantity", width = 13, command = update)
+        Quantity_Button.grid(row=1, column=1, padx=0, pady=0)
+
+
+    Total_Label = Label(Button_Frame, text = "Total: $%s" % totalsum)
+    Total_Label.config(font = ("Hevetica", 20))
+    Total_Label.grid(row=0, column=4, padx=0, pady=0)
+
+    updateQuantity_Button = Button(Button_Frame, text = "Update Quantity", width = 13, command = updateQuantity)
+    updateQuantity_Button.grid(row=0, column=0, padx=0, pady=0)
+    
+    Buy_Button = Button(Button_Frame, text = "Buy this Build", width = 13, command = buy)
+    Buy_Button.grid(row=0, column=3, padx=0, pady=0)
+
+    Delete_Button = Button(Button_Frame, text = "Remove Item", width = 13, command = delete)
+    Delete_Button.grid(row=0, column=2, padx=0, pady=0)
+
+    
+
+    cart.mainloop()
+
+    
 id = 1
 item = 'Seagate Barracuda Compute '
-addtoCart(item)
+#addtoCart(item)
+#viewCart()
