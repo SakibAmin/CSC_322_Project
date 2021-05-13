@@ -50,7 +50,7 @@ CREATE TABLE `case` (
   `total_profit` int DEFAULT NULL,
   PRIMARY KEY (`case_id`),
   KEY `company_id` (`company_id`),
-  CONSTRAINT `case_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
+  CONSTRAINT `case_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -104,6 +104,9 @@ CREATE TABLE `computer_parts_companies` (
   `Company_Name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
+  `pending_warnings` int DEFAULT NULL,
+  `standing_warnings` int DEFAULT NULL,
+  `funds` int DEFAULT NULL,
   PRIMARY KEY (`company_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -114,7 +117,7 @@ CREATE TABLE `computer_parts_companies` (
 
 LOCK TABLES `computer_parts_companies` WRITE;
 /*!40000 ALTER TABLE `computer_parts_companies` DISABLE KEYS */;
-INSERT INTO `computer_parts_companies` VALUES (1,'Intel','intel@gmail.com','password'),(2,'AMD','amd@gmail.com','password'),(3,'Corsair','corsair@gmail.com','password'),(4,'G.Skill','gskill@gmail.com','password'),(5,'Crucial','crucial@gmail.com','password'),(6,'NVIDIA','nvidia@gmail.com','password'),(7,'EVGA','evga@gmail.com','password'),(8,'ASUS','asus@gmail.com','password'),(9,'AsRock','asrock@gmail.com','password'),(10,'NZXT','nzxt@gmail.com','password'),(11,'Lian Li','lianli@gmail.com','password'),(12,'Seagate','seagate@gmail.com','password'),(13,'Samsung','samsung@gmail.com','password'),(14,'Kingston','kingston@gmail.com','password'),(15,'Cooler Master','coolermaster@gmail.com','password'),(16,'Arctic','arctic@gmail.com','password'),(17,'Noctua','noctua@gmail.com','password');
+INSERT INTO `computer_parts_companies` VALUES (1,'Intel','intel@gmail.com','password',1,0,0),(2,'AMD','amd@gmail.com','password',0,0,118218),(3,'Corsair','corsair@gmail.com','password',0,0,0),(4,'G.Skill','gskill@gmail.com','password',0,0,0),(5,'Crucial','crucial@gmail.com','password',0,0,0),(6,'NVIDIA','nvidia@gmail.com','password',0,0,0),(7,'EVGA','evga@gmail.com','password',0,0,0),(8,'ASUS','asus@gmail.com','password',0,0,0),(9,'AsRock','asrock@gmail.com','password',0,0,0),(10,'NZXT','nzxt@gmail.com','password',0,0,0),(11,'Lian Li','lianli@gmail.com','password',0,0,0),(12,'Seagate','seagate@gmail.com','password',0,0,0),(13,'Samsung','samsung@gmail.com','password',0,0,0),(14,'Kingston','kingston@gmail.com','password',0,0,0),(15,'Cooler Master','coolermaster@gmail.com','password',0,0,0),(16,'Arctic','arctic@gmail.com','password',0,0,0),(17,'Noctua','noctua@gmail.com','password',0,0,0);
 /*!40000 ALTER TABLE `computer_parts_companies` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -168,7 +171,7 @@ CREATE TABLE `cooler` (
   `total_profit` int DEFAULT NULL,
   PRIMARY KEY (`cooler_id`),
   KEY `company_id` (`company_id`),
-  CONSTRAINT `cooler_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
+  CONSTRAINT `cooler_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -233,7 +236,7 @@ CREATE TABLE `cpu` (
   `total_profit` int DEFAULT NULL,
   PRIMARY KEY (`cpu_id`),
   KEY `company_id` (`company_id`),
-  CONSTRAINT `cpu_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
+  CONSTRAINT `cpu_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -287,6 +290,8 @@ CREATE TABLE `delivery_companies` (
   `Company_Name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
+  `pending_warnings` int DEFAULT NULL,
+  `standing_warnings` int DEFAULT NULL,
   PRIMARY KEY (`delivery_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -297,7 +302,7 @@ CREATE TABLE `delivery_companies` (
 
 LOCK TABLES `delivery_companies` WRITE;
 /*!40000 ALTER TABLE `delivery_companies` DISABLE KEYS */;
-INSERT INTO `delivery_companies` VALUES (1,'UPS','ups@gmail.com','password'),(2,'FedEx','fedex@gmail.com','password');
+INSERT INTO `delivery_companies` VALUES (1,'UPS','ups@gmail.com','password',1,0),(2,'FedEx','fedex@gmail.com','password',0,0);
 /*!40000 ALTER TABLE `delivery_companies` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -353,7 +358,7 @@ CREATE TABLE `gpu` (
   `total_profit` int DEFAULT NULL,
   PRIMARY KEY (`gpu_id`),
   KEY `company_id` (`company_id`),
-  CONSTRAINT `gpu_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
+  CONSTRAINT `gpu_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -423,7 +428,7 @@ CREATE TABLE `motherboard` (
   `total_profit` int DEFAULT NULL,
   PRIMARY KEY (`motherboard_id`),
   KEY `company_id` (`company_id`),
-  CONSTRAINT `motherboard_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
+  CONSTRAINT `motherboard_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -486,7 +491,7 @@ CREATE TABLE `powersupply` (
   `total_profit` int DEFAULT NULL,
   PRIMARY KEY (`powersupply_id`),
   KEY `company_id` (`company_id`),
-  CONSTRAINT `powersupply_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
+  CONSTRAINT `powersupply_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -550,7 +555,7 @@ CREATE TABLE `ram` (
   `total_profit` int DEFAULT NULL,
   PRIMARY KEY (`ram_id`),
   KEY `company_id` (`company_id`),
-  CONSTRAINT `ram_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
+  CONSTRAINT `ram_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -605,6 +610,8 @@ CREATE TABLE `registered_customers` (
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
+  `pending_warnings` int DEFAULT NULL,
+  `standing_warnings` int DEFAULT NULL,
   PRIMARY KEY (`registered_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -615,7 +622,7 @@ CREATE TABLE `registered_customers` (
 
 LOCK TABLES `registered_customers` WRITE;
 /*!40000 ALTER TABLE `registered_customers` DISABLE KEYS */;
-INSERT INTO `registered_customers` VALUES (1,'Bob Jones','bobjones@gmail.com','password','114-11 134st'),(2,'John Doe','johndoe@gmail.com','password','114-11 134st');
+INSERT INTO `registered_customers` VALUES (1,'Bob Jones','bobjones@gmail.com','password','114-11 134st',0,0),(2,'John Doe','johndoe@gmail.com','password','123 5th street',3,0);
 /*!40000 ALTER TABLE `registered_customers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -668,7 +675,7 @@ CREATE TABLE `storage` (
   `total_profit` int DEFAULT NULL,
   PRIMARY KEY (`storage_id`),
   KEY `company_id` (`company_id`),
-  CONSTRAINT `storage_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`)
+  CONSTRAINT `storage_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `computer_parts_companies` (`company_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -722,6 +729,8 @@ CREATE TABLE `store_clerk` (
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
+  `pending_warnings` int DEFAULT NULL,
+  `standing_warnings` int DEFAULT NULL,
   PRIMARY KEY (`clerk_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -732,7 +741,7 @@ CREATE TABLE `store_clerk` (
 
 LOCK TABLES `store_clerk` WRITE;
 /*!40000 ALTER TABLE `store_clerk` DISABLE KEYS */;
-INSERT INTO `store_clerk` VALUES (1,'Lebron James','lebronjames@gmail.com','password'),(2,'Kyrie Irving','kyrieirving@gmail.com','password');
+INSERT INTO `store_clerk` VALUES (1,'Lebron James','lebronjames@gmail.com','password',1,0),(2,'Kyrie Irving','kyrieirving@gmail.com','password',0,0);
 /*!40000 ALTER TABLE `store_clerk` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -843,7 +852,7 @@ CREATE TABLE `comment` (
   KEY `discussion_id` (`discussion_id`), 
   KEY `registered_id` (`registered_id`),
   CONSTRAINT `discussion_ibfk_1` FOREIGN KEY (`discussion_id`) REFERENCES `discussion` (`discussion_id`),
-  CONSTRAINT `registered_customers_ibfk_1` FOREIGN KEY (`registered_id`) REFERENCES `registered_customers` (`registered_id`)
+  CONSTRAINT `registered_customers_ibfk_1` FOREIGN KEY (`registered_id`) REFERENCES `registered_customers` (`registered_id`) ON DELETE CASCADE
 );
 
 LOCK TABLES `comment` WRITE;
@@ -869,7 +878,7 @@ CREATE TABLE `complain` (
   `reason` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`complain_id`),
   KEY `complainant_id` (`complainant_id`), 
-  CONSTRAINT complainant_ibfk_1 FOREIGN KEY (complainant_id) REFERENCES registered_customers(registered_id)
+  CONSTRAINT complainant_ibfk_1 FOREIGN KEY (complainant_id) REFERENCES registered_customers(registered_id) ON DELETE CASCADE
 );
 
 LOCK TABLES `complain` WRITE;
@@ -886,9 +895,289 @@ CREATE TABLE `appeal` (
 --   KEY `registered_id` (`registered_id`),   
   KEY `complain_id` (`complain_id`), 
 --   CONSTRAINT registered_id_ibfk_1 FOREIGN KEY (registered_id) REFERENCES registered_customers(registered_id),
-  CONSTRAINT complain_id_ibfk_1 FOREIGN KEY (complain_id) REFERENCES complain(complain_id)
+  CONSTRAINT complain_id_ibfk_1 FOREIGN KEY (complain_id) REFERENCES complain(complain_id) ON DELETE CASCADE
 );
 
 LOCK TABLES `appeal` WRITE;
 INSERT INTO `appeal` VALUES (1, 1, 'i did not mean to say it like that, i apologize'),(2, 2, 'i dont deserve this!');
+UNLOCK TABLES;
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `cart`
+--
+
+DROP TABLE IF EXISTS `cart`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cart` (
+  `cart_id` int NOT NULL AUTO_INCREMENT,
+  `registered_id` int DEFAULT NULL,
+  `product_name` varchar(255) DEFAULT NULL,
+  `quantity` int DEFAULT NULL,
+  `price` int DEFAULT NULL,
+  PRIMARY KEY (`cart_id`),
+  KEY `registered_id` (`registered_id`),
+  CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`registered_id`) REFERENCES `registered_customers` (`registered_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cart`
+--
+
+LOCK TABLES `cart` WRITE;
+/*!40000 ALTER TABLE `cart` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cart` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `customer_funds`
+--
+
+DROP TABLE IF EXISTS `customer_funds`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `customer_funds` (
+  `customer_id` int NOT NULL,
+  `cc_number` bigint DEFAULT NULL,
+  `cc_cvv` int DEFAULT NULL,
+  `exp_month` int DEFAULT NULL,
+  `exp_year` int DEFAULT NULL,
+  `funds` int DEFAULT '0',
+  KEY `customer_id` (`customer_id`),
+  CONSTRAINT `customer_funds_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `registered_customers` (`registered_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `customer_funds`
+--
+
+LOCK TABLES `customer_funds` WRITE;
+/*!40000 ALTER TABLE `customer_funds` DISABLE KEYS */;
+INSERT INTO `customer_funds` VALUES (1,1234567812345678,123,6,21,0);
+/*!40000 ALTER TABLE `customer_funds` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `customer_orders`
+--
+
+DROP TABLE IF EXISTS `customer_orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `customer_orders` (
+  `order_id` int NOT NULL AUTO_INCREMENT,
+  `customer_id` int NOT NULL,
+  `total_price` int NOT NULL,
+  `order_status` varchar(64) NOT NULL,
+  PRIMARY KEY (`order_id`),
+  KEY `customer_id` (`customer_id`),
+  CONSTRAINT `customer_orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `registered_customers` (`registered_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `customer_orders`
+--
+
+LOCK TABLES `customer_orders` WRITE;
+/*!40000 ALTER TABLE `customer_orders` DISABLE KEYS */;
+INSERT INTO `customer_orders` VALUES (5,1,2187,'Processing');
+/*!40000 ALTER TABLE `customer_orders` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `customer_purchases`
+--
+
+DROP TABLE IF EXISTS `customer_purchases`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `customer_purchases` (
+  `purchase_id` int NOT NULL AUTO_INCREMENT,
+  `order_id` int DEFAULT NULL,
+  `registered_id` int DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `quantity` int DEFAULT NULL,
+  `price` int DEFAULT NULL,
+  PRIMARY KEY (`purchase_id`),
+  KEY `order_id` (`order_id`),
+  KEY `registered_id` (`registered_id`),
+  CONSTRAINT `customer_purchases_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `customer_orders` (`order_id`),
+  CONSTRAINT `customer_purchases_ibfk_2` FOREIGN KEY (`registered_id`) REFERENCES `registered_customers` (`registered_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `customer_purchases`
+--
+
+LOCK TABLES `customer_purchases` WRITE;
+/*!40000 ALTER TABLE `customer_purchases` DISABLE KEYS */;
+INSERT INTO `customer_purchases` VALUES (7,5,1,'Seagate Barracuda Compute ',1,53),(8,5,1,'124',1,2134);
+/*!40000 ALTER TABLE `customer_purchases` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `delivery_bid`
+--
+
+DROP TABLE IF EXISTS `delivery_bid`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `delivery_bid` (
+  `order_id` int NOT NULL,
+  `delivery_id` int NOT NULL,
+  `bid` int DEFAULT NULL,
+  PRIMARY KEY (`order_id`,`delivery_id`),
+  CONSTRAINT `delivery_bid_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `customer_orders` (`order_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `delivery_bid`
+--
+
+LOCK TABLES `delivery_bid` WRITE;
+/*!40000 ALTER TABLE `delivery_bid` DISABLE KEYS */;
+/*!40000 ALTER TABLE `delivery_bid` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `avoid_list`
+--
+
+DROP TABLE IF EXISTS `avoid_list`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `avoid_list` (
+  `avoid_id` int NOT NULL AUTO_INCREMENT,
+  `email` varchar(64) NOT NULL,
+  `reason` varchar(64) NOT NULL DEFAULT 'auto suspended',
+   PRIMARY KEY (`avoid_id`)
+--   PRIMARY KEY (`person_id`,`email`),
+--   CONSTRAINT `avoid_list_ibfk_1` FOREIGN KEY (`person_id`) REFERENCES `registered_customers` (`registered_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `avoid_list`
+--
+
+LOCK TABLES `avoid_list` WRITE;
+/*!40000 ALTER TABLE `avoid_list` DISABLE KEYS */;
+-- INSERT INTO `avoid_list` (email) VALUES ('email@.com');
+/*!40000 ALTER TABLE `avoid_list` ENABLE KEYS */;
 UNLOCK TABLES;

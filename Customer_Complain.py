@@ -153,10 +153,13 @@ def browse_all_complains(USER_ID):
     select_button = Button(complain, text="Select Complain", command=select_complain)
     select_button.pack(pady=20)
 
-    temp_label = Label(complain, text="")
-    temp_label.pack(pady=20)
+    pending_label = Label(complain, text="Pending Warnings: " + str(customer_data[0][5]))
+    pending_label.pack()
+    
+    standing_label = Label(complain, text="Standing Warnings: " + str(customer_data[0][6]))
+    standing_label.pack()
 
     complain.mainloop()
 
-id = 1
+id = 2
 browse_all_complains(id)

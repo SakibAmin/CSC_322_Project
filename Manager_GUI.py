@@ -1,6 +1,7 @@
 from Connect_DB import *
 from tkinter import *
 from tkinter import ttk
+from Warnings import *
 
 def manager_view(id):
 
@@ -475,7 +476,7 @@ def viewUsers():
              my_tree.insert(parent='', index='end', iid=count, text='', values=(record[0], record[1], record[2], record[3]), tags=('evenrow',))
         count += 1
 
-    select_button = Button(appeal, text="Select User", command=select_appeal)
+    select_button = Button(user, text="Select User", command=select_user)
     select_button.pack(pady=20)
 
 def viewClerks():
@@ -506,7 +507,7 @@ def viewClerks():
         selected = my_tree.focus()
         values = my_tree.item(selected, 'values')
         # temp_label.config(text=values)
-        view_user(values)
+        view_clerk(values)
 
 
     clerk = Tk()
@@ -557,7 +558,7 @@ def viewClerks():
              my_tree.insert(parent='', index='end', iid=count, text='', values=(record[0], record[1], record[2], record[3]), tags=('evenrow',))
         count += 1
 
-    select_button = Button(appeal, text="Select Clerk", command=select_clerk)
+    select_button = Button(clerk, text="Select Clerk", command=select_clerk)
     select_button.pack(pady=20)
 
 id = 1
