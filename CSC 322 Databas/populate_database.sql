@@ -847,7 +847,7 @@ CREATE TABLE `comment` (
 );
 
 LOCK TABLES `comment` WRITE;
-INSERT INTO `comment` VALUES (1, 1, 1, 'hello i like this product, very nice!!1'), (2, 1, 1, 'it is me again!! i love this item');
+INSERT INTO `comment` VALUES (1, 1, 1, 'hello i like this product, very nice!!1'), (2, 1, 1, 'it is me again!! i love this item'), (3, 1, 2, 'same!');
 UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `taboo`;

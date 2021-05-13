@@ -5,8 +5,67 @@ from Browse_Item import *
 import tkinter as tk
 
 def browse_discussion_detail(item_id, item_type):
-    def complain_user():
-        print("complain")
+    def complain_user(author_name, author_id):
+        def delete_warning():
+            complain.destroy()
+        def deny_self():
+            if author_id == CUSTOMER_ID:
+                return True
+            else:
+                return False
+        def return_reason():
+            def comment_to_database(text):
+                def notify_success():
+                    def delete_success():
+                        success.destroy()
+                        complain.destroy()
+                    success = Tk()
+                    success.title('Write a Complain')
+                    success.geometry('250x50')
+                    label = Label(success, text = "Successful complain!")
+                    label.pack()
+                    tk.Button(success, text="Ok", command=delete_success, borderwidth=0, font=('Helvetica', 12)).pack()
+                sql_query = "SELECT name FROM computer_store.registered_customers WHERE registered_id=" + str(author_id)
+                cursor.execute(sql_query)
+                author_name = cursor.fetchall()
+                print(author_name)
+                author_name = author_name[0][0]
+
+                sql_query = "INSERT INTO computer_store.complain (complainee_name, complainant_id, reason) VALUES ('"+ author_name + "'," +  str(CUSTOMER_ID) + ","    + "'" + text + "')"
+                cursor.execute(sql_query)
+                con.commit()
+                notify_success()
+
+
+            reason_text = reason.get()
+            reason.delete(0, 'end')
+            print(reason_text)
+            comment_to_database(reason_text)
+
+            # add_complain(text)
+
+        is_self_report = deny_self()
+        if is_self_report:
+            print("deny")
+            complain = Tk()
+            complain.title('Make a Complain')
+            complain.geometry('250x50')
+            label = Label(complain, text = "You can't complain about yourself!")
+            label.pack()
+            tk.Button(complain, text="Oops", command=delete_warning, borderwidth=0, font=('Helvetica', 12)).pack()
+        else:
+            print(CUSTOMER_ID)
+            print(author_id)
+            complain = Tk()
+            complain.title('Make a Complain')
+            complain.geometry('400x350')
+
+            label = Label(complain, text = "Type your reason: ")
+            label.pack()
+            reason = Entry(complain)
+            reason.pack()
+            tk.Button(complain, text="Confirm", command=return_reason, borderwidth=0, font=('Helvetica', 12)).pack()
+            print("complain")
 
     def onFrameConfigure(canvas):
         canvas.configure(scrollregion=canvas.bbox("all"))
@@ -135,10 +194,15 @@ def browse_discussion_detail(item_id, item_type):
             print(comment[2])
             print(comment[3])
 
+            # name_and_complain_frame = Frame(frame).grid(row=row_num, column=1)
+            # comment_author_label = Label(name_and_complain_frame, text=author_name, borderwidth=1, font=('Helvetica', 20)).pack()
+            # report_button = Button(name_and_complain_frame, text="Complain", command=complain_user, borderwidth=0, font=('Helvetica', 12)).pack()
             comment_author_label = Label(frame, text=author_name, borderwidth=1, font=('Helvetica', 20)).grid(row=row_num, column=1)
-            report_button = Button(frame, text="Complain", command=complain_user, borderwidth=0, font=('Helvetica', 12)).grid(row=row_num, column=2, padx=10)
+            # report_button = Button(frame, text="Complain", command=complain_user, borderwidth=0, font=('Helvetica', 12)).grid(row=row_num, column=2, padx=10)
             row_num += 1
             comment_label = Label(frame, text=comment, borderwidth=1, font=('Helvetica', 15), wraplength=500).grid(row=row_num, column=1)
+            row_num += 1
+            report_button = Button(frame, text="Complain", command=lambda author_name=author_name, author_id=author_id: complain_user(author_name, author_id), borderwidth=0, font=('Helvetica', 12)).grid(row=row_num, column=1)
             row_num += 1
             break_label = Label(frame, text=" " * 3000, borderwidth=1, font=('Helvetica', 15), wraplength=500).grid(row=row_num, column=1)
             row_num += 1
@@ -179,7 +243,7 @@ def browse_discussion_detail(item_id, item_type):
     # cursor.execute(sql_query)
     # discussion_data = cursor.fetchall()
     DETAIL_ID = None
-    CUSTOMER_ID = 1
+    CUSTOMER_ID = 2
 
     root = Tk()
     root.title('Discussion Detail')
