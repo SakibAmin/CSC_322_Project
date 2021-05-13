@@ -16,31 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `delivery_companies`
+-- Table structure for table `delivery_bid`
 --
 
-DROP TABLE IF EXISTS `delivery_companies`;
+DROP TABLE IF EXISTS `delivery_bid`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `delivery_companies` (
-  `delivery_id` int NOT NULL AUTO_INCREMENT,
-  `Company_Name` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `pending_warnings` int DEFAULT NULL,
-  `standing_warnings` int DEFAULT NULL,
-  PRIMARY KEY (`delivery_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `delivery_bid` (
+  `order_id` int NOT NULL,
+  `delivery_id` int NOT NULL,
+  `bid` int DEFAULT NULL,
+  PRIMARY KEY (`order_id`,`delivery_id`),
+  CONSTRAINT `delivery_bid_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `customer_orders` (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `delivery_companies`
+-- Dumping data for table `delivery_bid`
 --
 
-LOCK TABLES `delivery_companies` WRITE;
-/*!40000 ALTER TABLE `delivery_companies` DISABLE KEYS */;
-INSERT INTO `delivery_companies` VALUES (1,'UPS','ups@gmail.com','password',NULL,3),(2,'FedEx','fedex@gmail.com','password',NULL,NULL);
-/*!40000 ALTER TABLE `delivery_companies` ENABLE KEYS */;
+LOCK TABLES `delivery_bid` WRITE;
+/*!40000 ALTER TABLE `delivery_bid` DISABLE KEYS */;
+/*!40000 ALTER TABLE `delivery_bid` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-13  4:24:14
+-- Dump completed on 2021-05-13  4:24:16

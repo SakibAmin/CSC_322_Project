@@ -40,6 +40,10 @@ cursor.execute("CREATE TABLE customer_purchases" +
 "quantity int, price int, " +
 "PRIMARY KEY(purchase_id), FOREIGN KEY (order_id) REFERENCES customer_orders(order_id), FOREIGN KEY (registered_id) REFERENCES registered_customers(registered_id))")
 
+cursor.execute("CREATE TABLE delivery_bid" +
+"(order_id int, delivery_id int, bid int," +
+"PRIMARY KEY(order_id, delivery_id), FOREIGN KEY (order_id) REFERENCES customer_orders(order_id))")
+
 #Check to see if Tables Exist
 cursor.execute("Show Tables")
 for x in cursor:

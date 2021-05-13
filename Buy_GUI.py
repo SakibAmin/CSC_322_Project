@@ -215,6 +215,21 @@ def viewCart():
         cursor.execute("Delete FROM cart WHERE registered_id = %s",(id,))
         con.commit()
 
+        obuy = Tk()
+        obuy.geometry('200x150')
+
+        order_Label = Label(obuy, text = "Your Order Has been placed")
+        order_Label.config(font = ("Hevetica", 10))
+        order_Label.grid(row=0, column=0, padx=0, pady=0)
+
+        def destroy():
+
+            obuy.destroy()
+            cart.destroy()
+
+        confo_Button = Button(obuy, text = "Ok", width = 13, command = destroy)
+        confo_Button.pack()
+
     def delete():
 
         selected = my_tree.focus()
@@ -272,8 +287,6 @@ def viewCart():
 
     Delete_Button = Button(Button_Frame, text = "Remove Item", width = 13, command = delete)
     Delete_Button.grid(row=0, column=2, padx=0, pady=0)
-
-    
 
     cart.mainloop()
 

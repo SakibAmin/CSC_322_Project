@@ -16,31 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `delivery_companies`
+-- Table structure for table `customer_purchases`
 --
 
-DROP TABLE IF EXISTS `delivery_companies`;
+DROP TABLE IF EXISTS `customer_purchases`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `delivery_companies` (
-  `delivery_id` int NOT NULL AUTO_INCREMENT,
-  `Company_Name` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `pending_warnings` int DEFAULT NULL,
-  `standing_warnings` int DEFAULT NULL,
-  PRIMARY KEY (`delivery_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `customer_purchases` (
+  `purchase_id` int NOT NULL AUTO_INCREMENT,
+  `order_id` int DEFAULT NULL,
+  `registered_id` int DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `quantity` int DEFAULT NULL,
+  `price` int DEFAULT NULL,
+  PRIMARY KEY (`purchase_id`),
+  KEY `order_id` (`order_id`),
+  KEY `registered_id` (`registered_id`),
+  CONSTRAINT `customer_purchases_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `customer_orders` (`order_id`),
+  CONSTRAINT `customer_purchases_ibfk_2` FOREIGN KEY (`registered_id`) REFERENCES `registered_customers` (`registered_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `delivery_companies`
+-- Dumping data for table `customer_purchases`
 --
 
-LOCK TABLES `delivery_companies` WRITE;
-/*!40000 ALTER TABLE `delivery_companies` DISABLE KEYS */;
-INSERT INTO `delivery_companies` VALUES (1,'UPS','ups@gmail.com','password',NULL,3),(2,'FedEx','fedex@gmail.com','password',NULL,NULL);
-/*!40000 ALTER TABLE `delivery_companies` ENABLE KEYS */;
+LOCK TABLES `customer_purchases` WRITE;
+/*!40000 ALTER TABLE `customer_purchases` DISABLE KEYS */;
+INSERT INTO `customer_purchases` VALUES (7,5,1,'Seagate Barracuda Compute ',1,53),(8,5,1,'124',1,2134);
+/*!40000 ALTER TABLE `customer_purchases` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-13  4:24:14
+-- Dump completed on 2021-05-13  4:24:16
