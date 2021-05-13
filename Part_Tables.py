@@ -67,7 +67,11 @@ cursor.execute("CREATE TABLE PowerSupply" +
 "form_factor VARCHAR(255), efficency VARCHAR(255), wattage int, modular VARCHAR(255), price int," +
 "PRIMARY KEY (power_id), FOREIGN KEY (company_id) REFERENCES Computer_Parts_Companies(company_id))")
 
-
+#PreBuilts
+cursor.execute("CREATE TABLE PC" +
+"(pc_id int NOT NULL AUTO_INCREMENT, company_id int, name VARCHAR(255)," +
+"purpose VARCHAR(255), cpu VARCHAR(255), ram VARCHAR(255), gpu VARCHAR(255), storage VARCHAR(255), powersupply VARCHAR(255), OS VARCHAR(255), keyandmouse VARCHAR(255), " +
+"PRIMARY KEY (pc_id), FOREIGN KEY (company_id) REFERENCES Computer_Parts_Companies(company_id))")
 
 
 con.close()
