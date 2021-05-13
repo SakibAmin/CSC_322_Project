@@ -98,12 +98,24 @@ def Register_Verfication():
     cursor.execute("SELECT * FROM Registered_Customers WHERE email = %s", (email1,))
     data = cursor.fetchall()
     if len(data) == 0:
-        if password1 == password2:
-            cursor.execute("INSERT INTO registered_customers (name, email, password, address) VALUES ('{}', '{}', '{}', '{}')".format(name1, email1, password1, address1))
-            con.commit()
-            Register_Success()
-        else:
-            passwordFailed()
+        cursor.execute("SELECT * FROM computer_parts_companies WHERE email = %s", (email1,))
+        data = cursor.fetchall()
+        if len(data) == 0:
+            cursor.execute("SELECT * FROM delivery_companies WHERE email = %s", (email1,))
+            data = cursor.fetchall()
+            if len(data) == 0:
+                cursor.execute("SELECT * FROM store_clerk WHERE email = %s", (email1,))
+                data = cursor.fetchall()
+                if len(data) == 0:
+                    cursor.execute("SELECT * FROM store_manager WHERE email = %s", (email1,))
+                    data = cursor.fetchall()
+                    if len(data) == 0:
+                        if password1 == password2:
+                            cursor.execute("INSERT INTO registered_customers (name, email, password, address) VALUES ('{}', '{}', '{}', '{}')".format(name1, email1, password1, address1))
+                            con.commit()
+                            Register_Success()
+                        else:
+                            passwordFailed()
     else:
         emailFailed()
 
@@ -118,7 +130,7 @@ def emailFailed():
     emailFail.title("Email Already in Use")
     emailFail.geometry("150x100")
     Label(emailFail, text = "Email Already in Use").pack()
-    Button(emailFail, text = "OK", width = 10, height = 1, command = delete_emailFailed).pack()
+    Button(emailFail, text = "OK", width = 10, height = 1, command = delete_emailedFailed).pack()
 
     emailFail.mainloop()
 
