@@ -37,6 +37,14 @@ def manager_view(id):
     taboo_button.config(font = ("Hevetica", 15,))
     taboo_button.pack()
 
+    users_button = Button(manager, text = "List of Users", width = 20, height = 3, command = viewUsers)
+    users_button.config(font = ("Hevetica", 15,))
+    users_button.pack()
+
+    clerk_button = Button(manager, text = "List of Clerks", width = 20, height = 3, command = viewClerks)
+    clerk_button.config(font = ("Hevetica", 15,))
+    clerk_button.pack()
+
     manager.mainloop()
 
 def viewComplaints():
@@ -331,11 +339,34 @@ def viewBids():
     my_tree.pack()
     table_scroll.config(command = my_tree.yview)
 
-    # select_button = Button(bids, text="Select Bid", command=select_bid)
-    # select_button.pack(pady=20)
+    my_tree['columns'] = ("Order ID", "Company Id", "Bid")#, "Standing Warnings")
+    my_tree.column("#0", width = 0, stretch = NO)
+    my_tree.column("Order ID", anchor = CENTER, width = 140)
+    my_tree.column("Company Id", anchor = CENTER, width = 140)
+    my_tree.column("Bid", anchor = CENTER, width = 140)
+    # my_tree.column("Standing Warnings", anchor = CENTER, width = 140)
 
-    # temp_label = Label(bids, text="")
-    # temp_label.pack(pady=20)
+    my_tree.heading("#0", text = "", anchor = CENTER)
+    my_tree.heading("Order ID", text = "Order ID", anchor = CENTER)
+    my_tree.heading("Company Id", text = "Company Id", anchor = CENTER)
+    my_tree.heading("Bid", text = "Bid", anchor = CENTER)
+    # my_tree.heading("Standing Warnings", text = "Standing Warnings", anchor = CENTER)
+
+    my_tree.tag_configure('oddrow', background = "white")
+    my_tree.tag_configure('evenrow', background = "lightblue")
+
+    cursor.execute("Select order_id, order_id, company_id, bid FROM computer_store.delivery_bids")
+    records = cursor.fetchall()
+    count = 0
+    for record in records:
+        if count % 2 == 0:
+            my_tree.insert(parent='', index='end', iid=count, text='', values=(record[0], record[1], record[2], record[3]), tags=('evenrow',))
+        else:
+             my_tree.insert(parent='', index='end', iid=count, text='', values=(record[0], record[1], record[2], record[3]), tags=('evenrow',))
+        count += 1
+
+    select_button = Button(appeal, text="Select Bid", command=select_bid)
+    select_button.pack(pady=20)
 
 def viewTaboo():
     def view_taboo(values):
@@ -429,6 +460,170 @@ def viewTaboo():
     entry = Entry(taboo)
     entry.pack()
     add_taboo_button = Button(taboo, text="Add Taboo Word", command=add_taboo, borderwidth=0, font=('Helvetica', 12)).pack()
+
+def viewUsers():
+    def view_user(values):
+        def suspend_user(values):
+            print("suspended user")
+        #     sql_query = "DELETE FROM computer_store.taboo WHERE taboo_id=" + str(values[0])
+        #     cursor.execute(sql_query)
+        #     con.commit()
+        #     detail.destroy()
+        #     taboo.destroy()
+        #     viewTaboo()
+        # print(values)
+
+        detail = Tk()
+        detail.title('User #' + str(values[0]))
+        detail.geometry('250x100')
+
+        select_button = Button(detail, text="Suspend", command=lambda values=values: suspend_user(values))
+        select_button.pack(pady=20)
+
+        label = Label(detail, text = 'ARE YOU SURE?')
+        label.config(font = ("Hevetica", 15, "underline"))
+        label.pack()
+        
+
+    def select_user():
+        selected = my_tree.focus()
+        values = my_tree.item(selected, 'values')
+        # temp_label.config(text=values)
+        view_user(values)
+
+
+    user = Tk()
+    user.title('Users Page')
+    user.geometry('1200x500')
+
+    label = Label(user, text = 'Review Users')
+    label.config(font = ("Hevetica", 15, "underline"))
+    label.pack()
+
+    style = ttk.Style()
+    style.theme_use('default')
+    style.configure("Treeview", background = "#D3D3D3", foreground = "black", rowheight = 25, fieldbackground = "#D3D3D3")
+    style.map("Treeview", background = [("selected", "#347083")])
+    
+    table = Frame(user)
+    table.pack(pady=10)
+
+    table_scroll = Scrollbar(table)
+    table_scroll.pack(side = RIGHT, fill = Y)
+    my_tree = ttk.Treeview(table, yscrollcommand = table_scroll.set, selectmode = "extended")
+    my_tree.pack()
+    table_scroll.config(command = my_tree.yview)
+
+    my_tree['columns'] = ("User ID", "User Name", "Pending Warnings", "Standing Warnings")
+    my_tree.column("#0", width = 0, stretch = NO)
+    my_tree.column("User ID", anchor = CENTER, width = 140)
+    my_tree.column("User Name", anchor = CENTER, width = 140)
+    my_tree.column("Pending Warnings", anchor = CENTER, width = 140)
+    my_tree.column("Standing Warnings", anchor = CENTER, width = 140)
+
+    my_tree.heading("#0", text = "", anchor = CENTER)
+    my_tree.heading("User ID", text = "User ID", anchor = CENTER)
+    my_tree.heading("User Name", text = "User Name", anchor = CENTER)
+    my_tree.heading("Pending Warnings", text = "Pending Warnings", anchor = CENTER)
+    my_tree.heading("Standing Warnings", text = "Standing Warnings", anchor = CENTER)
+
+    my_tree.tag_configure('oddrow', background = "white")
+    my_tree.tag_configure('evenrow', background = "lightblue")
+
+    cursor.execute("Select registered_id, name, pending_warnings, standing_warnings FROM computer_store.registered_customers")
+    records = cursor.fetchall()
+    count = 0
+    for record in records:
+        if count % 2 == 0:
+            my_tree.insert(parent='', index='end', iid=count, text='', values=(record[0], record[1], record[2], record[3]), tags=('evenrow',))
+        else:
+             my_tree.insert(parent='', index='end', iid=count, text='', values=(record[0], record[1], record[2], record[3]), tags=('evenrow',))
+        count += 1
+
+    select_button = Button(appeal, text="Select User", command=select_appeal)
+    select_button.pack(pady=20)
+
+def viewClerks():
+    def view_clerk(values):
+        def suspend_clerk(values):
+            print("suspended clerk")
+        #     sql_query = "DELETE FROM computer_store.taboo WHERE taboo_id=" + str(values[0])
+        #     cursor.execute(sql_query)
+        #     con.commit()
+        #     detail.destroy()
+        #     taboo.destroy()
+        #     viewTaboo()
+        # print(values)
+
+        detail = Tk()
+        detail.title('Clerk #' + str(values[0]))
+        detail.geometry('250x100')
+
+        select_button = Button(detail, text="Suspend", command=lambda values=values: suspend_clerk(values))
+        select_button.pack(pady=20)
+
+        label = Label(detail, text = 'ARE YOU SURE?')
+        label.config(font = ("Hevetica", 15, "underline"))
+        label.pack()
+        
+
+    def select_clerk():
+        selected = my_tree.focus()
+        values = my_tree.item(selected, 'values')
+        # temp_label.config(text=values)
+        view_user(values)
+
+
+    clerk = Tk()
+    clerk.title('Clerk Page')
+    clerk.geometry('1200x500')
+
+    label = Label(clerk, text = 'Review Clerks')
+    label.config(font = ("Hevetica", 15, "underline"))
+    label.pack()
+
+    style = ttk.Style()
+    style.theme_use('default')
+    style.configure("Treeview", background = "#D3D3D3", foreground = "black", rowheight = 25, fieldbackground = "#D3D3D3")
+    style.map("Treeview", background = [("selected", "#347083")])
+    
+    table = Frame(clerk)
+    table.pack(pady=10)
+
+    table_scroll = Scrollbar(table)
+    table_scroll.pack(side = RIGHT, fill = Y)
+    my_tree = ttk.Treeview(table, yscrollcommand = table_scroll.set, selectmode = "extended")
+    my_tree.pack()
+    table_scroll.config(command = my_tree.yview)
+
+    my_tree['columns'] = ("Clerk ID", "Clerk Name", "Pending Warnings", "Standing Warnings")
+    my_tree.column("#0", width = 0, stretch = NO)
+    my_tree.column("Clerk ID", anchor = CENTER, width = 140)
+    my_tree.column("Clerk Name", anchor = CENTER, width = 140)
+    my_tree.column("Pending Warnings", anchor = CENTER, width = 140)
+    my_tree.column("Standing Warnings", anchor = CENTER, width = 140)
+
+    my_tree.heading("#0", text = "", anchor = CENTER)
+    my_tree.heading("Clerk ID", text = "Clerk ID", anchor = CENTER)
+    my_tree.heading("Clerk Name", text = "Clerk Name", anchor = CENTER)
+    my_tree.heading("Pending Warnings", text = "Pending Warnings", anchor = CENTER)
+    my_tree.heading("Standing Warnings", text = "Standing Warnings", anchor = CENTER)
+
+    my_tree.tag_configure('oddrow', background = "white")
+    my_tree.tag_configure('evenrow', background = "lightblue")
+
+    cursor.execute("Select clerk_id, name, pending_warnings, standing_warnings FROM computer_store.store_clerk")
+    records = cursor.fetchall()
+    count = 0
+    for record in records:
+        if count % 2 == 0:
+            my_tree.insert(parent='', index='end', iid=count, text='', values=(record[0], record[1], record[2], record[3]), tags=('evenrow',))
+        else:
+             my_tree.insert(parent='', index='end', iid=count, text='', values=(record[0], record[1], record[2], record[3]), tags=('evenrow',))
+        count += 1
+
+    select_button = Button(appeal, text="Select Clerk", command=select_clerk)
+    select_button.pack(pady=20)
 
 id = 1
 manager_view(id)
