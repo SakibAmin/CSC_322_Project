@@ -873,7 +873,7 @@ CREATE TABLE `complain` (
 );
 
 LOCK TABLES `complain` WRITE;
-INSERT INTO `complain` VALUES (1, 'John Doe', 1, 'i dont like what they commented'),(2, 'John Doe', 1, 'i dont like them');
+INSERT INTO `complain` VALUES (1, 'John Doe', 1, 'i dont like what they commented'),(2, 'John Doe', 1, 'i dont like them'),(3, 'John Doe', 1, 'hate him');
 UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `appeal`;

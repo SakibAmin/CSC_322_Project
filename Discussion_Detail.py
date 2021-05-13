@@ -81,14 +81,22 @@ def browse_discussion_detail(item_id, item_type):
         restart(item_id, item_type)
 
     def give_warning():
-        print("give warning")
+        def delete_warning():
+            warning.destroy()
+        print("deny")
+        warning = Tk()
+        warning.title('WARNING TABOO WORD')
+        warning.geometry('400x50')
+        label = Label(warning, text = "You have typed a taboo word, please try again.")
+        label.pack()
+        tk.Button(warning, text="Oops", command=delete_warning, borderwidth=0, font=('Helvetica', 12)).pack()
 
     def check_taboo(text, words):
         taboo_found = False
         for word in words:
             print(word)
             if (text.find(word) != -1):
-                tabo_found = True
+                taboo_found = True
                 max = 100
                 star = "***"
                 text = text.replace(word, star, 100)
@@ -105,7 +113,7 @@ def browse_discussion_detail(item_id, item_type):
             taboo_list.append(data[1])
         print(taboo_list)
         check = check_taboo(text, taboo_list)
-
+        print(check)
         if check:
             give_warning()
         else:

@@ -85,52 +85,87 @@ def viewComplaints():
         appeal_data = cursor.fetchall()
         print(appeal_data)
 
-        sql_query = "SELECT * FROM computer_store.registered_customers WHERE registered_id=" + str(data[2])
-        cursor.execute(sql_query)
-        reporter_data = cursor.fetchall()
-        print(reporter_data)
+        if cursor.rowcount == 0:
+            print("NO APPEAL YET ")
+            sql_query = "SELECT * FROM computer_store.registered_customers WHERE registered_id=" + str(data[2])
+            cursor.execute(sql_query)
+            reporter_data = cursor.fetchall()
+            print(reporter_data)
 
-        detail = Tk()
-        detail.title('Complain #' + str(data[0]))
-        detail.geometry('1200x500')
+            detail = Tk()
+            detail.title('Complain #' + str(data[0]))
+            detail.geometry('800x400')
 
-        detail_label = Label(detail, text = 'Review Complain #' + str(data[0]))
-        detail_label.config(font = ("Hevetica", 15, "underline"))
-        detail_label.pack()
+            detail_label = Label(detail, text = 'Review Complain #' + str(data[0]))
+            detail_label.config(font = ("Hevetica", 15, "underline"))
+            detail_label.pack()
 
-        leftFrame = Frame(detail, width=600, height=400, borderwidth = 1)
-        leftFrame.pack(side=LEFT, fill=X, expand=1, anchor=N, pady=20)
+            leftFrame = Frame(detail, width=600, height=400, borderwidth = 1)
+            leftFrame.pack(side=LEFT, fill=X, expand=1, anchor=N, pady=20)
 
-        reporter_label = Label(leftFrame, text="Reporter Name: " + reporter_data[0][1], font=("Hevetica", 20)).grid(row=0, column=1)
-        reporter_id_label = Label(leftFrame, text="Reporter ID: " + str(reporter_data[0][0]), font=("Hevetica", 20)).grid(row=0, column=0)
-        reported_name_label = Label(leftFrame, text="Receiver Name: " + data[1], font=("Hevetica", 20)).grid(row=1, column=1)
-        reported_id_name = Label(leftFrame, text="Receiver ID: " + str(appeal_data[0][2]), font=("Hevetica", 20)).grid(row=1, column=0)
-        reason_label = Label(leftFrame, text="Reason: ", font=("Hevetica", 20)).grid(row=2, column=0)
-        reason_description_label = Label(leftFrame, text=data[3], font=("Hevetica", 20)).grid(row=2, column=1)
+            reporter_label = Label(leftFrame, text="Reporter Name: " + reporter_data[0][1], font=("Hevetica", 20)).grid(row=0, column=1)
+            reporter_id_label = Label(leftFrame, text="Reporter ID: " + str(reporter_data[0][0]), font=("Hevetica", 20)).grid(row=0, column=0)
+            reported_name_label = Label(leftFrame, text="Receiver Name: " + data[1], font=("Hevetica", 20)).grid(row=1, column=1)
+            # reported_id_name = Label(leftFrame, text="Receiver ID: " + str(appeal_data[0][2]), font=("Hevetica", 20)).grid(row=1, column=0)
+            reason_label = Label(leftFrame, text="Reason: ", font=("Hevetica", 20)).grid(row=2, column=0)
+            reason_description_label = Label(leftFrame, text=data[3], font=("Hevetica", 20)).grid(row=2, column=1)
+            appeal_label = Label(leftFrame, text="NO APPEAL YET", font=("Hevetica", 20)).grid(row=3, column=1)
 
-        rightFrame = Frame(detail, width=600, height=400, borderwidth = 1)
-        rightFrame.pack(side=RIGHT, fill=X, expand=1, anchor=N, pady=20)
+            reject_button = Button(detail, text = "Reject Complain", width = 20, height = 3, command = rejectComplain)
+            reject_button.config(font = ("Hevetica", 15,))
+            reject_button.pack()
+            # reject_button.grid(row=3, column=0)
 
-        # random_label = Label(rightFrame, text="        ", font=("Hevetica", 20)).grid(row=2, column=0)
+            accept_button = Button(detail, text = "Accept Complain", width = 20, height = 3, command = acceptComplain)
+            accept_button.config(font = ("Hevetica", 15,))
+            accept_button.pack()
+        else:
+            sql_query = "SELECT * FROM computer_store.registered_customers WHERE registered_id=" + str(data[2])
+            cursor.execute(sql_query)
+            reporter_data = cursor.fetchall()
+            print(reporter_data)
 
-        appeal_reason = Label(rightFrame, text=appeal_data[0][3], font=("Hevetica", 20)).grid(row=1, column=1)
-        appeal_label = Label(rightFrame, text="Appeal: ", font=("Hevetica", 20)).grid(row=1, column=0)
+            detail = Tk()
+            detail.title('Complain #' + str(data[0]))
+            detail.geometry('1200x500')
 
-        reject_button = Button(detail, text = "Reject Complain", width = 20, height = 3, command = rejectComplain)
-        reject_button.config(font = ("Hevetica", 15,))
-        reject_button.pack()
-        # reject_button.grid(row=3, column=0)
+            detail_label = Label(detail, text = 'Review Complain #' + str(data[0]))
+            detail_label.config(font = ("Hevetica", 15, "underline"))
+            detail_label.pack()
 
-        accept_button = Button(detail, text = "Accept Complain", width = 20, height = 3, command = acceptComplain)
-        accept_button.config(font = ("Hevetica", 15,))
-        accept_button.pack()
-        # accept_button.grid(row=3, column=1)
+            leftFrame = Frame(detail, width=600, height=400, borderwidth = 1)
+            leftFrame.pack(side=LEFT, fill=X, expand=1, anchor=N, pady=20)
+
+            reporter_label = Label(leftFrame, text="Reporter Name: " + reporter_data[0][1], font=("Hevetica", 20)).grid(row=0, column=1)
+            reporter_id_label = Label(leftFrame, text="Reporter ID: " + str(reporter_data[0][0]), font=("Hevetica", 20)).grid(row=0, column=0)
+            reported_name_label = Label(leftFrame, text="Receiver Name: " + data[1], font=("Hevetica", 20)).grid(row=1, column=1)
+            reported_id_name = Label(leftFrame, text="Receiver ID: " + str(appeal_data[0][2]), font=("Hevetica", 20)).grid(row=1, column=0)
+            reason_label = Label(leftFrame, text="Reason: ", font=("Hevetica", 20)).grid(row=2, column=0)
+            reason_description_label = Label(leftFrame, text=data[3], font=("Hevetica", 20)).grid(row=2, column=1)
+
+            rightFrame = Frame(detail, width=200, height=400, borderwidth = 1)
+            rightFrame.pack(side=LEFT, fill=X, expand=1, anchor=N, pady=20)
+
+            # random_label = Label(rightFrame, text="        ", font=("Hevetica", 20)).grid(row=2, column=0)
+
+            appeal_reason = Label(leftFrame, text=appeal_data[0][3], font=("Hevetica", 20)).grid(row=3, column=1)
+            appeal_label = Label(leftFrame, text="Appeal: ", font=("Hevetica", 20)).grid(row=3, column=0)
+
+            reject_button = Button(detail, text = "Reject Complain", width = 20, height = 3, command = rejectComplain)
+            reject_button.config(font = ("Hevetica", 15,))
+            reject_button.pack()
+            # reject_button.grid(row=3, column=0)
+
+            accept_button = Button(detail, text = "Accept Complain", width = 20, height = 3, command = acceptComplain)
+            accept_button.config(font = ("Hevetica", 15,))
+            accept_button.pack()
+            # accept_button.grid(row=3, column=1)
 
 
     def select_complain():
         selected = my_tree.focus()
         values = my_tree.item(selected, 'values')
-        temp_label.config(text=values)
+        # temp_label.config(text=values)
         view_complain(values)
 
     complain = Tk()
@@ -328,7 +363,7 @@ def viewTaboo():
     def select_taboo():
         selected = my_tree.focus()
         values = my_tree.item(selected, 'values')
-        temp_label.config(text=values)
+        # temp_label.config(text=values)
         view_taboo(values)
 
     def add_taboo():
