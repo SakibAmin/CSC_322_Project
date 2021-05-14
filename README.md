@@ -61,6 +61,6 @@ $ python Start.py
 # Moving through the app
 
 In the database you will see tables for users, when you run Start.py you will be prompted to login.
-Please explore the the privleged accounts using the ones we made since you cannot sign up for a privileged user.
+Please explore the the privileged accounts using the ones we made since you cannot sign up for a privileged user.
 
 Thanks for reading!
