@@ -13,7 +13,7 @@ Requirements:
 Unfortunately, since we did not fully decide on how to connect to the database you will have to edit
 your password/root in several locations. The following files you must change the datbase credentials (will change later):
 
-```
+``` python
 # change to your credentials
 
 con = mysql.connector.connect(
